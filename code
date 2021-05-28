@@ -1,0 +1,789 @@
+#include <iostream>
+#include <winbgim.h>
+#define maxX 1280
+#define maxY 800
+using namespace std;
+const int ENTER = 13; 
+const int BACKSPACE = 8; 
+int MID[maxX][maxY];
+//========================================================================//===================================================================//
+
+
+void khoitaoID();
+void taoID(int x1,int y1, int x2,int y2, int ID);
+void ScanChu(char s[],int max, int px, int py, int ID, int &IDnext);
+void ScanTen(char s[],int max, int px, int py, int ID, int &IDnext);
+void ScanSo(char s[],int max, int px, int py, int ID, int &IDnext);
+void taoO(int x1,int y1,int x2,int y2,int mau,int mauvien,int ID);
+void taoDong(int x1,int y1,int chieucao,int mangdodai[], int slcot,int mau,int mauvien,int ID);
+void taoBang(int x1,int y1,int chieucao,int mangdodai[],int slcot,int sldong,char td[][50],int mau,int mauvien, int ID);
+void taoButton(int x1, int y1,int x2, int y2,int ID,int maunen, int mauchu,int cochu, char text[]);
+void Menu();
+void QuanLyMayBay_NhapMayBay();
+void QuanLyMayBay_HienThiMayBay();
+void QuanLyMayBay();
+void QuanLyChuyenBay_NhapChuyenBay();
+void QuanLyChuyenBay_HienThiChuyenBay();
+void QuanLyChuyenBay();
+void QuanLyHanhKhach_NhapHanhKhach();
+void QuanLyHanhKhach_HienThiHanhKhach();
+void QuanLyHanhKhach();
+void TimChuyenBay_Nhap();
+void TimChuyenBay_HienThi();
+void TimChuyenBay();
+void ThongKeChuyenBay_HienThiThongKe();
+void ThongKeChuyenBay();
+void run();
+
+//========================================================================//===================================================================//
+
+void khoitaoID(){
+	for(int i = 0; i < maxX;i++){
+		for(int j = 0; j < maxY;j++){
+			MID[i][j]=0;
+		}
+	}
+}
+
+void taoID(int x1,int y1, int x2,int y2, int ID){
+	for(int i = x1; i < x2;i++){
+		for(int j = y1; j < y2;j++){
+			MID[i][j] = ID;
+		}
+	}
+}
+
+void mancanhbao(){
+	setfillstyle(1,11);
+	bar(28,465,300,675);
+	setbkcolor(11);
+	settextstyle(0,0,2);
+	outtextxy(0,0,"CANH BAO");
+}
+
+void ScanChu(char s[],int max, int px, int py, int ID, int &IDnext){
+	setcolor(0);
+	setbkcolor(15);
+	settextstyle(1,0,1);
+	int mx = -1; 
+	int my = -1;
+	unsigned int l = strlen(s);
+		s[l] ='|';
+	outtextxy(px,py,s);
+	while(1){
+		getmouseclick(WM_LBUTTONDOWN,mx,my);
+		clearmouseclick(WM_LBUTTONDOWN);
+		delay(1);
+		if(!(((mx==-1)&&(my==-1))||(MID[my][mx]=ID))){
+			s[l] = ' ';
+			outtextxy(px,py,s);
+			s[l] = '\0';
+			break;
+		}
+		if(kbhit()){
+			char c = getch ();
+			if(l < max){
+				if (l==0||s[l-1]==' '){
+					if (c<='z' && c>='a')
+						c = c + 'A' - 'a';
+					else c = c;
+					}
+				else if (c<='Z' && c>='A')
+					c = c - 'A' + 'a';
+				if(c=='_'){
+					s[l] = c;
+					l++;
+				}
+				if (c<='z' && c>='a'){
+					s[l] = c;
+					l++;
+				}
+				if (c<='Z' && c>='A'){
+					s[l] = c;
+					l++;
+				}
+				if (c<='0' && c>='9'){
+					s[l] = c;
+					l++;
+				}
+				if (l>0) if(s[l-1]!=' ' && c == ' '){
+					s[l] = c;
+					l++;
+				}
+				if ((l==0||s[l-1]==' ')&&(s[l]>='a'||s[l]<='z'))
+					s[l] = s[l] + 'A' - 'a';
+					outtextxy(px,py,s);
+				}
+			if (c == ENTER){
+				s[l] = ' ';
+				outtextxy(px,py,s);
+				s[l] = '\0';
+				break;
+			}
+			if (c == BACKSPACE && l > 0){
+				s[l] = ' ';
+				outtextxy(px,py,s);
+				s[l-1] = ' ';
+				l--;
+			}
+			s[l] = '|';
+			outtextxy(px,py,s);
+			if(s[l]==' ') s[l]=0;
+		}
+	}
+	if((mx!=-1)&&(my!=-1)){
+		IDnext=MID[mx][my];
+	}
+}
+
+void ScanTen(char s[],int max, int px, int py, int ID, int &IDnext){
+	setcolor(0);
+	setbkcolor(15);
+	settextstyle(1,0,1);
+	int mx = -1; 
+	int my = -1;
+	unsigned int l = strlen(s);
+		s[l] ='|';
+	outtextxy(px,py,s);
+	while(1){
+		getmouseclick(WM_LBUTTONDOWN,mx,my);
+		clearmouseclick(WM_LBUTTONDOWN);
+		delay(1);
+		if(!(((mx==-1)&&(my==-1))||(MID[my][mx]=ID))){
+			s[l] = ' ';
+			outtextxy(px,py,s);
+			s[l] = '\0';
+			break;
+		}
+		if(kbhit()){
+			char c = getch ();
+			if(l < max){
+				if (l==0||s[l-1]==' '){
+					if (c<='z' && c>='a')
+						c = c + 'A' - 'a';
+					else c = c;
+					}
+				else if (c<='Z' && c>='A')
+					c = c - 'A' + 'a';
+				if(c=='_'){
+					s[l] = c;
+					l++;
+				}
+				if (c<='z' && c>='a'){
+					s[l] = c;
+					l++;
+				}
+				if (c<='Z' && c>='A'){
+					s[l] = c;
+					l++;
+				}
+				if (l>0) if(s[l-1]!=' ' && c == ' '){
+					s[l] = c;
+					l++;
+				}
+			if (c == ENTER){
+				s[l] = ' ';
+				outtextxy(px,py,s);
+				s[l] = '\0';
+				break;
+			}
+			if (c == BACKSPACE && l > 0){
+				s[l] = ' ';
+				outtextxy(px,py,s);
+				s[l-1] = ' ';
+				l--;
+			}
+			s[l] = '|';
+			outtextxy(px,py,s);
+			if(s[l]==' ') s[l]=0;
+		}
+	}
+	if((mx!=-1)&&(my!=-1)){
+		IDnext=MID[mx][my];
+	}
+}
+}
+
+void ScanSo(char s[],int max, int px, int py, int ID, int &IDnext){
+	setcolor(0);
+	setbkcolor(15);
+	settextstyle(1,0,1);
+	int mx = -1; 
+	int my = -1;
+	unsigned int l = strlen(s);
+		s[l] ='|';
+	outtextxy(px,py,s);
+	while(1){
+		getmouseclick(WM_LBUTTONDOWN,mx,my);
+		clearmouseclick(WM_LBUTTONDOWN);
+		delay(1);
+		if(!(((mx==-1)&&(my==-1))||(MID[my][mx]=ID))){
+			s[l] = ' ';
+			outtextxy(px,py,s);
+			s[l] = '\0';
+			break;
+		}
+		if(kbhit()){
+			char c = getch ();
+			if(l < max){
+				if (c>='0' && c<='9'){
+					s[l] = c;
+					outtextxy(px,py,s);
+					l++;
+				}
+			if (c == ENTER){
+				s[l] = ' ';
+				outtextxy(px,py,s);
+				s[l] = '\0';
+				break;
+			}
+			if (c == BACKSPACE && l > 0){
+				s[l] = ' ';
+				outtextxy(px,py,s);
+				s[l-1] = ' ';
+				l--;
+			}
+			s[l] = '|';
+			outtextxy(px,py,s);
+			if(s[l]==' ') s[l]=0;
+		}
+	}
+		if((mx!=-1)&&(my!=-1))	IDnext=MID[mx][my];
+	}
+}
+
+void taoO(int x1,int y1,int x2,int y2,int mau,int mauvien,int ID){
+	setfillstyle(1,mau);
+	bar(x1,y1,x2,y2);
+	setcolor(mauvien);
+	rectangle(x1,y1,x2,y2);
+	taoID(x1,y1,x2,y2,ID);
+}
+void taoOKID(int x1,int y1,int x2,int y2,int mau,int mauvien){
+	setfillstyle(1,mau);
+	bar(x1,y1,x2,y2);
+	setcolor(mauvien);
+	rectangle(x1,y1,x2,y2);
+
+}
+
+void taoDong(int x1,int y1,int chieucao,int mangdodai[], int slcot,int mau,int mauvien,int ID){
+	int x2, y2;	
+	y2 = y1 + chieucao; 
+	for(int i=0;i < slcot;i++){
+		x2 = x1 + mangdodai[i];
+		taoO(x1,y1,x2,y2,mau,mauvien,ID);
+		x1 = x2;	
+		
+	}
+}
+
+void taoDongKID(int x1,int y1,int chieucao,int mangdodai[], int slcot,int mau,int mauvien){
+	int x2, y2;	
+	y2 = y1 + chieucao; 
+	for(int i=0;i < slcot;i++){
+		x2 = x1 + mangdodai[i];
+		taoOKID(x1,y1,x2,y2,mau,mauvien);
+		x1 = x2;	
+		
+	}
+}
+
+void taoBang(int x1,int y1,int chieucao,int mangdodai[],int slcot,int sldong,char td[][50],int mau,int mauvien, int ID){
+	setcolor(0);
+	setbkcolor(mau);
+	settextstyle(3,0,2);
+	int y = y1;
+	for(int i=1;i<=sldong;i++){
+	 	taoDong(x1,y1,chieucao,mangdodai,slcot,mau,mauvien,ID + i);
+		 y1 = y1 + chieucao;
+	}
+	for(int i=0;i<slcot;i++){
+		outtextxy(x1+12,y+15,td[i]);
+		x1 = x1 + mangdodai[i];
+	}
+}
+
+void taoBangKID(int x1,int y1,int chieucao,int mangdodai[],int slcot,int sldong,char td[][50],int mau,int mauvien){
+	setcolor(0);
+	setbkcolor(mau);
+	settextstyle(3,0,2);
+	int y = y1;
+	for(int i=1;i<=sldong;i++){
+	 	taoDongKID(x1,y1,chieucao,mangdodai,slcot,mau,mauvien);
+		 y1 = y1 + chieucao;
+	}
+	for(int i=0;i<slcot;i++){
+		outtextxy(x1+12,y+15,td[i]);
+		x1 = x1 + mangdodai[i];
+	}
+}
+
+
+void taoButton(int x1, int y1,int x2, int y2,int ID,int maunen, int mauchu,int cochu, char text[]){
+	setfillstyle(1,maunen);
+	bar(x1,y1,x2,y2);
+	setbkcolor(maunen);
+	setcolor(mauchu);
+	settextstyle(3,0,cochu);
+	outtextxy(x1 + 10,y1 + 10, text);
+	taoID(x1,y1,x2,y2,ID);
+}
+
+void Menu(){
+	setbkcolor(3);						
+	cleardevice();
+	setcolor(0);
+
+	for (int i = 1; i < 4;i++){
+		line(310 + i,0,310 + i,1280);
+	}
+
+
+	taoButton(10,40,270,140,1,7,0,3,"Quan Ly May Bay");
+	taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
+	taoButton(10,340,270,440,3,7,0,3,"Quan Ly Hanh Khach");
+	taoButton(10,490,270,590,4,7,0,3,"Tim Chuyen Bay");
+	taoButton(10,640,270,740,5,7,0,3,"Thong Ke Chuyen Bay");
+	
+}
+
+void QuanLyMayBay_NhapMayBay(){
+	setbkcolor(3);	
+	setcolor(0);
+	
+	taoO(335,570,945,740,3,0,0);
+
+	outtextxy(345,580,"ID");
+	taoO(450,580,925,610,15,0,11);
+
+	outtextxy(345,640,"LOAI");
+	taoO(450,637,925,667,15,0,12);
+
+	outtextxy(345,700,"SO CHO");
+	taoO(450,697,925,727,15,0,13);
+	
+
+	taoButton(945,570,985,620,1001,4,0,3,"X");
+	
+	taoButton(965,680,1040,730,1002,7,0,3,"NEW");
+
+	taoButton(1050,680,1135,730,1003,7,0,3,"SAVE");
+	
+	taoButton(1145,680,1265,730,1004,7,0,3,"REMOVE");
+}
+
+void QuanLyMayBay_HienThiMayBay(){
+	char text[][50]={"ID","Loai","So Cho"};
+	int m[3] = {300,310,300};
+   	taoBang(335,10,55,m,3,10,text,15,0,101);
+}
+
+void QuanLyMayBay(){
+	QuanLyMayBay_HienThiMayBay();
+	QuanLyMayBay_NhapMayBay();
+}
+
+void QuanLyChuyenBay_NhapChuyenBay(){
+	setbkcolor(3);	
+	setcolor(0);
+	taoO(335,570,945,740,3,0,0);
+  	
+	outtextxy(345,580,"ID");
+	taoO(458,580,925,605,15,0,21);
+	
+	outtextxy(345,620,"NGAY");
+	taoO(458,620,925,645,15,0,22);
+	
+	outtextxy(345,660,"TOI");
+	taoO(458,660,925,685,15,0,23);
+	
+	outtextxy(345,700,"IDMAYBAY");
+	taoO(458,700,925,725,15,0,24);
+	
+	taoButton(1065,620,1120,670,25,7,0,3,"VE");
+	
+	taoButton(1145,620,1215,670,26,7,0,3,"HUY");
+	
+	taoButton(945,570,985,620,2001,4,0,3,"X");
+	
+	taoButton(965,680,1040,730,2002,7,0,3,"NEW");
+
+	taoButton(1050,680,1135,730,2003,7,0,3,"SAVE");
+	
+	taoButton(1145,680,1265,730,2004,7,0,3,"REMOVE");
+	
+}
+
+void QuanLyChuyenBay_HienThiChuyenBay(){
+	char text[][50]={"ID","Ngay Gio Khoi Hanh","Toi","ID May Bay","Trang Thai"};
+	int m[5] = {100,250,150,200,200};
+   	taoBang(335,10,55,m,5,10,text,15,0,201);
+}
+
+void QuanLyChuyenBay_Ve(){
+	setbkcolor(3);	
+	setcolor(0);
+	
+   	taoO(335,40,1260,90,3,0,0);
+	outtextxy(345,55,"ID");
+	taoO(375,50,535,80,15,0,0);
+	outtextxy(550,55,"Khoi Hanh");
+
+
+	taoO(670,50,1000,80,15,0,0);
+
+
+
+	outtextxy(1015,55,"TOI");
+	taoO(1065,50,1230,80,15,0,0);
+	
+	
+	taoO(335,110,1260,550,15,0,0);
+	int x,y;
+	x = 345; y = 125;
+	for (int i = 1; i <= 8;i++){
+		for(int j = 1; j <= 10; j++){
+			taoO(x,y,x+86,y+49,4,0,0);
+			x = x + 91;
+		}
+		x = 345;
+		y = y + 51; 
+	}
+	
+//		int x1 = 345;
+//		int y1 = 120;
+//		int x2 = 395;
+//		int y2 = 170;
+//		for(int i = 0;i < 10; i++){
+//		taoO(x1,y1,x2,y2,4,3,20000+i);
+//		x1 = x1 + 80;
+//		x2 = x2 + 80;
+//	}
+	
+	taoO(335,570,945,740,3,0,0);
+	outtextxy(345,580,"STT");
+	taoO(458,580,925,605,15,0,21);
+	
+	outtextxy(345,620,"CCCD");
+	taoO(458,620,925,645,15,0,22);
+	
+	outtextxy(345,660,"Ten");
+	taoO(458,660,925,685,15,0,23);
+	
+	outtextxy(345,700,"Gioi Tinh");
+	taoO(458,700,925,725,15,0,24);
+	
+	taoButton(965,620,1245,670,200001,7,0,3,"Thong Tin Hanh Khach");
+	
+	
+	
+	taoButton(965,680,1065,730,20003,7,0,3,"Ban Ve");
+
+
+	
+	taoButton(1145,680,1245,730,20004,7,0,3,"Huy Ve");
+
+	
+}
+
+void QuanLyChuyenBay_ThongTinHanhKhach(){
+	taoButton(315,0,365,50,200010,4,0,3,"<");
+	char text[][50]={"STT","So Ve","CCCD","Ho Va Ten","Gioi Tinh"};
+	int m[5] = {100,250,150,200,200};
+   	taoBang(335,190,55,m,5,10,text,15,0,0);
+}
+void QuanLyChuyenBay(){
+	QuanLyChuyenBay_HienThiChuyenBay();
+   	QuanLyChuyenBay_NhapChuyenBay();
+}
+
+void QuanLyHanhKhach_NhapHanhKhach(){
+	setbkcolor(3);	
+	setcolor(0);
+	taoO(335,570,945,740,3,0,0);
+	
+   	outtextxy(345,580,"CCCD");
+   	taoO(450,580,925,610,15,0,31);
+	
+	outtextxy(345,640,"HO TEN");
+	taoO(450,637,925,667,15,0,32);
+	
+	outtextxy(345,700,"GIOI TINH");
+	taoO(450,697,925,727,15,0,33);
+	
+
+
+	taoButton(945,570,985,620,3001,4,0,3,"X");
+	
+	taoButton(965,680,1040,730,3002,7,0,3,"NEW");
+
+	taoButton(1050,680,1135,730,3003,7,0,3,"SAVE");
+	
+	taoButton(1145,680,1265,730,3004,7,0,3,"REMOVE");
+	
+}
+
+void QuanLyHanhKhach_HienThiHanhKhach(){
+	char text[][50]={"CCCD","TEN","HO"};
+	int m[3] = {300,310,300};
+   	taoBangKID(335,10,55,m,3,10,text,15,0);
+}
+
+void QuanLyHanhKhach(){
+	QuanLyHanhKhach_HienThiHanhKhach();
+	QuanLyHanhKhach_NhapHanhKhach();
+}
+
+void TimChuyenBay_Nhap(){
+	setbkcolor(3);	
+	setcolor(0);
+	
+   	taoO(335,40,1260,90,3,0,0);
+	outtextxy(345,55,"ID");
+	taoO(375,50,535,80,15,0,41);
+	outtextxy(550,55,"NGAY");
+	taoO(620,50,670,80,15,0,42);
+	outtextxy(690,55,"THANG");
+	taoO(780,50,840,80,15,0,43);
+	outtextxy(855,55,"NAM");
+	taoO(910,50,1000,80,15,0,44);
+	outtextxy(1015,55,"TOI");
+	taoO(1065,50,1230,80,15,0,45);
+
+}
+
+void TimChuyenBay_HienThi(){
+	char text[][50]={"ID","Ngay Gio Khoi Hanh","Toi","Trang Thai"};
+	int m[4] = {210,300,210,210};
+   	taoBangKID(335,150,55,m,4,10,text,15,0);
+}
+
+void TimChuyenBay(){
+   	TimChuyenBay_HienThi();
+   	TimChuyenBay_Nhap();
+}
+
+void ThongKeChuyenBay_HienThiThongKe(){
+	char text[][50]={"ID May Bay","So Chuyen Bay Da Bay"};
+	int m[2] = {450,450};
+   	taoBangKID(335,10,55,m,2,13,text,15,0);
+}
+
+void ThongKeChuyenBay(){
+	ThongKeChuyenBay_HienThiThongKe();
+}
+
+//void hieuung(){
+//	int x= -1; int ymouse = -1;
+//	if(ismouseclick(WM_MOUSEMOVE)){
+//		getmouseclick(WM_MOUSEMOVE,xmouse,ymouse);
+//		if (MID[xmouse][ymouse]==1){
+//    		taoButton(10,40,270,140,1,8,15,3,"Quan Ly May Bay");
+//		}
+//		else{
+//		taoButton(10,40,270,140,1,7,0,3,"Quan Ly May Bay");}
+//		}
+//	else if(ismouseclick(WM_LBUTTONDOWN)){
+//    	getmouseclick(WM_LBUTTONDOWN,xmouse,ymouse);}
+//    	if (MID[xmouse][ymouse]==1){
+//    		taoButton(10,40,270,140,1,8,15,3,"Quan Ly May Bay");
+//    		break;
+//		}
+//	delay(1);
+//}
+
+void run(){
+	int x = -1, y = -1;
+	khoitaoID();
+	Menu();
+	while (1){
+        if(ismouseclick(WM_MOUSEMOVE)){
+        	int xmouse = -1; 
+        	int ymouse = -1;
+			getmouseclick(WM_MOUSEMOVE,xmouse,ymouse);
+			if (MID[xmouse][ymouse]==1){
+    			taoButton(10,40,270,140,1,8,15,3,"Quan Ly May Bay");
+    		}
+			else{
+				taoButton(10,40,270,140,1,7,0,3,"Quan Ly May Bay");}
+			if (MID[xmouse][ymouse]==2){
+				taoButton(10,190,270,290,2,8,15,3,"Quan Ly Chuyen Bay");
+			}
+			else{
+				taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
+			}
+			if (MID[xmouse][ymouse]==3){
+				taoButton(10,190,270,290,2,8,15,3,"Quan Ly Chuyen Bay");
+			}
+			else{
+				taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
+			}
+			if (MID[xmouse][ymouse]==4){
+				taoButton(10,190,270,290,2,8,15,3,"Quan Ly Chuyen Bay");
+			}
+			else{
+				taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
+			}
+			if (MID[xmouse][ymouse]==5){
+				taoButton(10,190,270,290,2,8,15,3,"Quan Ly Chuyen Bay");
+			}
+			else{
+				taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
+			}
+			}
+				
+//		if(ismouseclick(WM_MOUSEMOVE))
+//		getmouseclick(WM_MOUSEMOVE,xmouse,ymouse);
+//		if (MID[xmouse][ymouse]==2){
+//    		taoButton(10,190,270,290,2,8,15,3,"Quan Ly Chuyen Bay");
+//		}
+//		else{
+//			taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
+//		}
+//		xmouse = -1; ymouse =-1; 
+//	}
+//	else if(ismouseclick(WM_LBUTTONDOWN)){
+//    	getmouseclick(WM_LBUTTONDOWN,xmouse,ymouse);}
+//    	if (MID[xmouse][ymouse]==1){
+//    		taoButton(10,40,270,140,1,8,15,3,"Quan Ly May Bay");
+//		}
+		delay(1);
+		if (ismouseclick(WM_LBUTTONDOWN))
+		getmouseclick(WM_LBUTTONDOWN, x, y);
+//        cout << x <<"," << y <<"," <<MID[x][y];}
+//        if(ismouseclick(WM_MOUSEMOVE)){
+//		getmouseclick(WM_MOUSEMOVE,x,y);
+//		cout << MID[x][y];}
+        menu:
+    	if(x!=-1 && y!=-1)
+		switch(MID[x][y]){
+			case 1:{
+				Menu();
+//				if (case 1:){
+//    			taoButton(10,40,270,140,1,8,15,3,"Quan Ly May Bay");
+//    			}
+//				else{
+//			taoButton(10,40,270,140,1,7,0,3,"Quan Ly May Bay");}
+			QuanLyMayBay();
+//				while(1){
+//        			delay(0.001);
+//					x=-1,y=-1;
+//					if (ismouseclick(WM_LBUTTONDOWN)){
+//						getmouseclick(WM_LBUTTONDOWN, x, y);
+//        				cout << x <<"," << y <<"," <<MID[x][y];}
+//        			
+//    					if(x!=-1 && y!=-1)
+//						switch(MID[x][y]){
+//						case 11:{
+//							setcolor(5);
+//							outtextxy(500,200," key 11 ");
+//							char s[]= "";
+//						int key;
+//							ScannerStringV2(s,5,300+5,10+5,11,key);
+//							x=-1,y=-1;
+//							break;
+//						}
+//						case 12:{
+//							setcolor(5);
+//							outtextxy(700,200," key 12 ");
+//								x=-1,y=-1;
+//							break;
+//						}
+//						default:{
+//							goto menu;
+//							break;
+//						}
+//					}
+//				}
+				x=-1,y=-1;
+				break;
+			}
+			case 2:{
+				Menu();
+				QuanLyChuyenBay();
+					while (1){
+        			delay(1);
+					x=-1,y=-1;
+					if (ismouseclick(WM_LBUTTONDOWN))
+        			getmouseclick(WM_LBUTTONDOWN, x, y);
+        		
+    				if(x!=-1 && y!=-1)
+    			
+					switch(MID[x][y]){
+						case 25:{
+							man2:
+							Menu();
+						
+							QuanLyChuyenBay_Ve();
+							while (1){
+        						delay(1);
+								x=-1,y=-1;
+								if (ismouseclick(WM_LBUTTONDOWN))
+        						getmouseclick(WM_LBUTTONDOWN, x, y);
+    							if(x!=-1 && y!=-1)
+								switch(MID[x][y]){
+									case 200001:{
+										Menu();
+										QuanLyChuyenBay_ThongTinHanhKhach();
+										x=-1,y=-1;
+										break;
+									}
+									case 200010:{
+										goto man2;
+									}
+									default:{
+									goto menu;
+									break;
+								}
+							}
+						}
+							x=-1,y=-1;
+							break;
+						}
+						default:{
+							goto menu;
+							break;
+						}
+					}
+				}
+				x=-1,y=-1;
+				break;
+		
+			}
+			case 3:{
+				Menu();
+				QuanLyHanhKhach();
+				x=-1,y=-1;
+				break;
+			}
+			case 4:{
+				Menu();
+				TimChuyenBay();
+				x=-1,y=-1;
+				break;
+			}
+			case 5:{
+				Menu();
+				ThongKeChuyenBay();
+				x=-1,y=-1;
+				break;
+			}
+		}
+	}
+}
+
+
+//========================================================================//===================================================================//
+
+
+int main(int argc, char *argv[])
+{
+	initwindow(1280, 800);					
+   	cleardevice();	
+	run();
+	while(!kbhit()) delay(1);
+	system("pause");
+    closegraph();
+}
+
