@@ -614,24 +614,24 @@ void run(){
 				taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
 			}
 			if (MID[xmouse][ymouse]==3){
-				taoButton(10,190,270,290,2,8,15,3,"Quan Ly Chuyen Bay");
+				taoButton(10,340,270,440,3,8,15,3,"Quan Ly Hanh Khach");
 			}
 			else{
-				taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
+				taoButton(10,340,270,440,3,7,0,3,"Quan Ly Hanh Khach");
 			}
 			if (MID[xmouse][ymouse]==4){
-				taoButton(10,190,270,290,2,8,15,3,"Quan Ly Chuyen Bay");
+				taoButton(10,490,270,590,4,8,15,3,"Tim Chuyen Bay");
 			}
 			else{
-				taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
+				taoButton(10,490,270,590,4,7,0,3,"Tim Chuyen Bay");
 			}
 			if (MID[xmouse][ymouse]==5){
-				taoButton(10,190,270,290,2,8,15,3,"Quan Ly Chuyen Bay");
+				taoButton(10,640,270,740,5,8,15,3,"Thong Ke Chuyen Bay");
 			}
 			else{
-				taoButton(10,190,270,290,2,7,0,3,"Quan Ly Chuyen Bay");
+				taoButton(10,640,270,740,5,7,0,3,"Thong Ke Chuyen Bay");
 			}
-			}
+		}
 				
 //		if(ismouseclick(WM_MOUSEMOVE))
 //		getmouseclick(WM_MOUSEMOVE,xmouse,ymouse);
