@@ -9,7 +9,7 @@ struct MayBay
   char Type[41];
   int Room; // so cho cua may bay
   bool Active = true;
-  int SoLuotBay;
+  int SoLuotBay = 0;
   // cho so phu
 
 };

@@ -1,10 +1,62 @@
 #include"CTDL.h"
 #include<cmath>
 #include<string.h>
+#include<vector>
+#include<iostream>
+#include<sstream>
+
+#include<fstream>
+#include<cstdio>
+
 #pragma once
 NodeMayBay dsmb;
 ptrDSCB pheadDSCB=NULL;
 NodeHk* hk=NULL;
+ofstream MBO; 
+ifstream MBI;
+void FileOutMB(ofstream &MBOut,NodeMayBay nodemb,int n)
+{
+	MBOut.open("test.txt",ios::app);
+	MBOut<<nodemb.data[n]->ID<<" "<<nodemb.data[n]->Type<<" "<<nodemb.data[n]->Room<<" "<<nodemb.data[n]->SoLuotBay<<" "<<nodemb.data[n]->Active<<endl;
+ 	MBOut.close();
+}
+
+void FileInMB(ifstream &MBIn,NodeMayBay &nodemb)
+{
+  	MBI.open("test.txt");
+ 	string TempRead;
+ 	vector<string>temp;
+ 	int TempTotal =0;
+ 	char tempID[16];
+ 	char tempType[41];
+	while(getline(MBI,TempRead))
+{
+	stringstream iss(TempRead);
+	for( string a; iss >>a;)
+	 	{
+		temp.push_back(a);
+	  	}
+   	int x[3]; 
+    for(int i=(temp.size()-3); i<temp.size(); i++)
+    	{
+        int count =0;
+        stringstream go(temp[i]);
+        go >> x[count];
+        count++;
+    }
+    nodemb.data[TempTotal]->Room = x[0];
+	nodemb.data[TempTotal]->SoLuotBay = x[1];
+    nodemb.data[TempTotal]->Active = x[2];
+	strcpy(tempID, temp[0].c_str());
+    strcpy(tempType, temp[1].c_str());
+    strcpy(nodemb.data[TempTotal]->ID,tempID);
+    strcpy(nodemb.data[TempTotal]->Type,tempType);
+    TempTotal++;
+    nodemb.total = TempTotal;
+    temp.clear();  
+ 	}
+}
+
 
 #define IDCANCEL 2
 // ham xu ly may bay        
