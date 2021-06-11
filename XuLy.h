@@ -4,7 +4,7 @@
 #include<vector>
 #include<iostream>
 #include<sstream>
-
+#include<string>
 #include<fstream>
 #include<cstdio>
 
@@ -212,21 +212,35 @@ void InsertNodeCB(ptrDSCB &pheadCB, NodeChuyenBay *p)
   }
 }
 //ADD CHUYEN BAY
-void AddNewChuyenBay(ptrDSCB &pheadDSCB,char TempMCB[],char TempNoiToi[],char tempIDMB[],int TempDay,int TempMonth,int TempYear,int TempHour, int TempMin)
+void AddNewChuyenBay(ptrDSCB &pheadDSCB,char TempMCB[],int TempDay,int TempMonth,int TempYear,int TempHour, int TempMin,char TempNoiToi[],char tempIDMB[],int TempTT)
 {
 	ChuyenBay data;
    	strcpy(data.MaCB,TempMCB);
    	strcpy(data.SanBayDen,TempNoiToi);
    	strcpy(data.ID,tempIDMB);
+   	
+   	Date d;
+   	d.day = TempDay;
+   	d.mon = TempMonth;
+   	d.year = TempYear;
+   	d.hour = TempHour;
+   	d.min = TempMin;
+   	data.DepartTime = d;
+   	data.Status = TempTT;
+   	
   	NodeChuyenBay*p = new NodeChuyenBay;
 	p->data = data;
    	p->next = NULL;
+   	
+	/*
 	data.DepartTime.hour = TempHour;
   	data.DepartTime.min = TempMin;
     data.DepartTime.day = TempDay;
     data.DepartTime.mon = TempMonth;
 	data.DepartTime.year = TempYear;
+	*/
 
-	cout << data.DepartTime.day << " " << data.DepartTime.mon << " " << data.DepartTime.year << " " << data.DepartTime.hour << " " << data.DepartTime.min;
+	cout << data.DepartTime.day << " " << data.DepartTime.mon << " " << data.DepartTime.year << " " << data.DepartTime.hour << " " << data.DepartTime.min << endl;
 	InsertNodeCB(pheadDSCB,p);
 }
+

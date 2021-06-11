@@ -87,6 +87,14 @@ void HopLe1(int x,int y){
 	outtextxy(x+5,y+5,"Hop Le!");
 }
 
+void KhongHopLe1(int x,int y){
+	settextstyle(3,0,1);
+	setbkcolor(3);	
+	setcolor(4);
+	outtextxy(x+5,y+5,"                                          ");
+	outtextxy(x+5,y+5,"Khong Hop Le!");
+}
+
 void TonTai1(int x,int y){
 	settextstyle(3,0,1);
 	setbkcolor(3);	
@@ -103,12 +111,34 @@ void KhongTonTai1(int x,int y){
 	outtextxy(x+5,y+5,"Khong Ton Tai");
 }
 
+void CleanMessageBox(int x,int y){
+	settextstyle(3,0,1);
+	setbkcolor(3);	
+	setcolor(0);
+	outtextxy(x+5,y+5,"                                                        ");
+}
+
 void OUTTEXT(int x, int y, int maunen, int mauchu,int fontchu, int sizechu, char text[]){
 	settextstyle(fontchu,0,sizechu);
 	setbkcolor(maunen);	
 	setcolor(mauchu);
 	outtextxy(x,y,text);
 }
+
+void OUTTEXT1(int x, int y, int maunen, int mauchu,int fontchu, int sizechu){
+	settextstyle(fontchu,0,sizechu);
+	setbkcolor(maunen);	
+	setcolor(mauchu);
+	outtextxy(x,y,"/");
+}
+
+void OUTTEXT2(int x, int y, int maunen, int mauchu,int fontchu, int sizechu){
+	settextstyle(fontchu,0,sizechu);
+	setbkcolor(maunen);	
+	setcolor(mauchu);
+	outtextxy(x,y,":");
+}
+
 void ScanTen(int x, int y, char s[], int lenMax,int mauNen){   
 	settextstyle(6,0,1);
 	setcolor(0);
@@ -192,6 +222,136 @@ void ScanSo(int x, int y, char *s, int lenMax,int mauNen, int id){
 						s[l+1]='\0';
 						outtextxy(x,y,s);
 					}	
+				}
+				else if(c==8){
+					if (l==0) continue;
+					s[l-1]='|';
+					s[l]=' ';
+					l--;
+					outtextxy(x,y,s);	
+				}else if (c==13){
+					s[l]='\0';
+//					Key=-2;
+					break;
+				}	
+			 } 	
+			 else if(c==8){
+					s[l-1]='|';
+					s[l]=' ';
+					l--;
+					outtextxy(x,y,s);
+ 
+				}else if (c==13){
+					s[l]='\0';
+//					Key=-2;
+					break;
+				}
+		}
+		else{
+ 
+			s[l]='|';
+			delay(100);
+			outtextxy(x,y,s);
+			s[l]=' ';
+			delay(100);
+			outtextxy(x,y,s);
+		}
+//		if (ismouseclick(WM_LBUTTONDOWN)){
+//			 getmouseclick(WM_LBUTTONDOWN, x1, y1);
+//			 if (Mapid[x1][y1] != id) {
+//			 	s[l]='\0';
+//			 	Key=Mapid[x1][y1];
+//			 	break;
+//			 }
+//		}
+	 }
+}
+void ScanTT(int x, int y, char *s, int lenMax,int mauNen, int id){ // scan only 1
+	settextstyle(6,0,1);
+	setcolor(0);
+	setbkcolor(mauNen);
+    int l=strlen(s);
+    s[l+1]='\0';
+    s[l]='|';
+    int x1,y1;
+     while(1){
+		outtextxy(x,y,s);
+     	if(kbhit()){
+	     	char c= getch();
+	     	if (l<lenMax){
+	     		if(c >= '0' && c <= '1'){
+				 	if (l==0 && c=='0') continue;
+					else{
+						s[l]=c;
+						l++;
+						s[l+1]='\0';
+						outtextxy(x,y,s);
+					}	
+				}
+				else if(c==8){
+					if (l==0) continue;
+					s[l-1]='|';
+					s[l]=' ';
+					l--;
+					outtextxy(x,y,s);	
+				}else if (c==13){
+					s[l]='\0';
+//					Key=-2;
+					break;
+				}	
+			 } 	
+			 else if(c==8){
+					s[l-1]='|';
+					s[l]=' ';
+					l--;
+					outtextxy(x,y,s);
+ 
+				}else if (c==13){
+					s[l]='\0';
+//					Key=-2;
+					break;
+				}
+		}
+		else{
+ 
+			s[l]='|';
+			delay(100);
+			outtextxy(x,y,s);
+			s[l]=' ';
+			delay(100);
+			outtextxy(x,y,s);
+		}
+//		if (ismouseclick(WM_LBUTTONDOWN)){
+//			 getmouseclick(WM_LBUTTONDOWN, x1, y1);
+//			 if (Mapid[x1][y1] != id) {
+//			 	s[l]='\0';
+//			 	Key=Mapid[x1][y1];
+//			 	break;
+//			 }
+//		}
+	 }
+}
+void ScanTT2(int x, int y, char *s, int lenMax,int mauNen, int id){ //scan 0 -> 3
+	settextstyle(6,0,1);
+	setcolor(0);
+	setbkcolor(mauNen);
+    int l=strlen(s);
+    s[l+1]='\0';
+    s[l]='|';
+    int x1,y1;
+     while(1){
+		outtextxy(x,y,s);
+     	if(kbhit()){
+	     	char c= getch();
+	     	if (l<lenMax){
+	     		if(c >= '0' && c <= '3'){
+//				 	if (l==0 && c=='0') continue;
+//					else{
+						s[l]=c;
+						l++;
+						s[l+1]='\0';
+						outtextxy(x,y,s);
+//					}	
 				}
 				else if(c==8){
 					if (l==0) continue;
@@ -479,12 +639,12 @@ void QuanLyChuyenBay_NhapChuyenBay(){
 	outtextxy(345,655,"IDCB");
 	taoO(458,650,925,680,7,0,21);
 	
-	outtextxy(345,702,"NGAY");
-	taoO(405,697,455,727,7,0,0);
-	outtextxy(460,702,"THANG");
-	taoO(530,697,580,727,7,0,0);
-	outtextxy(585,702,"NAM");
-	taoO(630,697,710,727,7,0,0);
+	outtextxy(345,702,"NAM");
+	taoO(395,697,475,727,7,0,0);
+	outtextxy(480,702,"THANG");
+	taoO(550,697,600,727,7,0,0);
+	outtextxy(605,702,"NGAY");
+	taoO(660,697,710,727,7,0,0);
 	outtextxy(715,702,"GIO");
 	taoO(750,697,800,727,7,0,0);
 	outtextxy(805,702,"PHUT");
@@ -524,27 +684,32 @@ void QuanLyChuyenBay_HienThiChuyenBay(){
 
 	while(ptr != NULL){
     	OUTTEXT(xx+12,yy+15,15,0,3,3,ptr->data.MaCB);
-    	
-//    	char day[50]= "";
-//    	char mon[50]= "";
-//    	char year[50]= "";
-//    	char hour[50]= "";
-//    	char min[50]= "";
-//    	IntToChar(ptr->data.DepartTime.day,day);
-//    	IntToChar(ptr->data.DepartTime.mon,mon);
-//    	IntToChar(ptr->data.DepartTime.year,year);
-//    	IntToChar(ptr->data.DepartTime.hour,hour);
-//    	IntToChar(ptr->data.DepartTime.min,min);
-//    	cout << ptr->data.DepartTime.day << " "<< ptr->data.DepartTime.mon << " "<< ptr->data.DepartTime.year << " "<< ptr->data.DepartTime.hour << " "<< ptr->data.DepartTime.min << endl;
-//    	OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,day);
-//    	OUTTEXT(xx+12+m[0]+30,yy+15,15,0,3,3,mon);
-//    	OUTTEXT(xx+12+m[0]+30,yy+15,15,0,3,3,year);
-//    	OUTTEXT(xx+12+m[0]+30,yy+15,15,0,3,3,hour);
-//    	OUTTEXT(xx+12+m[0]+30,yy+15,15,0,3,3,min);	
+ 
+    	char day[50]= "";
+    	char mon[50]= "";
+    	char year[50]= "";
+    	char hour[50]= "";
+    	char min[50]= "";
+    	IntToChar(ptr->data.DepartTime.day,day);
+    	IntToChar(ptr->data.DepartTime.mon,mon);
+    	IntToChar(ptr->data.DepartTime.year,year);
+    	IntToChar(ptr->data.DepartTime.hour,hour);
+    	IntToChar(ptr->data.DepartTime.min,min);
+    	cout << ptr->data.DepartTime.day << " "<< ptr->data.DepartTime.mon << " "<< ptr->data.DepartTime.year << " "<< ptr->data.DepartTime.hour << " "<< ptr->data.DepartTime.min << endl;
+		OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,day);
+    	OUTTEXT1(xx+12+m[0]+35,yy+15,15,0,3,3);
+    	OUTTEXT(xx+12+m[0]+50,yy+15,15,0,3,3,mon);
+    	OUTTEXT1(xx+12+m[0]+85,yy+15,15,0,3,3);
+    	OUTTEXT(xx+12+m[0]+100,yy+15,15,0,3,3,year);
+    	OUTTEXT(xx+12+m[0]+30+120+10,yy+15,15,0,3,3,hour);
+    	OUTTEXT2(xx+12+m[0]+30+120+40,yy+15,15,0,3,3);
+    	OUTTEXT(xx+12+m[0]+30+120+50,yy+15,15,0,3,3,min);	
 					
     	OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,ptr->data.SanBayDen);
     	OUTTEXT(xx+12+m[0]+m[1]+m[2],yy+15,15,0,3,3,ptr->data.ID);
-//    	OUTTEXT(xx+12+m[0]+m[1]+m[2]+m[3],yy+15,15,0,3,3,ptr->data.Status);
+    	char TT[50] = "";
+    	IntToChar(ptr->data.Status,TT);
+    	OUTTEXT(xx+12+m[0]+m[1]+m[2]+m[3],yy+15,15,0,3,3,TT);
     	ptr = ptr->next;  
    		yy +=55;
 	}
@@ -786,7 +951,8 @@ void run(){
 	char GIO2[50] = ""; 
 	char PHUT2[50] = ""; 
 	char TOI2[50] = "";
-	char IDMAYBAY2[50] = ""; 
+	char IDMAYBAY2[50] = "";
+	char TRANGTHAI2[50] = ""; 
 	char CCCD3[50] = "";
 	char HOTEN3[50] = ""; 
 	char GIOITINH3[50] = "";
@@ -813,6 +979,7 @@ void run(){
 	bool okPHUT2 = false;
 	bool okTOI2 = false;
 	bool okIDMAYBAY2 = false; 
+	bool okTRANGTHAI2 = false; 
 	bool okCCCD3 = false;
 	bool okHOTEN3 = false; 
 	bool okGIOITINH3= false;
@@ -834,6 +1001,9 @@ void run(){
 	int TempNam = 0;
 	int TempGio = 0;
 	int TempPhut = 0;
+	int TempTT = 0; 
+	NodeChuyenBay* ptr = new NodeChuyenBay;
+	ptr = pheadDSCB;
 	FileInMB(MBI,dsmb);
 	while (1){
 		if(kbhit()){
@@ -892,7 +1062,7 @@ void run(){
 		delay(1);
 		if (ismouseclick(WM_LBUTTONDOWN)){
 			getmouseclick(WM_LBUTTONDOWN, x, y);
-			cout << x <<"," << y <<"," <<MID[x][y];
+			cout << x <<"," << y <<"," <<MID[x][y] << endl;
 //			if (MID[x][y]==1){
 //    			taoButton(10,40,270,140,1,8,15,3,"Quan Ly May Bay");
 //    		}
@@ -1351,22 +1521,26 @@ void run(){
 
 				taoO(458,650,925,680,15,0,21);
 
-				taoO(405,697,455,727,15,0,22);
-	
-				taoO(530,697,580,727,15,0,22);
-	
-
-				taoO(585 + 45,697,585 + 45 + 80,727,15,0,22);
-
-				taoO(585 + 45 + 85 + 35,697,585 + 45 + 85 + 35 + 50,727,15,0,22);
-
-				taoO(585 + 45 + 85 + 35 + 50 + 10 +50,697,585 + 45 + 85 + 35 + 50 + 10 +50 + 50,727,15,0,22);
+				taoO(395,697,475,727,15,0,201);
+				taoO(550,697,600,727,15,0,202);
+				taoO(660,697,710,727,15,0,203);
+				taoO(750,697,800,727,15,0,204);
+				taoO(860,697,925,727,15,0,205);
+		
 				
 				taoO(458,742,925,772,15,0,0);
-				taoO(458,787,925,817,15,0,0);
-				OUTTEXT(458+5,697+5,15,0,6,1,NGAY2);
+				taoO(458,787,820,817,15,0,0);
+				taoO(860,787,925,817,15,0,0);
+				
+				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+				
 				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
 				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
 				
 				taoButton(335+200,600,335+200+40,640,2001,4,0,3,"X");
 				
@@ -1392,21 +1566,43 @@ void run(){
 			 		outtextxy(970,650,"IDCB: ");
 				 	TonTai1(970 + 50,645);
 					okID2=false;
-//					strcpy(NGAY2,ptr->data.DepartTime);
-//					char CharRoom[50];
-//					IntToChar(dsmb.data[sotam]->Room,CharRoom);
-//					strcpy(SOCHO1,CharRoom);
+					
+					char day[50]= "";
+    				char mon[50]= "";
+    				char year[50]= "";
+    				char hour[50]= "";
+    				char min[50]= "";
+    				IntToChar(ptr->data.DepartTime.day,day);
+    				IntToChar(ptr->data.DepartTime.mon,mon);
+    				IntToChar(ptr->data.DepartTime.year,year);
+    				IntToChar(ptr->data.DepartTime.hour,hour);
+    				IntToChar(ptr->data.DepartTime.min,min);
+    				
+    				strcpy(NGAY2,day); strcpy(THANG2,mon); strcpy(NAM2,year); strcpy(GIO2,hour); strcpy(PHUT2,min);
 					strcpy(TOI2,ptr->data.SanBayDen);
 					strcpy(IDMAYBAY2,ptr->data.ID);
+					
+					char TT[50] = "";
+					IntToChar(ptr->data.Status,TT);
+					strcpy(TRANGTHAI2,TT);
+					
+					
 					taoO(458,650,925,680,15,0,0);
 					OUTTEXT(458+5,650+5,15,4,6,1,ID2);
-					OUTTEXT(458+5,697+5,15,0,6,1,NGAY2);
+					OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+					OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+					OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+					OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+					OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+					
 					OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
 					OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
+					OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
 				 	taoButton(1050,780,1135,830,1003,7,0,3,"SAVE");
 					taoButton(1145,780,1265,830,1004,7,0,3,"REMOVE");
 					}
 					else {
+
 				 		setbkcolor(3);
 				 		setcolor(0);
 				 		settextstyle(3,0,1);
@@ -1417,66 +1613,230 @@ void run(){
 				x=-1;y=-1;
 				break;
 				}
-			case 22:{ // NGAY
+//====================================================================================
+				case 201:{ //NAM
 				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
 						OUTTEXT(458+5,650+5,15,4,6,1,ID2);}
 					else{
 						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
 					}
-				OUTTEXT(458+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+				
 				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
 				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
-			
-				taoButton(335+200,600,335+200+40,640,2001,4,0,3,"X");
-				
-				taoButton(965,780,1040,830,0,7,8,3,"NEW");
-
-				taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
-	
-				taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
-				taoID(458,742,925,772,23);
-				
-
-							
-				ScanSo(405+5,697+5,NGAY2,2,15,22);
-				ScanSo(530+5,697+5,THANG2,2,15,22);
-				ScanSo(585 + 45+5,697+5,NAM2,4,15,22);
-				ScanSo(585 + 45 + 85 + 35+5,697+5,GIO2,2,15,22);
-				ScanSo(585 + 45 + 85 + 35 + 50 + 10 +50+5,697+5,PHUT2,2,15,22);
-				if(strlen(NGAY2)==0){
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
+				ScanSo(395+5,697+5,NAM2,4,15,22);
+				if(strlen(NAM2)==0){
 				 	setbkcolor(3);
 				 	setcolor(0);
 				 	settextstyle(3,0,1);
+				 	CleanMessageBox(970,680);
+				 	outtextxy(970,680,"NAM:");
+				 	BaoLoi1(970 + 50,675);
+				 	okNAM2=false; 
+					}
+				else{
+					TempNam = CharToInt(NAM2);
+					if(TempNam > 2000 && TempNam < 2100){
+						setbkcolor(3);
+					 	setcolor(0);
+						settextstyle(3,0,1);
+						CleanMessageBox(970,680);
+				 		outtextxy(970,680,"NAM:");
+				 		HopLe1(970 + 50,675);
+				 		okNAM2=true;
+					}
+					else {
+						setbkcolor(3);
+					 	setcolor(0);
+					 	settextstyle(3,0,1);
+					 	CleanMessageBox(970,680);
+					 	outtextxy(970,680,"NAM:");
+					 	KhongHopLe1(970 + 50,675);
+				 		okNAM2=false; 
+					}
+				}
+				x=-1;y=-1;
+				break;
+			}
+		
+			case 202:{ //THANG
+				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
+						OUTTEXT(458+5,650+5,15,4,6,1,ID2);}
+					else{
+						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
+					}
+				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+				
+				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
+				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
+				ScanSo(550+5,697+5,THANG2,2,15,22);
+				if(strlen(THANG2)==0){
+				 	setbkcolor(3);
+				 	setcolor(0);
+				 	settextstyle(3,0,1);
+				 	CleanMessageBox(970,680);
+				 	outtextxy(970,680,"THANG:");
+				 	BaoLoi1(970 + 70,675);
+				 	okTHANG2=false; 
+					}
+				else {
+					TempThang = CharToInt(THANG2);
+				 	setbkcolor(3);
+				 	setcolor(0);
+					settextstyle(3,0,1);
+					CleanMessageBox(970,680);
+			 		outtextxy(970,680,"THANG:");
+			 		HopLe1(970 + 70,675);
+			 		okTHANG2=true;
+					}
+				x=-1;y=-1;
+				break;
+			}
+			case 203:{ //NGAY
+				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
+						OUTTEXT(458+5,650+5,15,4,6,1,ID2);}
+					else{
+						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
+					}
+				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+				
+				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
+				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
+				ScanSo(660+5,697+5,NGAY2,2,15,22);
+				if(strlen(NGAY2)==0){
+					CleanMessageBox(970,680);
+				 	setbkcolor(3);
+				 	setcolor(0);
+				 	settextstyle(3,0,1);
+				 	CleanMessageBox(970,680);
 				 	outtextxy(970,680,"NGAY:");
 				 	BaoLoi1(970 + 60,675);
 				 	okNGAY2=false; 
 					}
 				else {
 					TempNgay = CharToInt(NGAY2);
-					TempThang = CharToInt(THANG2);
-					TempNam = CharToInt(NAM2);
-					TempGio = CharToInt(GIO2);
-					TempPhut = CharToInt(PHUT2);
 				 	setbkcolor(3);
 				 	setcolor(0);
 					settextstyle(3,0,1);
+					CleanMessageBox(970,680);
 			 		outtextxy(970,680,"NGAY:");
 			 		HopLe1(970 + 60,675);
 			 		okNGAY2=true; 
+
 					}
 				x=-1;y=-1;
 				break;
 			}
+			case 204:{ //GIO
+				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
+						OUTTEXT(458+5,650+5,15,4,6,1,ID2);}
+					else{
+						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
+					}
+				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+				
+				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
+				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
+				ScanSo(750+5,697+5,GIO2,2,15,22);
+				if(strlen(GIO2)==0){
+				 	setbkcolor(3);
+				 	setcolor(0);
+				 	settextstyle(3,0,1);
+				 	CleanMessageBox(970,680);
+				 	outtextxy(970,680,"GIO:");
+				 	BaoLoi1(970 + 40,675);
+				 	okGIO2=false; 
+					}
+				else {
+					TempGio = CharToInt(GIO2);
+				 	setbkcolor(3);
+				 	setcolor(0);
+					settextstyle(3,0,1);
+					CleanMessageBox(970,680);
+			 		outtextxy(970,680,"GIO:");
+			 		HopLe1(970 + 40,675);
+			 		okGIO2=true;
+					}
+				x=-1;y=-1;
+				break;
+			}
+			case 205:{ //PHUT
+				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
+						OUTTEXT(458+5,650+5,15,4,6,1,ID2);}
+					else{
+						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
+					}
+				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+				
+				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
+				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
+				ScanSo(860+5,697+5,PHUT2,2,15,22);					
+				if(strlen(PHUT2)==0){
+				 	setbkcolor(3);
+				 	setcolor(0);
+				 	settextstyle(3,0,1);
+				 	CleanMessageBox(970,680);
+				 	outtextxy(970,680,"PHUT:");
+				 	BaoLoi1(970 + 60,675);
+				 	okPHUT2=false; 
+					}	
+				else {
+
+					TempPhut = CharToInt(PHUT2);
+				 	setbkcolor(3);
+				 	setcolor(0);
+					settextstyle(3,0,1);
+					CleanMessageBox(970,680);
+			 		outtextxy(970,680,"PHUT:");
+			 		HopLe1(970 + 60,675);
+			 		okPHUT2=true;
+					}
+				taoButton(335+200,600,335+200+40,640,2001,4,0,3,"X");
+				taoID(458,742,925,772,23);
+				x=-1;y=-1;
+				break;
+			}
+//====================================================================================
 			case 23:{ // NOI TOI 
 				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
 						OUTTEXT(458+5,650+5,15,4,6,1,ID2);}
 					else{
 						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
 					}
-				OUTTEXT(458+5,650+5,15,0,6,1,ID2); // TEST OUTTEXT ID CHUYEN BAY
-				OUTTEXT(458+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+				
 				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
 				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
 				taoButton(335+200,600,335+200+40,640,2001,4,0,3,"X");
 				ScanTen(458+5,742+5,TOI2,10,15);
 				if(strlen(TOI2)==0){
@@ -1487,7 +1847,7 @@ void run(){
 			 		BaoLoi1(970 + 80,705);
 			 		okTOI2=false; 
 					}
-				 	else {
+				else {
 				 	setbkcolor(3);
 				 	setcolor(0);
 				 	settextstyle(3,0,1);
@@ -1495,7 +1855,7 @@ void run(){
 					HopLe1(970 + 80,705);
 					okTOI2=true; 
 					}
-					taoID(458,787,925,817,24);
+				taoID(458,787,925,817,24);
 				x=-1;y=-1;
 				break;
 			}
@@ -1505,11 +1865,15 @@ void run(){
 					else{
 						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
 					}
-				OUTTEXT(458+5,650+5,15,0,6,1,ID2); // TEST OUTTEXT ID CHUYEN BAY
-				OUTTEXT(458+5,697+5,15,0,6,1,NGAY2);
-				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
-				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);				
+				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
 				
+				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
+				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);			
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
 				
 				
 				taoButton(335+200,600,335+200+40,640,2001,4,0,3,"X");
@@ -1539,7 +1903,34 @@ void run(){
 					KhongTonTai1(970 + 25,735);
 					okIDMAYBAY2=false;
 				}
-					if(SearchNode(pheadDSCB,ID2)!=NULL){ //SEARCH ID CHUYEN BAY 
+				taoID(860,787,925,817,25);
+				x=-1;y=-1;
+				break;
+			}
+			case 25:{
+				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
+						OUTTEXT(458+5,650+5,15,4,6,1,ID2);}
+				else{
+						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
+					}
+				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+				
+				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
+				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
+				
+				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
+						ScanTT2(860+5,787+5,TRANGTHAI2,1,15,25);}
+				else{
+						ScanTT(860+5,787+5,TRANGTHAI2,1,15,25);
+					}
+				TempTT = CharToInt(TRANGTHAI2);
+				taoButton(335+200,600,335+200+40,640,2001,4,0,3,"X");
+				if(SearchNode(pheadDSCB,ID2)!=NULL){ //SEARCH ID CHUYEN BAY 
 						taoButton(965,780,1040,830,0,7,8,3,"NEW");
 						
 						taoButton(1050,780,1135,830,2003,7,0,3,"SAVE");
@@ -1553,6 +1944,7 @@ void run(){
 	
 						taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
 					}
+				
 				x=-1;y=-1;
 				break;
 			}
@@ -1565,7 +1957,7 @@ void run(){
 				okNGAY2 = false;
 				okTOI2 = false;
 				okIDMAYBAY2 = false;
-			taoO(458,650,925,680,15,0,21);
+				taoO(458,650,925,680,15,0,21);
 				taoO(458,697,925,727,15,0,22);
 				taoO(458,742,925,772,15,0,0);
 				taoO(458,787,925,817,15,0,0);
@@ -1585,7 +1977,7 @@ void run(){
 					delay(250);
 			    	taoButton(965,780,1040,830,2002,7,0,3,"NEW");
 			    	if(okID2 == true && okNGAY2 == true && okTOI2 == true && okIDMAYBAY2 == true){
-			    		AddNewChuyenBay(pheadDSCB,ID2,TOI2,IDMAYBAY2,TempNgay,TempThang,TempNam,TempGio,TempPhut);
+			    		AddNewChuyenBay(pheadDSCB,ID2,TempNgay,TempThang,TempNam,TempGio,TempPhut,TOI2,IDMAYBAY2,TempTT);
 						Menu();
 						QuanLyChuyenBay();
 						
@@ -1594,12 +1986,22 @@ void run(){
 						MessageBox("",0);
 						strcpy(ID2,"");
 						strcpy(NGAY2,"");
+						strcpy(THANG2,"");
+						strcpy(NAM2,"");
+						strcpy(GIO2,"");
+						strcpy(PHUT2,"");
 						strcpy(TOI2,"");
 						strcpy(IDMAYBAY2,"");
+						strcpy(TRANGTHAI2,"");
 						okID2 = false;
 						okNGAY2 = false;
+						okTHANG2 = false;
+						okNAM2 = false;
+						okGIO2 = false;
+						okPHUT2 = false;
 						okTOI2 = false;
 						okIDMAYBAY2 = false;
+						okTRANGTHAI2 = false;
 					}
 					else{
 						MessageBox("Khong The Them",4);
