@@ -488,17 +488,19 @@ void QuanLyChuyenBay_NhapChuyenBay(){
 	outtextxy(715,702,"GIO");
 	taoO(750,697,800,727,7,0,0);
 	outtextxy(805,702,"PHUT");
-	taoO(860,697,910,727,7,0,0);
+	taoO(860,697,925,727,7,0,0);
 	
 	
 	outtextxy(345,747,"TOI");
 	taoO(458,742 ,925,772,7,0,0);
 	
 	outtextxy(345,792,"IDMAYBAY");
-	taoO(458,787,925,817,7,0,0);
+	taoO(458,787,820,817,7,0,0);
+	
+	outtextxy(830,792,"TT");
+	taoO(860,787,925,817,7,0,0);
 	
 	taoO(965,640,1265,770,3,0,0);
-
    	outtextxy(1060,625,"MessageBox");
 
 	taoButton(965,780,1040,830,0,7,8,3,"NEW");
