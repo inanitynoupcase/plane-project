@@ -1,5 +1,6 @@
 #include<iostream>
 #include<conio.h>
+#include"Date.h"
 #pragma once
 using namespace std;
 
@@ -47,18 +48,19 @@ void InitializeVe(DsVe &dsve, int quantity,int booked)
 
 struct ChuyenBay
 {
-	   char MaCB[16]; // ma chuyen bay
-     char ID[16]; // so hieu may bay
-     char SanBayDen[21]; 
-//     Date DepartTime;
-     int Status; // trang thai 0: huy chuyen, 1: con ve,  2: het ve, 3: hoan tat
-     DsVe dsv; 
+	char MaCB[16]; // ma chuyen bay
+    Date DepartTime; // thoi gian
+    char SanBayDen[21]; // noitoi
+    char ID[16];	// id may bay
+    int Status; // trang thai 0: huy chuyen, 1: con ve,  2: het ve, 3: hoan tat
+//     DsVe dsv; 
 };
 struct NodeChuyenBay
 {
   ChuyenBay data;
-  NodeChuyenBay* next;
+  NodeChuyenBay* next=NULL;
 };
+
 typedef NodeChuyenBay*ptrDSCB;
 
 
