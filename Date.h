@@ -35,11 +35,6 @@ bool DaysOfMon(Date dt)
 }
 bool CheckDepartTime(Date dt)
 {
-	if(DaysOfMon(dt)==false) 
-	{
-		//cout<<"Ngay trong thang khong hop le!"<<endl;
-		return false;
-	}
 	
 	time_t now=time(0);
 	tm *ltm=localtime(&now);

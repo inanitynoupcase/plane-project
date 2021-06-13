@@ -53,7 +53,7 @@ struct ChuyenBay
     char SanBayDen[21]; // noitoi
     char ID[16];	// id may bay
     int Status = 1 ; // trang thai 0: huy chuyen, 1: con ve,  2: het ve, 3: hoan tat
-//     DsVe dsv; 
+    DsVe dsv; 
 };
 struct NodeChuyenBay
 {
