@@ -683,6 +683,7 @@ void QuanLyChuyenBay_HienThiChuyenBay(){
    	NodeChuyenBay* ptr = new NodeChuyenBay;
 	ptr = pheadDSCB;
 	SortCB_Time(pheadDSCB);
+	
 	while(ptr != NULL){
     	OUTTEXT(xx+12,yy+15,15,0,3,3,ptr->data.MaCB);
  
@@ -771,16 +772,21 @@ void TimChuyenBay_Nhap(){
 	
    	taoO(335,40,1260,90,3,0,0);
 	outtextxy(345,55,"ID");
-	taoO(375,50,535,80,7,0,41);
+	taoO(375,50,535,80,7,0,0);
 	outtextxy(550,55,"NGAY");
-	taoO(620,50,670,80,7,0,42);
+	taoO(620,50,670,80,7,0,41);
 	outtextxy(690,55,"THANG");
-	taoO(780,50,840,80,7,0,43);
+	taoO(780,50,840,80,7,0,42);
 	outtextxy(855,55,"NAM");
-	taoO(910,50,1000,80,7,0,44);
+	taoO(910,50,1000,80,7,0,43);
 	outtextxy(1015,55,"TOI");
-	taoO(1065,50,1230,80,7,0,45);
-
+	taoO(1065,50,1230,80,7,0,44);
+	
+	
+	taoO(335,95,1260,145,3,0,0);
+	OUTTEXT(335,91,3,0,3,1,"MessageBox");
+	taoO(1065,105,1230,135,4,0,45);
+	OUTTEXT(1110,110,4,0,3,1,"Tim Kiem");
 }
 
 void TimChuyenBay_HienThi(){
@@ -952,7 +958,7 @@ void run(){
 	char PHUT2[50] = ""; 
 	char TOI2[50] = "";
 	char IDMAYBAY2[50] = "";
-	char TRANGTHAI2[50] = ""; 
+	char TRANGTHAI2[10]= ""; 
 	char CCCD3[50] = "";
 	char HOTEN3[50] = ""; 
 	char GIOITINH3[50] = "";
@@ -968,19 +974,18 @@ void run(){
 	char DANHSACH6[50] = "";
 	char NGAYKHOIHANH6[50] = ""; 
 	char NOIDEN6[50] = "";
-	bool okID1 = false;
-	bool okLOAI1 = false;
-	bool okSOCHO1 = false; 
-	bool okID2 = false;
-	bool okNGAY2= false; 
-	bool okTHANG2 = false; 
-	bool okNAM2 = false;
-	bool NamNhuan = false; 
-	bool okGIO2 = false; 
-	bool okPHUT2 = false;
-	bool okTOI2 = false;
-	bool okIDMAYBAY2 = false; 
-	bool okTRANGTHAI2 = false; 
+	bool okID1 = true;
+	bool okLOAI1 = true;
+	bool okSOCHO1 = true; 
+	bool okID2 = true;
+	bool okNGAY2= true; 
+	bool okTHANG2 = true; 
+	bool okNAM2 = true;
+	bool NamNhuan = true; 
+	bool okGIO2 = true; 
+	bool okPHUT2 = true;
+	bool okTOI2 = true;
+	bool okIDMAYBAY2 = true; 
 	bool okCCCD3 = false;
 	bool okHOTEN3 = false; 
 	bool okGIOITINH3= false;
@@ -1002,6 +1007,9 @@ void run(){
 	int TempNam = 0;
 	int TempGio = 0;
 	int TempPhut = 0;
+	int TempNgay4 = 0;
+	int TempThang4 = 0;
+	int TempNam4 = 0;
 	int TempTT = 0; 
 	NodeChuyenBay* ptr = new NodeChuyenBay;
 	ptr = pheadDSCB;
@@ -1531,7 +1539,7 @@ void run(){
 				
 				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
 				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
-				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
+				
 				
 				taoButton(335+200,600,335+200+40,640,2001,4,0,3,"X");
 				
@@ -1558,6 +1566,7 @@ void run(){
 				 	TonTai1(970 + 50,645);
 					okID2=false;
 					
+					
 					char day[50]= "";
     				char mon[50]= "";
     				char year[50]= "";
@@ -1577,7 +1586,13 @@ void run(){
 					IntToChar(ptr->data.Status,TT);
 					strcpy(TRANGTHAI2,TT);
 					
-					
+					okNGAY2 = true;
+					okTHANG2 = true;
+					okNAM2= true;
+					okGIO2 = true;
+					okPHUT2 = true;
+					okTOI2 = true;
+					okIDMAYBAY2 = true;
 					taoO(458,650,925,680,15,0,0); // ID CHUYEN BAY OFF
 					taoO(395,697,475,727,15,0,201); // NAM ON 
 					OUTTEXT(458+5,650+5,15,4,6,1,ID2);
@@ -1610,7 +1625,8 @@ void run(){
 						}
 					}
 					else {
-
+						strcpy(TRANGTHAI2,"1");
+						TempTT = CharToInt(TRANGTHAI2);
 				 		setbkcolor(3);
 				 		setcolor(0);
 				 		settextstyle(3,0,1);
@@ -1619,6 +1635,7 @@ void run(){
 				 		okID2=true;
 				 		taoO(395,697,475,727,15,0,201);
 					 	}
+				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
 				x=-1;y=-1;
 				break;
 				}
@@ -2027,7 +2044,7 @@ void run(){
 				 	outtextxy(970,740,"ID: ");
 					TonTai1(970 + 25,735);
 					okIDMAYBAY2=true;
-					taoID(860,787,925,817,25);// TRANG THAI ON
+//					taoID(860,787,925,817,25);// TRANG THAI ON
 					}
 				else{
 					setbkcolor(3);
@@ -2038,34 +2055,6 @@ void run(){
 					okIDMAYBAY2=false;
 					taoID(458,787,820,817,24); 
 				}
-				x=-1;y=-1;
-				break;
-			}
-			case 25:{ // TRANG THAI 
-				taoID(458,787,820,817,0);//ID MAY BAY OFF
-				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
-						OUTTEXT(458+5,650+5,15,4,6,1,ID2);}
-				else{
-						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
-					}
-				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
-				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
-				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
-				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
-				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
-				
-				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
-				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
-				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
-				
-				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
-						ScanTT2(860+5,787+5,TRANGTHAI2,1,15,25);}
-				else{
-						ScanTT(860+5,787+5,TRANGTHAI2,1,15,25);
-					}
-				TempTT = CharToInt(TRANGTHAI2);
-				taoButton(335+200,600,335+200+40,640,2001,4,0,3,"X");
-	
 				if(SearchNode(pheadDSCB,ID2)!=NULL){ //SEARCH ID CHUYEN BAY 
 		
 					taoButton(965,780,1040,830,0,7,8,3,"NEW");
@@ -2073,6 +2062,7 @@ void run(){
 					taoButton(1050,780,1135,830,2003,7,0,3,"SAVE");
 		
 					taoButton(1145,780,1265,830,2004,7,0,3,"REMOVE");
+//					taoID(860,787,925,817,25);
 					
 				}
 				else{
@@ -2082,11 +2072,56 @@ void run(){
 	
 					taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
 				}
-
 				x=-1;y=-1;
 				break;
 			}
+//			case 25:{ // TRANG THAI 
+//				taoID(458,787,820,817,0);//ID MAY BAY OFF
+//				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
+//						OUTTEXT(458+5,650+5,15,4,6,1,ID2);}
+//				else{
+//						OUTTEXT(458+5,650+5,15,0,6,1,ID2);
+//					}
+//				OUTTEXT(395+5,697+5,15,0,6,1,NAM2);
+//				OUTTEXT(550+5,697+5,15,0,6,1,THANG2);
+//				OUTTEXT(660+5,697+5,15,0,6,1,NGAY2);
+//				OUTTEXT(750+5,697+5,15,0,6,1,GIO2);
+//				OUTTEXT(860+5,697+5,15,0,6,1,PHUT2);
+//				
+//				OUTTEXT(458+5,742+5,15,0,6,1,TOI2);
+//				OUTTEXT(458+5,787+5,15,0,6,1,IDMAYBAY2);
+//				OUTTEXT(860+5,787+5,15,0,6,1,TRANGTHAI2);
+//				
+//				if(SearchNode(pheadDSCB,ID2)!=NULL){ // SEARCH CHUYEN BAY 
+//						ScanTT2(860+5,787+5,TRANGTHAI2,1,15,25);}
+//				else{
+//						ScanTT(860+5,787+5,TRANGTHAI2,1,15,25);
+//					}
+//				TempTT = CharToInt(TRANGTHAI2);
+//				taoButton(335+200,600,335+200+40,640,2001,4,0,3,"X");
+//	
+//				if(SearchNode(pheadDSCB,ID2)!=NULL){ //SEARCH ID CHUYEN BAY 
+//		
+//					taoButton(965,780,1040,830,0,7,8,3,"NEW");
+//						
+//					taoButton(1050,780,1135,830,2003,7,0,3,"SAVE");
+//		
+//					taoButton(1145,780,1265,830,2004,7,0,3,"REMOVE");
+//					
+//				}
+//				else{
+//					taoButton(965,780,1040,830,2002,7,0,3,"NEW");
+//					
+//					taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
+//	
+//					taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
+//				}
+//
+//				x=-1;y=-1;
+//				break;
+//			}
 			case 2001:{ // HUY THONG TIN 
+		
 				strcpy(ID2,"");
 				strcpy(NGAY2,"");
 				strcpy(THANG2,"");
@@ -2130,6 +2165,8 @@ void run(){
 				setbkcolor(3);
    				settextstyle(3,0,1);
    				outtextxy(1060,625,"MessageBox");
+   			
+   				UpdateCB(pheadDSCB);
 				x=-1;y=-1;
 				break;
 			}
@@ -2137,7 +2174,7 @@ void run(){
 					taoButton(965,780,1040,830,2002,15,1,3,"NEW");
 					delay(250);
 			    	taoButton(965,780,1040,830,2002,7,0,3,"NEW");
-			    	if(okID2 == true && okNGAY2 == true && okTOI2 == true && okIDMAYBAY2 == true){
+			    	if(okID2 == true && okNGAY2 == true && okTHANG2 == true && okNAM2 == true && okGIO2 == true && okPHUT2 == true && okTOI2 == true && okIDMAYBAY2 == true){
 			    		Date temp;
 			    		temp.year = TempNam;
 			    		temp.mon = TempThang;
@@ -2161,15 +2198,7 @@ void run(){
 								strcpy(TOI2,"");
 								strcpy(IDMAYBAY2,"");
 								strcpy(TRANGTHAI2,"");
-								okID2 = false;
-								okNGAY2 = false;
-								okTHANG2 = false;
-								okNAM2 = false;
-								okGIO2 = false;
-								okPHUT2 = false;
-								okTOI2 = false;
-								okIDMAYBAY2 = false;
-								okTRANGTHAI2 = false;
+								
 								}
 							}
 						else{
@@ -2186,7 +2215,7 @@ void run(){
 					taoButton(1050,780,1135,830,2003,15,1,3,"SAVE");
 					delay(250);
 					taoButton(1050,780,1135,830,2003,7,0,3,"SAVE");
-					if(okID2 == false && okNGAY2 == true && okTOI2 == true && okIDMAYBAY2 == true){
+					if(okID2 == false && okNGAY2 == true && okTHANG2 == true && okNAM2 == true && okGIO2 == true && okPHUT2 == true && okTOI2 == true && okIDMAYBAY2 == true){
 						Date temp;
 			    		temp.year = TempNam;
 			    		temp.mon = TempThang;
@@ -2219,15 +2248,8 @@ void run(){
 								strcpy(TOI2,"");
 								strcpy(IDMAYBAY2,"");
 								strcpy(TRANGTHAI2,"");
-								okID2 = false;
-								okNGAY2 = false;
-								okTHANG2 = false;
-								okNAM2 = false;
-								okGIO2 = false;
-								okPHUT2 = false;
-								okTOI2 = false;
-								okIDMAYBAY2 = false;
-								okTRANGTHAI2 = false;
+						
+								
 							}
 							else{
 								MessageBox("Khong The Sua",4);
@@ -2262,15 +2284,8 @@ void run(){
 						strcpy(TOI2,"");
 						strcpy(IDMAYBAY2,"");
 						strcpy(TRANGTHAI2,"");
-						okID2 = false;
-						okNGAY2 = false;
-						okTHANG2 = false;
-						okNAM2 = false;
-						okGIO2 = false;
-						okPHUT2 = false;
-						okTOI2 = false;
-						okIDMAYBAY2 = false;
-						okTRANGTHAI2 = false;
+
+						
 					}
 					else{
 						MessageBox("Khong The Xoa",4);
@@ -2372,53 +2387,79 @@ void run(){
 				x=-1,y=-1;
 				break;
 			}
-			case 41:{
-				taoO(375,50,535,80,15,0,41);
-//				taoO(620,50,670,80,7,0,42);
-//				taoO(780,50,840,80,7,0,43);
-//				taoO(910,50,1000,80,7,0,44);
-//				taoO(1065,50,1230,80,7,0,45);
-				ScanMa(375+5,50+5,ID4,10,15,41);
+			case 41:{ // NGAY
+				taoO(375,50,535,80,15,0,0);
+				taoO(620,50,670,80,15,0,41);
+				taoO(780,50,840,80,15,0,42);
+				taoO(910,50,1000,80,15,0,43);
+				taoO(1065,50,1230,80,15,0,44);
+			
+				ScanSo(620+5,50+5,NGAY4,2,15,42); 
+				TempNgay4 = CharToInt(NGAY4);
+				taoID(780,50,840,80,42); 
 				x=-1;y=-1;
 				break;
 			}
-			case 42:{
-//				taoO(375,50,535,80,7,0,41);
-				taoO(620,50,670,80,15,0,42);
-//				taoO(780,50,840,80,7,0,43);
-//				taoO(910,50,1000,80,7,0,44);
-//				taoO(1065,50,1230,80,7,0,45);
-				ScanSo(620+5,50+5,NGAY4,10,15,42);
+			case 42:{ // THANG
+			
+				ScanSo(780+5,50+5,THANG4,2,15,43);
+				TempThang4= CharToInt(THANG4);
+				taoID(910,50,1000,80,43); // NAM ON 
 				x=-1;y=-1;
 				break;
 			}
-			case 43:{
-//				taoO(375,50,535,80,7,0,41);
-//				taoO(620,50,670,80,7,0,42);
-				taoO(780,50,840,80,15,0,43);
-//				taoO(910,50,1000,80,7,0,44);
-//				taoO(1065,50,1230,80,7,0,45);
-				ScanSo(780+5,50+5,THANG4,10,15,43);
+			case 43:{ // NAM
+			
+				ScanSo(910+5,50+5,NAM4,4,15,44);
+				TempNam4 = CharToInt(NAM4);
+				taoID(1065,50,1230,80,44); // TOI ON 
 				x=-1;y=-1;
 				break;
 			}
-			case 44:{
-//				taoO(375,50,535,80,7,0,41);
-//				taoO(620,50,670,80,7,0,42);
-//				taoO(780,50,840,80,7,0,43);
-				taoO(910,50,1000,80,15,0,44);
-//				taoO(1065,50,1230,80,7,0,45);
-				ScanSo(910+5,50+5,NAM4,10,15,44);
-				x=-1;y=-1;
-				break;
-			}
-			case 45:{
-//				taoO(375,50,535,80,7,0,41);
-//				taoO(620,50,670,80,7,0,42);
-//				taoO(780,50,840,80,7,0,43);
-//				taoO(910,50,1000,80,7,0,44);
-				taoO(1065,50,1230,80,15,0,45);
+			case 44:{ // NOI TOI
+
 				ScanTen(1065+5,50+5,TOI4,10,15);
+				x=-1;y=-1;
+				break;
+			}
+			case 45:{ 
+				//search 
+				int m[4] = {210,300,210,210};
+				NodeChuyenBay* ptr = new NodeChuyenBay;
+				ptr = pheadDSCB;
+				UpdateCB(pheadDSCB);
+				int xx = 335; int yy = 150 + 55;
+				while(ptr != NULL)
+				{
+					if(ptr->data.DepartTime.day == TempNgay4 && ptr->data.DepartTime.mon == TempThang4 && ptr->data.DepartTime.year == TempNam4 && strcmp(ptr->data.SanBayDen,TOI4) ==0 )
+					{
+					    	OUTTEXT(xx+12,yy+15,15,0,3,3,ptr->data.MaCB);
+					    	char day[50]= "";
+					    	char mon[50]= "";
+					    	char year[50]= "";
+					    	char hour[50]= "";
+					    	char min[50]= "";
+					    	IntToChar(ptr->data.DepartTime.day,day);
+					    	IntToChar(ptr->data.DepartTime.mon,mon);
+					    	IntToChar(ptr->data.DepartTime.year,year);
+					    	IntToChar(ptr->data.DepartTime.hour,hour);
+					    	IntToChar(ptr->data.DepartTime.min,min);
+							OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,day);
+					    	OUTTEXT1(xx+12+m[0]+30,yy+15,15,0,3,3); // dau /
+					    	OUTTEXT(xx+12+m[0]+40,yy+15,15,0,3,3,mon);
+					    	OUTTEXT1(xx+12+m[0]+70,yy+15,15,0,3,3); // Dau / 
+					    	OUTTEXT(xx+12+m[0]+80,yy+15,15,0,3,3,year);
+					    	OUTTEXT(xx+12+m[0]+140,yy+15,15,0,3,3,hour);
+					    	OUTTEXT2(xx+12+m[0]+165,yy+15,15,0,3,3);// Dau : 
+					    	OUTTEXT(xx+12+m[0]+170,yy+15,15,0,3,3,min);	
+										
+					    	OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,ptr->data.SanBayDen);
+					     
+					   		yy +=55;
+											
+									}
+						ptr = ptr->next; 
+				}
 				x=-1;y=-1;
 				break;
 			}
