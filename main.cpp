@@ -771,22 +771,20 @@ void TimChuyenBay_Nhap(){
 	setcolor(0);
 	
    	taoO(335,40,1260,90,3,0,0);
-	outtextxy(345,55,"ID");
-	taoO(375,50,535,80,7,0,0);
-	outtextxy(550,55,"NGAY");
-	taoO(620,50,670,80,7,0,41);
-	outtextxy(690,55,"THANG");
-	taoO(780,50,840,80,7,0,42);
-	outtextxy(855,55,"NAM");
-	taoO(910,50,1000,80,7,0,43);
+	outtextxy(355,55,"NAM");
+	taoO(430,50,560,80,7,0,41);
+
+	outtextxy(595,55,"THANG");
+	taoO(695,50,780,80,7,0,42);
+	outtextxy(805,55,"NGAY");
+	taoO(885,50,970,80,7,0,43);
 	outtextxy(1015,55,"TOI");
 	taoO(1065,50,1230,80,7,0,44);
 	
 	
 	taoO(335,95,1260,145,3,0,0);
-	OUTTEXT(335,91,3,0,3,1,"MessageBox");
-	taoO(1065,105,1230,135,4,0,45);
-	OUTTEXT(1110,110,4,0,3,1,"Tim Kiem");
+	taoO(1065,105,1230,135,7,0,45);
+	OUTTEXT(1110,110,7,8,3,1,"Tim Kiem");
 }
 
 void TimChuyenBay_HienThi(){
@@ -974,26 +972,22 @@ void run(){
 	char DANHSACH6[50] = "";
 	char NGAYKHOIHANH6[50] = ""; 
 	char NOIDEN6[50] = "";
-	bool okID1 = true;
-	bool okLOAI1 = true;
-	bool okSOCHO1 = true; 
-	bool okID2 = true;
-	bool okNGAY2= true; 
-	bool okTHANG2 = true; 
-	bool okNAM2 = true;
-	bool NamNhuan = true; 
-	bool okGIO2 = true; 
-	bool okPHUT2 = true;
-	bool okTOI2 = true;
-	bool okIDMAYBAY2 = true; 
+	bool okID1 = false;
+	bool okLOAI1 = false;
+	bool okSOCHO1 = false; 
+	bool okID2 = false;
+	bool okNGAY2= false; 
+	bool okTHANG2 = false; 
+	bool okNAM2 = false;
+	bool NamNhuan2 = false; 
+	bool okGIO2 = false; 
+	bool okPHUT2 = false;
+	bool okTOI2 = false;
+	bool okIDMAYBAY2 = false; 
 	bool okCCCD3 = false;
 	bool okHOTEN3 = false; 
 	bool okGIOITINH3= false;
-	bool okID4= false; 
-	bool okNGAY4 = false;
-	bool okTHANG4 = false; 
-	bool okNAM4= false;
-	bool okTOI4= false; 
+// Man 4 KHONG CAN CHECK 
 	bool okID5= false;
 	bool okNGAY5 = false; 
 	bool okTOI5= false;
@@ -1002,9 +996,9 @@ void run(){
 	bool okNGAYKHOIHANH6= false; 
 	bool okNOIDEN6 = false;
 	int sotam = 0;
-	int TempNgay = 0;
-	int TempThang = 0;
-	int TempNam = 0;
+	int TempNgay2 = 0;
+	int TempThang2 = 0;
+	int TempNam2 = 0;
 	int TempGio = 0;
 	int TempPhut = 0;
 	int TempNgay4 = 0;
@@ -1667,15 +1661,15 @@ void run(){
 				 	okNAM2=false; 
 					}
 				else{
-					TempNam = CharToInt(NAM2);
-					if(TempNam > 2000 && TempNam < 2100){
+					TempNam2 = CharToInt(NAM2);
+					if(TempNam2 > 2000 && TempNam2 < 2100){
 						setbkcolor(3);
 					 	setcolor(0);
 						settextstyle(3,0,1);
 						CleanMessageBox(970,680);
 				 		outtextxy(970,680,"NAM:");
 				 		HopLe1(970 + 50,675);
-				 		NamNhuan = checkYear(TempNam);
+				 		NamNhuan2 = checkYear(TempNam2);
 				 		okNAM2=true;
 						taoID(550,697,600,727,202); //THANG ON 
 					}
@@ -1721,8 +1715,8 @@ void run(){
 				 	okTHANG2=false; 
 					}
 				else{
-					TempThang = CharToInt(THANG2);
-					if(TempThang >= 1 && TempThang <= 12){
+					TempThang2 = CharToInt(THANG2);
+					if(TempThang2 >= 1 && TempThang2 <= 12){
 						setbkcolor(3);
 					 	setcolor(0);
 						settextstyle(3,0,1);
@@ -1773,9 +1767,9 @@ void run(){
 				 	okNGAY2=false; 
 					}
 				else {
-					TempNgay = CharToInt(NGAY2);
-					if(TempThang == 1 || TempThang == 3 || TempThang == 5 || TempThang == 7 || TempThang == 8 || TempThang == 10 || TempThang == 12){
-						if(TempNgay >=1 && TempNgay <= 31){
+					TempNgay2 = CharToInt(NGAY2);
+					if(TempThang2 == 1 || TempThang2 == 3 || TempThang2 == 5 || TempThang2 == 7 || TempThang2 == 8 || TempThang2 == 10 || TempThang2 == 12){
+						if(TempNgay2 >=1 && TempNgay2 <= 31){
 							setbkcolor(3);
 						 	setcolor(0);
 							settextstyle(3,0,1);
@@ -1795,8 +1789,8 @@ void run(){
 					 		okNGAY2=false; 
 			 			}
 					}	
-					else if(TempThang == 4 || TempThang == 6 || TempThang == 9 || TempThang == 11){
-						if(TempNgay >=1 && TempNgay <= 30){
+					else if(TempThang2 == 4 || TempThang2 == 6 || TempThang2 == 9 || TempThang2 == 11){
+						if(TempNgay2 >=1 && TempNgay2 <= 30){
 								setbkcolor(3);
 							 	setcolor(0);
 								settextstyle(3,0,1);
@@ -1816,9 +1810,9 @@ void run(){
 				 		okNGAY2=false; 
 			 			}
 			 		}
-					else if(TempThang == 2){
-						if(NamNhuan == true){
-							if(TempNgay >=1 && TempNgay <= 29){
+					else if(TempThang2 == 2){
+						if(NamNhuan2 == true){
+							if(TempNgay2 >=1 && TempNgay2 <= 29){
 								setbkcolor(3);
 							 	setcolor(0);
 								settextstyle(3,0,1);
@@ -1839,7 +1833,7 @@ void run(){
 			 				}
 						}
 						else{
-							if(TempNgay >=1 && TempNgay <= 28){
+							if(TempNgay2 >=1 && TempNgay2 <= 28){
 								setbkcolor(3);
 							 	setcolor(0);
 								settextstyle(3,0,1);
@@ -2138,7 +2132,7 @@ void run(){
 				okNAM2 = false;
 				okGIO2 = false;
 				okPHUT2 = false;
-				NamNhuan = false;
+				NamNhuan2 = false;
 				okTOI2 = false;
 				okIDMAYBAY2 = false;
 				
@@ -2166,7 +2160,6 @@ void run(){
    				settextstyle(3,0,1);
    				outtextxy(1060,625,"MessageBox");
    			
-   				UpdateCB(pheadDSCB);
 				x=-1;y=-1;
 				break;
 			}
@@ -2176,14 +2169,14 @@ void run(){
 			    	taoButton(965,780,1040,830,2002,7,0,3,"NEW");
 			    	if(okID2 == true && okNGAY2 == true && okTHANG2 == true && okNAM2 == true && okGIO2 == true && okPHUT2 == true && okTOI2 == true && okIDMAYBAY2 == true){
 			    		Date temp;
-			    		temp.year = TempNam;
-			    		temp.mon = TempThang;
-			    		temp.day = TempNgay;
+			    		temp.year = TempNam2;
+			    		temp.mon = TempThang2;
+			    		temp.day = TempNgay2;
 			    		temp.hour = TempGio;
 			    		temp.min = TempPhut;
 			    		if(CheckDepartTime(temp)==true){
 							if(check_decent_chuyen_bay(pheadDSCB,IDMAYBAY2,temp)==true){   			
-								AddNewChuyenBay(pheadDSCB,ID2,TempNgay,TempThang,TempNam,TempGio,TempPhut,TOI2,IDMAYBAY2,TempTT);
+								AddNewChuyenBay(pheadDSCB,ID2,TempNgay2,TempThang2,TempNam2,TempGio,TempPhut,TOI2,IDMAYBAY2,TempTT);
 								Menu();
 								QuanLyChuyenBay();
 								MessageBox("Da Them Thanh Cong",14);
@@ -2217,9 +2210,9 @@ void run(){
 					taoButton(1050,780,1135,830,2003,7,0,3,"SAVE");
 					if(okID2 == false && okNGAY2 == true && okTHANG2 == true && okNAM2 == true && okGIO2 == true && okPHUT2 == true && okTOI2 == true && okIDMAYBAY2 == true){
 						Date temp;
-			    		temp.year = TempNam;
-			    		temp.mon = TempThang;
-			    		temp.day = TempNgay;
+			    		temp.year = TempNam2;
+			    		temp.mon = TempThang2;
+			    		temp.day = TempNgay2;
 			    		temp.hour = TempGio;
 			    		temp.min = TempPhut;
 			    		NodeChuyenBay *Edit = new NodeChuyenBay;
@@ -2233,7 +2226,7 @@ void run(){
 						}
 			    		if(CheckDepartTime(temp)==true){
 							if(check_decent_chuyen_bay_version_2(pheadDSCB,Edit,IDMAYBAY2,temp)==true){ 
-								EditChuyenBay(pheadDSCB,Edit,ID2,TempNgay,TempThang,TempNam,TempGio,TempPhut);
+								EditChuyenBay(pheadDSCB,Edit,ID2,TempNgay2,TempThang2,TempNam2,TempGio,TempPhut);
 								Menu();
 								QuanLyChuyenBay();
 								MessageBox("Da Sua Thanh Cong",14);
@@ -2387,51 +2380,70 @@ void run(){
 				x=-1,y=-1;
 				break;
 			}
-			case 41:{ // NGAY
-				taoO(375,50,535,80,15,0,0);
-				taoO(620,50,670,80,15,0,41);
-				taoO(780,50,840,80,15,0,42);
-				taoO(910,50,1000,80,15,0,43);
+			case 41:{ // NAM
+				
+				taoO(430,50,560,80,15,0,41);
+				taoO(695,50,780,80,15,0,42);
+				taoO(885,50,970,80,15,0,43);
 				taoO(1065,50,1230,80,15,0,44);
-			
-				ScanSo(620+5,50+5,NGAY4,2,15,42); 
-				TempNgay4 = CharToInt(NGAY4);
-				taoID(780,50,840,80,42); 
+				taoO(1065,105,1230,135,4,0,45);
+				OUTTEXT(1110,110,4,0,3,1,"Tim Kiem");
+				ScanSo(430+5,50+5,NAM4,4,15,42); 
+				TempNam4 = CharToInt(NAM4);
+
 				x=-1;y=-1;
 				break;
 			}
 			case 42:{ // THANG
-			
-				ScanSo(780+5,50+5,THANG4,2,15,43);
-				TempThang4= CharToInt(THANG4);
-				taoID(910,50,1000,80,43); // NAM ON 
+				taoO(430,50,560,80,15,0,41);
+				taoO(695,50,780,80,15,0,42);
+				taoO(885,50,970,80,15,0,43);
+				taoO(1065,50,1230,80,15,0,44);
+				taoO(1065,105,1230,135,4,0,45);
+				OUTTEXT(1110,110,4,0,3,1,"Tim Kiem");
+				ScanSo(695+5,50+5,THANG4,2,15,42);
+				TempThang4 = CharToInt(THANG4);
 				x=-1;y=-1;
 				break;
 			}
-			case 43:{ // NAM
-			
-				ScanSo(910+5,50+5,NAM4,4,15,44);
-				TempNam4 = CharToInt(NAM4);
-				taoID(1065,50,1230,80,44); // TOI ON 
+			case 43:{ //  NGAY
+				taoO(430,50,560,80,15,0,41);
+				taoO(695,50,780,80,15,0,42);
+				taoO(885,50,970,80,15,0,43);
+				taoO(1065,50,1230,80,15,0,44);
+				taoO(1065,105,1230,135,4,0,45);
+				OUTTEXT(1110,110,4,0,3,1,"Tim Kiem");
+				ScanSo(885+5,50+5,NGAY4,2,15,43);
+				TempNgay4 = CharToInt(NGAY4);
 				x=-1;y=-1;
 				break;
 			}
 			case 44:{ // NOI TOI
-
+				taoO(430,50,560,80,15,0,41);
+				taoO(695,50,780,80,15,0,42);
+				taoO(885,50,970,80,15,0,43);
+				taoO(1065,50,1230,80,15,0,44);
+				taoO(1065,105,1230,135,4,0,45);
+				OUTTEXT(1110,110,4,0,3,1,"Tim Kiem");
 				ScanTen(1065+5,50+5,TOI4,10,15);
 				x=-1;y=-1;
 				break;
 			}
-			case 45:{ 
-				//search 
+			case 45:{ //search 
+				taoO(1065,105,1230,135,15,0,45);
+				OUTTEXT(1110,110,15,1,3,1,"Tim Kiem");
+				delay(100);
+				taoO(1065,105,1230,135,4,0,45);
+				OUTTEXT(1110,110,4,0,3,1,"Tim Kiem");
+				char text[][50]={"ID","Ngay Gio Khoi Hanh","Toi","Trang Thai"};
 				int m[4] = {210,300,210,210};
+   				taoBangKID(335,150,55,m,4,10,text,15,0);
 				NodeChuyenBay* ptr = new NodeChuyenBay;
 				ptr = pheadDSCB;
-				UpdateCB(pheadDSCB);
-				int xx = 335; int yy = 150 + 55;
+				int xx = 335; int yy = 150 + 55;			
 				while(ptr != NULL)
 				{
-					if(ptr->data.DepartTime.day == TempNgay4 && ptr->data.DepartTime.mon == TempThang4 && ptr->data.DepartTime.year == TempNam4 && strcmp(ptr->data.SanBayDen,TOI4) ==0 )
+					if(ptr->data.DepartTime.day == TempNgay4 || ptr->data.DepartTime.mon == TempThang4 || ptr->data.DepartTime.year == TempNam4 || strcmp(ptr->data.SanBayDen,TOI4) ==0 )
 					{
 					    	OUTTEXT(xx+12,yy+15,15,0,3,3,ptr->data.MaCB);
 					    	char day[50]= "";
@@ -2457,9 +2469,22 @@ void run(){
 					     
 					   		yy +=55;
 											
-									}
+							}
 						ptr = ptr->next; 
-				}
+					}
+					
+					strcpy(NAM4,"");
+					strcpy(NGAY4,"");
+					strcpy(THANG4,"");
+					strcpy(TOI4,"");
+					taoO(430,50,560,80,7,0,41);
+					taoO(695,50,780,80,7,0,42);
+					taoO(885,50,970,80,7,0,43);
+					taoO(1065,50,1230,80,7,0,44);
+					TempNgay4 = 0;
+					TempThang4 = 0;
+					TempNam4 = 0;
+				
 				x=-1;y=-1;
 				break;
 			}
@@ -2606,7 +2631,7 @@ void run(){
 				break;
 			}
 			default: break;
-			
+		
 		}
 	}
 }
