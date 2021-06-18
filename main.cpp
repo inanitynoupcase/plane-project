@@ -685,6 +685,18 @@ void QuanLyChuyenBay_HienThiChuyenBay(){
 	SortCB_Time(pheadDSCB);
 	
 	while(ptr != NULL){
+		if(CheckDepartTime(ptr->data.DepartTime) == false && ptr->data.Status != 0 && ptr->data.Status != 3)
+    	  {
+        ptr->data.Status = 3;
+        FreeMemory(pheadDSCB->data.dsv);
+     	 }
+   
+		if(CheckDepartTime(ptr->data.DepartTime) == false && ptr->data.Status != 0 && ptr->data.Status != 3)
+     	 {
+        ptr->data.Status = 3;
+        FreeMemory(pheadDSCB->data.dsv);
+     	 }
+
     	OUTTEXT(xx+12,yy+15,15,0,3,3,ptr->data.MaCB);
  
     	char day[50]= "";
@@ -727,26 +739,33 @@ void QuanLyChuyenBay(){
 void QuanLyHanhKhach_NhapHanhKhach(){
 	setbkcolor(3);	
 	setcolor(0);
+	settextstyle(3,0,1);
 	taoO(335,640,945,830,3,0,0);
 	
-   	outtextxy(345,655,"CCCD");
+   	outtextxy(345,655,"CCCD: ");
    	taoO(450,650,925,680,7,0,31);
 	
-	outtextxy(345,722,"HO TEN");
+	outtextxy(345,722,"HO TEN: ");
 	taoO(450,717,925,747,7,0,0);
 	
-	outtextxy(345,792,"GIOI TINH");
-	taoO(450,787,925,817,7,0,0);
+	outtextxy(345,792,"GIOI TINH: ");
+	taoO(500,787,600,817,7,0,0);
+	OUTTEXT(500+25,787+5,7,8,3,1,"NAM");
 	
+	taoO(775,787,875,817,7,0,0);
+	OUTTEXT(775+35,787+5,7,8,3,1,"NU");
+		
+	taoO(965,640,1265,770,3,0,0);
+	OUTTEXT(1060,625,3,0,3,1,"MessageBox");
 
 
 //	taoButton(945,570,985,620,3001,4,0,3,"X");
 	
-	taoButton(965,780,1040,830,3002,7,0,3,"NEW");
+	taoButton(965,780,1040,830,0,7,8,3,"NEW");
 
-	taoButton(1050,780,1135,830,3003,7,0,3,"SAVE");
+	taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
 	
-	taoButton(1145,780,1265,830,3004,7,0,3,"REMOVE");
+	taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
 	
 }
 
@@ -860,16 +879,59 @@ void DatVe_Nhap(){
 
 void DatVe_HienThi(){
 	taoO(335,110,1260,550,15,0,0);
-	int x,y;
-	x = 345; y = 125;
-	for (int i = 1; i <= 8;i++){
-		for(int j = 1; j <= 10; j++){
-			taoO(x,y,x+86,y+49,4,0,0);
-			x = x + 91;
+	line(355,330,1240,330);
+	bool DatVe[99];
+	int l = 30;
+	DatVe[l] = true;
+	int x1 = 355, y1 = 120;
+	int k1 = 0;
+	for(int j = 0; j < 10; j++){
+		for(int i = 0; i < 5 ; i++){
+			if(i + k1 == l){
+				taoO(x1,y1,x1+30,y1+30,4,0,0);
+				char tempi[50] = "";
+				IntToChar(i + k1,tempi);
+				OUTTEXT(x1 + 5,y1+5,4,0,3,1,tempi);
+				y1 = y1 + 40;	
+			}
+			else{
+				taoO(x1,y1,x1+30,y1+30,15,0,0);
+				char tempi[50] = "";
+				IntToChar(i + k1,tempi);
+				OUTTEXT(x1 + 5,y1+5,15,1,3,1,tempi);
+				y1 = y1 + 40;	
+			}
 		}
-		x = 345;
-		y = y + 51; 
+		k1 = k1 + 10;
+		x1 = x1 + 95;
+		y1 = 120;
 	}
+	int x2 = 355, y2 = 350;
+	int k2 = 0;
+	for(int j = 0; j < 10; j++){
+		for(int i = 5; i < 10 ; i++){
+			taoO(x2,y2,x2+30,y2+30,15,0,0);
+			char tempi[50] = "";
+			IntToChar(i + k2,tempi);
+			OUTTEXT(x2+5,y2+5,15,1,3,1,tempi);
+			y2 = y2 + 40;
+			}
+		k2 = k2 + 10;
+		x2 = x2 + 95;
+		y2 = 350;
+	}
+
+//	int x,y;
+//	x = 345; y = 125;
+//	for (int i = 1; i <= 8;i++){
+//		for(int j = 1; j <= 10; j++){
+//			taoO(x,y,x+86,y+49,4,0,0);
+//			x = x + 91;
+//		}
+//		x = 345;
+//		y = y + 51; 
+//	}
+	
 	taoButton(405,575,455,625,50001,7,0,2,"<");
    	taoButton(1130,575,1180,625,50002,7,0,2," >");
 }
@@ -2649,5 +2711,4 @@ int main(int argc, char *argv[])
 	system("pause");
     closegraph();
 }
-
 
