@@ -7,13 +7,15 @@
 #include<string>
 #include<fstream>
 #include<cstdio>
-
+#include <iomanip>  
 #pragma once
 NodeMayBay dsmb;
 ptrDSCB pheadDSCB=NULL;
-NodeHk* hk=NULL;
+nodehk root=NULL;
 ofstream MBO; 
 ifstream MBI;
+ofstream HKT;
+ifstream HKTIN;
 void FileOutMB(ofstream &MBOut,NodeMayBay nodemb,int n)
 {
 	MBOut.open("DSMB.txt",ios::app);
@@ -69,6 +71,20 @@ void FileInMB(ifstream &MBIn,NodeMayBay &nodemb){
     temp.clear();  
 	}
 	MBI.close();
+}
+
+void NLR_FileOutHK(ofstream &out,nodehk root)
+{
+  out.open("HanhKhach.txt",ios::app | ios::binary );
+  if(root != NULL)
+  {
+       out<<root->data.CCCD<<"  "<<root->data.HOTEN<<"    "<< root->data.GioiTinh<<endl;
+       out.close();
+       NLR_FileOutHK(out,root->left);
+       out.close();
+       NLR_FileOutHK(out,root->right);
+  }
+  out.close();
 }
 
 void CMDREMOVE() // De phong ham remove bi loi 
@@ -509,3 +525,96 @@ void DelChuyenBay(ptrDSCB &pheadDSCB,ptrDSCB ptr, NodeMayBay &DSMB)
   	dsmb.data[result]->SoLuotBay--;
     FreeMemory(ptr->data.dsv);
 }
+//UPDATE CHUYEN BAY 
+void UpdateCB(ptrDSCB &pheadDSCB)
+{
+   NodeChuyenBay* ptr= new NodeChuyenBay;
+   ptr = pheadDSCB;
+   while(ptr != NULL)
+   {
+      if(ptr->data.dsv.n == ptr->data.dsv.max && ptr->data.Status != 0 )
+      {
+        ptr->data.Status = 2;
+      }
+      if(CheckDepartTime(ptr->data.DepartTime) == false && ptr->data.Status != 0 && ptr->data.Status != 3)
+      {
+        ptr->data.Status = 3;
+        FreeMemory(pheadDSCB->data.dsv);
+      }
+        ptr=ptr->next;
+   }
+}
+int CountTotalHK =0;
+void InsertNodehk(nodehk &root, HanhKhach &datahk)
+{
+   if(root == NULL )
+   {
+    nodehk temp = new NodeHanhKhach;
+    strcpy(temp->data.CCCD,datahk.CCCD);
+    strcpy(temp->data.HOTEN,datahk.HOTEN);
+    strcpy(temp->data.GioiTinh,datahk.GioiTinh);
+    temp->left = NULL;
+    temp->right = NULL;
+    root = temp;
+    CountTotalHK++;
+ 	}
+   else
+   {
+     if(strcmp(datahk.CCCD,root->data.CCCD) >0 )
+	 {
+       InsertNodehk(root->right,datahk);
+     }
+     else if(strcmp(datahk.CCCD, root->data.CCCD) <0 )
+	 {
+       InsertNodehk(root->left,datahk);
+     }
+   }
+}
+
+void FileINHK(ifstream &in)
+{
+  in.open("HanhKhach.txt");
+  string temp;
+   while(getline(in,temp))
+   {
+       stringstream iss(temp); 
+       string *read = new string[7];
+       string name;
+       int count=0;
+       for(string a; iss >>a;)
+       {
+         read[count] = a;
+         count++;
+       }
+     HanhKhach data;
+      strcpy(data.CCCD, read[0].c_str());
+      for(int i=1; i< count-1 ; i++)
+      {
+       name = name+" "+read[i];
+      }
+      strcpy(data.HOTEN, name.c_str());
+      strcpy(data.GioiTinh, read[count-1].c_str());
+      InsertNodehk(root,data);
+      delete [] read;
+   } 
+}
+
+nodehk SearchHk(nodehk &root,char tempcmnd[])
+{
+  if(root == NULL )
+  {
+    return root;
+  }
+  else if(strcmp(tempcmnd,root->data.CCCD) >0 )
+  {
+    return SearchHk(root->right,tempcmnd);
+  }
+  else if(strcmp(tempcmnd,root->data.CCCD) <0 )
+  {
+    return SearchHk(root->left, tempcmnd);
+  }
+  else 
+  return root;
+}
+
+

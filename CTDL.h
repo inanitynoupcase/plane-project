@@ -68,17 +68,18 @@ typedef NodeChuyenBay*ptrDSCB;
 // CAY NHI PHAN TIM KIEM CAN BANG
 struct HanhKhach
 {
-  char CMND[10];
-  char Ho[31];
-  char Ten[11];
-  bool Phai; // 0 la nu  1 la nam
+  char CCCD[12];
+  char HOTEN[25];
+  char GioiTinh[3]; 
+  bool IsOnPlane =1;
 };
-struct NodeHk
+struct NodeHanhKhach
 {
   HanhKhach data;
-  int bf=0; //chi so can bang cua nut
-  NodeHk* right=NULL;
-  NodeHk* left=NULL;
+  NodeHanhKhach* right=NULL;
+  NodeHanhKhach* left=NULL;
 };
+typedef NodeHanhKhach* nodehk;
+
 
 
