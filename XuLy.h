@@ -16,6 +16,8 @@ ofstream MBO;
 ifstream MBI;
 ofstream HKT;
 ifstream HKTIN;
+ofstream CBO;
+ifstream CBI;
 void FileOutMB(ofstream &MBOut,NodeMayBay nodemb,int n)
 {
 	MBOut.open("DSMB.txt",ios::app);
@@ -73,12 +75,49 @@ void FileInMB(ifstream &MBIn,NodeMayBay &nodemb){
 	MBI.close();
 }
 
+void FileOutCB(ofstream &out,ptrDSCB phead)
+{
+	out.open("ChuyenBay.txt",ios::app);
+	NodeChuyenBay* ptr= new NodeChuyenBay;
+	ptr=phead;
+	while(ptr!= NULL)
+	{
+		int count=0;
+		string temp =ptr->data.SanBayDen;
+		stringstream iss(temp);
+		for(string a; iss>> a;)
+		{
+			count++;
+		}
+		out<<ptr->data.MaCB<<" ";
+		out<<ptr->data.DepartTime.day<<" ";
+		out<<ptr->data.DepartTime.mon<<" ";
+		out<<ptr->data.DepartTime.year<<" ";
+		out<<ptr->data.DepartTime.hour<<" ";
+		out<<ptr->data.DepartTime.min<<" ";
+		out<<ptr->data.ID<<" ";
+		out<<ptr->data.Status<<" ";
+		out<<ptr->data.SanBayDen<<" "<<count<<endl;
+		ptr=ptr->next;
+	}
+	out.close();
+}
+
+
 void NLR_FileOutHK(ofstream &out,nodehk root)
 {
   out.open("HanhKhach.txt",ios::app | ios::binary );
   if(root != NULL)
   {
-       out<<root->data.CCCD<<"  "<<root->data.HOTEN<<"    "<< root->data.GioiTinh<<endl;
+  	   int count=0;
+  	   string name;
+  	   name = root->data.TEN;
+  	   stringstream is(name);
+  	   for(string a; is >>a;)
+  	   {
+  	      count++;	
+	   }
+       out<<root->data.CCCD<<" "<<root->data.HO <<" "<< root->data.TEN<<" "<<count<<" "<< root->data.GioiTinh<<endl;
        out.close();
        NLR_FileOutHK(out,root->left);
        out.close();
@@ -120,7 +159,6 @@ void EditMb(NodeMayBay &nodemb,char TempID[],char TempType[],int TempRoom);
 
 // ham xu ly chuyen bay
 void InsertNodeCB(ptrDSCB &pheadCB, NodeChuyenBay *p);
-void FreeMemory(DsVe &DSV);
 void UpdateCB(ptrDSCB &pheadDSCB);
 void EditChuyenBay(ptrDSCB &pheadDSCB);
 HanhKhach CreateData(char TempCmnd[]);
@@ -180,23 +218,7 @@ void DelMb(NodeMayBay &nodemb,char TempID[])
        return;
     }
 }
-//DUYET CHUYEN BAY 
-void TraverseDSCB(ptrDSCB pheadCB)
-{	
-	NodeChuyenBay*ptr = pheadCB;
-	if(ptr == NULL)
-	{
-		cout<<"dsmb rong";
-	}
-	else
-	{ 
-		while(ptr != NULL)
-    	{
-		cout<<"cai gi do"; 
-	    }
-       ptr = ptr->next;
-	}  
-}
+
 //Search CHUYEN BAY 
 ptrDSCB SearchNode(ptrDSCB &pheadCB,char TempMCB[])
 {	
@@ -249,7 +271,7 @@ void AddNewChuyenBay(ptrDSCB &pheadDSCB,char TempMCB[],int TempDay,int TempMonth
   	NodeChuyenBay*p = new NodeChuyenBay;
   	int result = SearchIdMb(dsmb,tempIDMB);
     DsVe TempDsVe;
-  	InitializeVe(TempDsVe, dsmb.data[result]->Room, 0);
+  	CreateVe(TempDsVe, dsmb.data[result]->Room);
     data.dsv = TempDsVe;
     dsmb.data[result]->SoLuotBay++;
    
@@ -264,7 +286,7 @@ void AddNewChuyenBay(ptrDSCB &pheadDSCB,char TempMCB[],int TempDay,int TempMonth
 	data.DepartTime.year = TempYear;
 	*/
 
-	cout << data.DepartTime.day << " " << data.DepartTime.mon << " " << data.DepartTime.year << " " << data.DepartTime.hour << " " << data.DepartTime.min << endl;
+//	cout << data.DepartTime.day << " " << data.DepartTime.mon << " " << data.DepartTime.year << " " << data.DepartTime.hour << " " << data.DepartTime.min << endl;
 	InsertNodeCB(pheadDSCB,p);
 }
 bool checkYear(int year){
@@ -286,8 +308,8 @@ bool check_decent_chuyen_bay(ptrDSCB &pheadDSCB,char temp_so_hieu[],Date temp)
 	ptr=pheadDSCB;
 	while(ptr!=NULL)
 {
-	cout<<ptr->data.DepartTime.day<<" "<<ptr->data.DepartTime.mon<<" "<<ptr->data.DepartTime.year<<" "<<ptr->data.DepartTime.hour << " "<<ptr->data.DepartTime.min<<endl;
-	cout<<ptr->data.ID;
+//	cout<<ptr->data.DepartTime.day<<" "<<ptr->data.DepartTime.mon<<" "<<ptr->data.DepartTime.year<<" "<<ptr->data.DepartTime.hour << " "<<ptr->data.DepartTime.min<<endl;
+//	cout<<ptr->data.ID;
 	if(strcmp(ptr->data.ID,temp_so_hieu)==0 && ptr->data.Status!=0)
 	{
 		if(ptr->data.DepartTime.day==temp.day && ptr->data.DepartTime.mon==temp.mon && ptr->data.DepartTime.year==temp.year )
@@ -508,22 +530,60 @@ bool check_decent_chuyen_bay_version_2(ptrDSCB &pheadDSCB,ptrDSCB &EditNode,char
 	}
 		return true;
 }
+
 //Xoa het ds ve
-void FreeMemory(DsVe &DVS)
+void FREEVE(DsVe &dsv)
 {
-	for(int i=DVS.n;i<DVS.max;i++)
-  {
-		delete DVS.SoGhe[i];
-		DVS.SoGhe[i]=NULL;
+	for(int i=dsv.n; i< dsv.max;i++)
+	{
+		delete dsv.ve[i];
+		dsv.ve[i]=NULL;
 	}
 }
+// sort danh sach ve
+void SortVe(DsVe &dsv)
+{
+	for(int i=0;i<dsv.n-1;i++)
+	{
+		Ve*Temp = dsv.ve[i];
+		int TempIndex=i;
+		for(int j=i+1;j<dsv.n;j++)
+		{
+			if(Temp->stt > dsv.ve[j]->stt)
+			{
+				Temp=dsv.ve[j];
+				TempIndex=j;
+			}
+		}
+		
+		Temp=dsv.ve[i];
+		dsv.ve[i]=dsv.ve[TempIndex];
+		dsv.ve[TempIndex]=Temp;		
+	}
+}
+
+//KIEM TRA VE TRONG 
+//ve[1]->stt 323
+//ve[2]->stt 1
+bool IsEmpty(DsVe &dsv,int pos)
+{
+	for(int i=0;i<dsv.n;i++)
+	{
+		if(dsv.ve[i]->stt == pos)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 //XOA CHUYEN BAY 
 void DelChuyenBay(ptrDSCB &pheadDSCB,ptrDSCB ptr, NodeMayBay &DSMB)
 {
     ptr->data.Status=0;
 	int result = SearchIdMb(DSMB,ptr->data.ID);
   	dsmb.data[result]->SoLuotBay--;
-    FreeMemory(ptr->data.dsv);
+    FREEVE(ptr->data.dsv);
 }
 //UPDATE CHUYEN BAY 
 void UpdateCB(ptrDSCB &pheadDSCB)
@@ -539,7 +599,7 @@ void UpdateCB(ptrDSCB &pheadDSCB)
       if(CheckDepartTime(ptr->data.DepartTime) == false && ptr->data.Status != 0 && ptr->data.Status != 3)
       {
         ptr->data.Status = 3;
-        FreeMemory(pheadDSCB->data.dsv);
+        FREEVE(pheadDSCB->data.dsv);
       }
         ptr=ptr->next;
    }
@@ -551,7 +611,8 @@ void InsertNodehk(nodehk &root, HanhKhach &datahk)
    {
     nodehk temp = new NodeHanhKhach;
     strcpy(temp->data.CCCD,datahk.CCCD);
-    strcpy(temp->data.HOTEN,datahk.HOTEN);
+    strcpy(temp->data.HO,datahk.HO);
+    strcpy(temp->data.TEN,datahk.TEN);
     strcpy(temp->data.GioiTinh,datahk.GioiTinh);
     temp->left = NULL;
     temp->right = NULL;
@@ -571,32 +632,111 @@ void InsertNodehk(nodehk &root, HanhKhach &datahk)
    }
 }
 
+void FileInCB(ifstream &in, ptrDSCB &pheadDSCB)
+{
+	in.open("ChuyenBay.txt");
+	string temp;
+	while(getline(in,temp))
+	{
+		string *read = new string[15];
+		int count=0;
+		stringstream iss(temp);
+		for(string a; iss >>a;)
+		{
+			read[count] = a;
+			count++;
+		}
+		stringstream n(read[7]);
+		int STAT;
+		n >> STAT;
+		stringstream is(read[count-1]);
+		int CountNOIDEN;
+	    is>> CountNOIDEN;
+		string NoiDen;
+		for(int i= count- CountNOIDEN -1 ; i< count-1; i++)
+		{
+			NoiDen = NoiDen+" "+read[i];
+		}
+		// CC 3 2 2022 2 1 MAYBAY1 1 Quang Nam 2  count = 11;
+		//  0 1 2 3    4 5  6      7  8     9  10
+ 	ChuyenBay data;
+	strcpy(data.MaCB,read[0].c_str());
+	strcpy(data.ID,read[6].c_str());
+	strcpy(data.SanBayDen,NoiDen.c_str());
+	data.Status = STAT;
+	
+	int count2=0;
+	int array[5];
+	for(int i=1; i< 6; i++)
+	{
+		stringstream is(read[i]);
+		is >> array[count2];
+		count2++;
+	}
+		
+		Date d;
+		d.day = array[0];
+		d.mon = array[1];
+		d.year = array[2];
+		d.hour = array[3];
+		d.min = array[4];
+		data.DepartTime = d;
+		NodeChuyenBay*p = new NodeChuyenBay;
+    	int result = SearchIdMb(dsmb,data.ID);
+        DsVe TempDsVe;
+    	CreateVe(TempDsVe, dsmb.data[result]->Room);
+        data.dsv = TempDsVe;
+	    p->data = data;
+     	p->next = NULL;
+     	InsertNodeCB(pheadDSCB,p);
+	}
+	
+	in.close();
+}
+
 void FileINHK(ifstream &in)
 {
+ 
   in.open("HanhKhach.txt");
+  if(in.fail())
+  {
+  	return;
+  }
+  else
+  {
   string temp;
    while(getline(in,temp))
    {
        stringstream iss(temp); 
-       string *read = new string[7];
-       string name;
+       string *read = new string[10];
+       string Name;
        int count=0;
+       // 234234234  Phan     Dang1    ngu      2       Nam  count 6
+       //     0        1       2        3      4        5
+                            //  6-2-2      					   
        for(string a; iss >>a;)
        {
          read[count] = a;
          count++;
        }
-     HanhKhach data;
-      strcpy(data.CCCD, read[0].c_str());
-      for(int i=1; i< count-1 ; i++)
-      {
-       name = name+" "+read[i];
-      }
-      strcpy(data.HOTEN, name.c_str());
-      strcpy(data.GioiTinh, read[count-1].c_str());
-      InsertNodehk(root,data);
-      delete [] read;
-   } 
+       stringstream is(read[count-2]);
+       int CountName;
+       is>> CountName;
+//       cout<<count<<" "<<CountName<<endl;
+       for(int i=count-2-CountName; i<count-2 ; i++)
+       {
+       	Name = Name+" "+read[i];
+	   }
+        HanhKhach data;
+        strcpy(data.CCCD, read[0].c_str());
+	    strcpy(data.HO, read[1].c_str());
+	    strcpy(data.TEN, Name.c_str());
+	    strcpy(data.GioiTinh, read[count-1].c_str());
+	    InsertNodehk(root,data);
+	    delete [] read;
+	   } 
+	in.close();
+  }
 }
 
 nodehk SearchHk(nodehk &root,char tempcmnd[])
@@ -617,4 +757,19 @@ nodehk SearchHk(nodehk &root,char tempcmnd[])
   return root;
 }
 
-
+void OrderVe(DsVe &dsv ,int pos,nodehk Check,HanhKhach data)
+{
+  	  if (Check == NULL)
+			{
+				InsertNodehk(root,data);
+				dsv.ve[dsv.n]->stt = pos;
+				strcpy(dsv.ve[dsv.n]->CCCD,data.CCCD);
+			}
+			else if (Check != NULL)
+           {
+				dsv.ve[dsv.n]->stt=pos;
+				strcpy(dsv.ve[dsv.n]->CCCD,Check->data.CCCD);
+			} 
+			dsv.n++;
+			SortVe(dsv);
+}

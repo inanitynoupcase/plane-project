@@ -23,28 +23,27 @@ struct NodeMayBay
 
 struct Ve
 {
-    char CMND[10];
+    char CCCD[9];
     int stt; // so thu tu 
 }; 
 struct DsVe
 {
-  Ve** SoGhe;
-  int n; // so ve da dat
+  Ve** ve;
+  int n=0; // so ve da dat
   int max; // so ghe max
 };
 
-//khoi tao mang 2 chieu con tro va 
-void InitializeVe(DsVe &dsve, int quantity,int booked)
-{
-	dsve.SoGhe=new Ve*[quantity];
-	for(int i=0; i<quantity ;i++)
-  {
-		dsve.SoGhe[i] = new Ve[1];
-	}
-	dsve.max = quantity;
-	dsve.n = booked;
-}
+//khoi tao mang 2 chieu con tro nhung no la 1 chieu
 
+void CreateVe(DsVe &dsv, int quantity)
+{
+	dsv.ve=new Ve*[quantity];
+	for(int i=0;i<quantity;i++)
+	{
+		dsv.ve[i] = new Ve[1];
+	}
+	dsv.max = quantity;
+}
 
 struct ChuyenBay
 {
@@ -65,11 +64,12 @@ typedef NodeChuyenBay*ptrDSCB;
 
 
 
-// CAY NHI PHAN TIM KIEM CAN BANG
+// CAY NHI PHAN TIM KIEM
 struct HanhKhach
 {
   char CCCD[12];
-  char HOTEN[25];
+  char HO[10];
+  char TEN[15];
   char GioiTinh[3]; 
   bool IsOnPlane =1;
 };
