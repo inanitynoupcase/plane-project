@@ -732,7 +732,7 @@ void QuanLyChuyenBay_NhapChuyenBay(){
 void QuanLyChuyenBay_HienThiChuyenBay(){
 	taoButton(10,160,280,230,2,8,15,3,"Quan Ly Chuyen Bay");
 	char text[][50]={"ID","Ngay Gio Khoi Hanh","Toi","ID May Bay","Trang Thai"};
-	int m[5] = {100,250,150,200,200};
+	int m[5] = {180,250,150,200,120};
    	taoBang(335,10,55,m,5,10,text,15,0);
   	taoButton(405,575,455,625,20001,7,0,2,"<");
    	taoButton(1130,575,1180,625,20002,7,0,2," >");
@@ -1566,7 +1566,7 @@ void run(){
 				OUTTEXT(730,585,3,1,3,3,charTrang2);
 				OUTTEXT1(760,585,3,0,3,3);
 				OUTTEXT(790,585,3,0,3,3,charTongTrang2);
-				int m[5] = {100,250,150,200,200};
+				int m[5] = {180,250,150,200,120};
 				int xx = 335; int yy = 65;
 				int i = 0; 	
 				while(ptr != NULL)
@@ -1668,6 +1668,9 @@ void run(){
 					strcpy(TOI2,ptr->data.SanBayDen);
 					strcpy(IDMAYBAY2,ptr->data.ID);
 					
+					if(SearchIdMb(dsmb,IDMAYBAY2) == -1){
+						ptr->data.Status = 0;
+					}
 					char TT[50] = "";
 					IntToChar(ptr->data.Status,TT);
 					strcpy(TRANGTHAI2,TT);
@@ -2375,9 +2378,6 @@ void run(){
 				break;
 			}
 			case 2002:{ // ADD_CHUYENBAY
-					taoButton(965,780,1040,830,2002,15,1,3,"NEW");
-					delay(250);
-			    	taoButton(965,780,1040,830,0,7,8,3,"NEW");
 			    	Date temp;
 			    	temp.year = TempNam2;
 			   		temp.mon = TempThang2;
@@ -2446,7 +2446,7 @@ void run(){
 							OUTTEXT(730,585,3,1,3,3,charTrang2);
 							OUTTEXT1(760,585,3,0,3,3);
 							OUTTEXT(790,585,3,0,3,3,charTongTrang2);
-							int m[5] = {100,250,150,200,200};
+					     	int m[5] = {180,250,150,200,120};
 							int xx = 335; int yy = 65;
 							int i = 0; 	
 							while(ptr != NULL)
@@ -2499,14 +2499,13 @@ void run(){
 						delay(400);
 						MessageBox("",0);		
 					}
+					taoButton(965,780,1040,830,2002,15,1,3,"NEW");
+					delay(250);
+			    	taoButton(965,780,1040,830,0,7,8,3,"NEW");
 				x=-1;y=-1;
 				break;
 			}
 			case 2003:{ //EDIT_CHUYENBAY
-					taoButton(1050,780,1135,830,2003,15,1,3,"SAVE");
-					delay(250);
-					taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
-					taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
 					remove("ChuyenBay.txt");
 					Date temp;
 			    	temp.year = TempNam2;
@@ -2579,7 +2578,7 @@ void run(){
 							OUTTEXT(730,585,3,1,3,3,charTrang2);
 							OUTTEXT1(760,585,3,0,3,3);
 							OUTTEXT(790,585,3,0,3,3,charTongTrang2);
-							int m[5] = {100,250,150,200,200};
+							int m[5] = {180,250,150,200,120};
 							int xx = 335; int yy = 65;
 							int i = 0; 	
 							while(ptr != NULL)
@@ -2627,19 +2626,19 @@ void run(){
 						DeleteDSCB(ptr);
 					}
 					else{
-						DeleteDSCB(Edit);
 						MessageBox("Khong The Sua",4);
 						delay(400);
 						MessageBox("",0);
 					}
+					DeleteDSCB(Edit);
+					taoButton(1050,780,1135,830,2003,15,1,3,"SAVE");
+					delay(250);
+					taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
+					taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
 					x=-1;y=-1;
 					break;
 			}
 			case 2004:{ // XOA_CHUYENBAY
-					taoButton(1145,780,1265,830,2004,15,1,3,"REMOVE");
-					delay(250);
-					taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
-					taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
 					NodeChuyenBay *ptr = SearchNode(pheadDSCB,ID2);
 					if(ptr->data.Status == 1 || ptr->data.Status == 2)
 					{
@@ -2671,7 +2670,7 @@ void run(){
 						OUTTEXT(730,585,3,1,3,3,charTrang2);
 						OUTTEXT1(760,585,3,0,3,3);
 						OUTTEXT(790,585,3,0,3,3,charTongTrang2);
-						int m[5] = {100,250,150,200,200};
+						int m[5] = {180,250,150,200,120};
 						int xx = 335; int yy = 65;
 						int i = 0; 	
 						while(ptr != NULL)
@@ -2723,6 +2722,10 @@ void run(){
 						delay(400);
 						MessageBox("",0);
 					}
+					taoButton(1145,780,1265,830,2004,15,1,3,"REMOVE");
+					delay(250);
+					taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
+					taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
 					x=-1;y=-1;
 				break;
 			}
@@ -2741,7 +2744,7 @@ void run(){
 					OUTTEXT(730,585,3,1,3,3,charTrang2);
 					OUTTEXT1(760,585,3,0,3,3);
 					OUTTEXT(790,585,3,0,3,3,charTongTrang2);
-					int m[5] = {100,250,150,200,200};
+					int m[5] = {180,250,150,200,120};
 					char text[][50]={"ID","Ngay Gio Khoi Hanh","Toi","ID May Bay","Trang Thai"};
 				   	taoBang(335,10,55,m,5,10,text,15,0);
 					int xx = 335; int yy = 65;
@@ -2808,7 +2811,7 @@ void run(){
 					OUTTEXT(730,585,3,1,3,3,charTrang2);
 					OUTTEXT1(760,585,3,0,3,3);
 					OUTTEXT(790,585,3,0,3,3,charTongTrang2);
-					int m[5] = {100,250,150,200,200};
+					int m[5] = {180,250,150,200,120};
 					char text[][50]={"ID","Ngay Gio Khoi Hanh","Toi","ID May Bay","Trang Thai"};
 				   	taoBang(335,10,55,m,5,10,text,15,0);
 					int xx = 335; int yy = 65;
