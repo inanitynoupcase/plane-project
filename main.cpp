@@ -142,12 +142,13 @@ void run(){
           FileInVe(VEI);
 	  }
     }
+    cout<<" this is kthk "<<ktHK<<" ";
     if(ktHK ==1)
     {
     	FileINHK(HKTIN);
 	}
      
-	while (1){
+	while (1){         
 		if(kbhit()){
 			char c = getch();
 		}
@@ -235,6 +236,7 @@ void run(){
 				 		taoID(450,787,925,817,13); // SO CHO ON 
 					}
 				 	else {
+				 		cout << "run" << endl;
 				 		setbkcolor(3);
 				 		setcolor(0);
 				 		settextstyle(3,0,1);
@@ -269,6 +271,7 @@ void run(){
 				 		HopLe1(970 + 50,675);
 				 		okLOAI1=true; 
 				 		taoID(450,787,925,817,13); // SO CHO ON 
+				 		
 				 		if(okID1 == false && okLOAI1 == true && okSOCHO1 == true){
 							taoButton(965,780,1040,830,0,7,8,3,"NEW");
 
@@ -276,13 +279,16 @@ void run(){
 		
 							taoButton(1145,780,1265,830,1004,7,0,3,"REMOVE");
 						} 
-						if(strcmp(dsmb.data[sotam1]->Type,LOAI1) != 0 || dsmb.data[sotam1]->Room != tempSoCho){
+						if(strcmp(dsmb.data[sotam1]->Type,LOAI1) != 0 || dsmb.data[sotam1]->Room != tempSoCho ){
+							if(okID1 == false && okLOAI1 == true && okSOCHO1 == true){
 							taoButton(965,780,1040,830,0,7,8,3,"NEW");
 
 							taoButton(1050,780,1135,830,1003,7,0,3,"SAVE");
 		
 							taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
+							}
 						}
+						
 					}
 					x=-1;y=-1;
 					break;
@@ -330,12 +336,17 @@ void run(){
 							}
 							tempSoCho = CharToInt(SOCHO1);
 							if(strcmp(dsmb.data[sotam1]->Type,LOAI1) != 0 || dsmb.data[sotam1]->Room != tempSoCho){
+								if( okID1 == false && okLOAI1 == true && okSOCHO1 == true){
+								
 								taoButton(965,780,1040,830,0,7,8,3,"NEW");
 	
 								taoButton(1050,780,1135,830,1003,7,0,3,"SAVE");
 			
 								taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
+							
+								}
 							}
+						
 						}
 						else{
 							setbkcolor(3);
@@ -1166,7 +1177,7 @@ void run(){
 					}
 				else{
 					TempGio2 = CharToInt(GIO2);
-					if(TempGio2 <= 24 && TempGio2 >= 0){
+					if(TempGio2 <= 23 && TempGio2 >= 0){
 						setbkcolor(3);
 					 	setcolor(0);
 						settextstyle(3,0,1);
@@ -1579,8 +1590,18 @@ void run(){
 					else{
 						taoO(458,787,820,817,7,0,0);
 						MessageBox("Khong The Them",4);
-						delay(400);
-						MessageBox("",0);	
+						outtextxy(980,650,"NHO HON GIO HE THONG");
+						taoID(458,650,925,680,0);
+
+						taoID(395,697,475,727,0);
+						taoID(550,697,600,727,0);
+						taoID(660,697,710,727,0);
+						taoID(750,697,800,727,0);
+						taoID(860,697,925,727,0);
+							
+						taoID(458,742,925,772,0);
+						taoID(458,787,820,817,0);
+						taoID(860,787,925,817,0);
 						taoButton(965,780,1040,830,2002,15,1,3,"NEW");
 						delay(50);
 				    	taoButton(965,780,1040,830,0,7,8,3,"NEW");	
@@ -1589,7 +1610,6 @@ void run(){
 				break;
 			}
 			case 2003:{ //EDIT_CHUYENBAY
-					remove("ChuyenBay.txt");
 					Date temp;
 			    	temp.year = TempNam2;
 			    	temp.mon = TempThang2;
@@ -1727,8 +1747,8 @@ void run(){
 					NodeChuyenBay *ptr = SearchNode(pheadDSCB,ID2);
 					if(ptr->data.Status == 1 || ptr->data.Status == 2)
 					{
-						remove("ChuyenBay.txt");
-						DelChuyenBay(pheadDSCB,ptr,dsmb);
+					//	remove("ChuyenBay.txt");
+						DelChuyenBay(ptr,dsmb);
 						strcpy(ID2,"");
 						strcpy(NGAY2,"");
 						strcpy(THANG2,"");
@@ -1739,7 +1759,7 @@ void run(){
 						strcpy(IDMAYBAY2,"");
 						strcpy(TRANGTHAI2,"");	
 												
-						NodeChuyenBay* ptr = new NodeChuyenBay;
+						NodeChuyenBay* ptr = pheadDSCB;
 						ptr = pheadDSCB;
 				
 						SortCB_Time(pheadDSCB);
@@ -1813,6 +1833,7 @@ void run(){
 					    taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
 					    taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
 						MessageBox("Khong The Xoa",4);
+						
 						delay(400);
 						MessageBox("",0);
 					}
@@ -2304,12 +2325,15 @@ void run(){
 	            			deleteNodeHK(root,CCCD3);
 	            			cout<<"old count "<<CountTotalHK<<endl;
 	            			CountTotalHK--;
-//	            			if(CountTotalHK>0)
+            			if(CountTotalHK == 0)
+            			{
+            				DeleteTree(root);
+						}
 	            			HanhKhach *array2 = new HanhKhach[CountTotalHK];
 					   	    NLR(root,array2);
 					   		indexHK2 =0;
 	                   	 	NLR_FileOutHK(HKT,array2,CountTotalHK);
-                            
+                            cout<<"this is si"<<root->data.CCCD;
 							strcpy(CCCD3,"");
 							strcpy(HO3,"");
 							strcpy(TEN3,"");
@@ -2318,6 +2342,9 @@ void run(){
 							okHO3 = false;
 							okTEN3 = false;
 							okGIOITINH3 = false;
+							
+	                                       
+							
 							
 							taoO(965,640,1265,770,3,0,0);
 						 	setbkcolor(3);
