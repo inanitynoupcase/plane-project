@@ -21,8 +21,6 @@ ifstream CBI; ifstream CheckCB;
 ofstream VEO;
 ifstream VEI; ifstream CheckVe;
 #define IDCANCEL 2
-
-
 // ham xu ly may bay        
 int SearchIdMb(NodeMayBay NodeMb,char TempId[]);
 void AddMb(NodeMayBay &nodemb,char TempID[],char TempType[],int TempRoom);
@@ -64,10 +62,23 @@ void RemoveVe(DsVe &dsv,char CCCD[],int i);
 void OrderVe(DsVe &dsv ,int pos,nodehk Check,HanhKhach data);
 
 //HAM INPUT & OUTPUT
+void FileInMB(ifstream &MBIn,NodeMayBay &nodemb);
+void FileOutMB(ofstream &MBOut,NodeMayBay nodemb,int n);
+void FileOutMBV2(ofstream &MBOut,NodeMayBay dsmb);
+bool FileGoodMB(ifstream &in);
 
+void FileInCB(ifstream &in, ptrDSCB &pheadDSCB);
+void FileOutCB(ofstream &out,ptrDSCB phead);
+bool FileGoodCB(ifstream &in);
 
+void FileINHK(ifstream &in);
+void NLR_FileOutHK(ofstream &out, HanhKhach *data, int countHK);
+bool FileGoodHK(ifstream &in);
+void OrderVe_V2(DsVe &dsv ,int pos,char TempCCCD[]);
 
-
+void FileInVe(ifstream &read);
+void FileOutVe(ofstream &out, ptrDSCB phead);
+bool FileGoodVe(ifstream &in);
 //================================================================================================================================================//
 //=====================================================================HAM-XU-LY-HANH-KHACH=======================================================//
 //THEM HANH KHACH
