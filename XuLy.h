@@ -113,18 +113,18 @@ void InsertNodehk(nodehk &root, HanhKhach &datahk)
 //XOA HANH KHACH
 NodeHanhKhach* deleteNodeHK(nodehk  &root, char CCCDtemp[])
 {
-  //  if (root == NULL)
-      //  return root;
+    if (root == NULL)
+        return root;
       
     if (strcmp(CCCDtemp,root->data.CCCD) <0 )
      {
         root->left = deleteNodeHK(root->left, CCCDtemp);
-     //  return root;
+       return root;
     }
     else if (strcmp(CCCDtemp,root->data.CCCD) >0)
      {
         root->right = deleteNodeHK(root->right, CCCDtemp);
-    //   return root;
+       return root;
     }
     
     //  6
@@ -133,13 +133,13 @@ NodeHanhKhach* deleteNodeHK(nodehk  &root, char CCCDtemp[])
      {
         NodeHanhKhach* temp = root->right;
         delete root;
-    //   return temp;
+       return temp;
     }
     else if (root->right == NULL)
      {
         NodeHanhKhach* temp = root->left;
         delete root;
-      //  return temp;
+        return temp;
     }
     else 
 	{
@@ -613,6 +613,9 @@ bool check_decent_chuyen_bay(ptrDSCB &pheadDSCB,char temp_so_hieu[],Date temp)
 				if(time<120) return false;
 			}
     }
+    sad1     sad2
+    12/3     13/3
+     11pm     01am
     else if(ptr->data.DepartTime.year==temp.year && abs(ptr->data.DepartTime.mon-temp.mon)==1 )
     {
     	
@@ -928,11 +931,17 @@ void FileOutMB(ofstream &MBOut,NodeMayBay nodemb,int n)
 void FileOutMBV2(ofstream &MBOut,NodeMayBay dsmb)
 {
 	MBOut.open("DSMB.txt",ios::trunc);
+	if(dsmb.total >0 )
+  {	
 	for(int i=0; i<dsmb.total; i++)
-	{
-	MBOut<<dsmb.data[i]->ID<<" "<<dsmb.data[i]->Type<<" "<<dsmb.data[i]->Room<<" "<<dsmb.data[i]->SoLuotBay<<" "<<dsmb.data[i]->Active<<endl;
+	{		
+	    if(dsmb.data[i]->Active != 0)
+	    {
+    	MBOut<<dsmb.data[i]->ID<<" "<<dsmb.data[i]->Type<<" "<<dsmb.data[i]->Room<<" "<<dsmb.data[i]->SoLuotBay<<" "<<dsmb.data[i]->Active<<endl;
+        }
     }
  	MBOut.close();
+  }
 }
 
 // kiem tra file may bayDSMB.t
@@ -1024,6 +1033,7 @@ void FileInCB(ifstream &in, ptrDSCB &pheadDSCB)
 	    p->data = data;
      	p->next = NULL;
      	InsertNodeCB(pheadDSCB,p);
+     	delete [] read;
 	}
 	
 	in.close();
@@ -1032,8 +1042,8 @@ void FileInCB(ifstream &in, ptrDSCB &pheadDSCB)
 void FileOutCB(ofstream &out,ptrDSCB phead)
 {
 	out.open("DSCB.txt",ios::trunc);
-	NodeChuyenBay* ptr= new NodeChuyenBay;
-	ptr=phead;
+	NodeChuyenBay* ptr= phead;
+// new	ptr=phead;
 	while(ptr!= NULL)
 	{
 		int count=0;
@@ -1234,7 +1244,8 @@ void FileInVe(ifstream &read)
            strcpy(CCCD,a[1].c_str());
            cout<<"this is cccd "<<CCCD<<endl;
            OrderVe_V2(ptr->data.dsv,pos,CCCD);
-        }  
+        } 
+		delete [] a; 
      }
 }
 void FileOutVe(ofstream &out, ptrDSCB phead)
