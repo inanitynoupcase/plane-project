@@ -4,7 +4,6 @@
 //CHAY CHUONG TRINH 
 void run(){
 	int x = -1, y = -1;
-	khoitaoID();
 	Menu();
 	taoO(428,80,1028,360,3,15,0);
 	settextstyle(3,0,5);
@@ -14,121 +13,121 @@ void run(){
 	outtextxy(500,200,"TRAN NGUYEN GIA BAO");
 	outtextxy(450,250,"N19DCCN037");
 	outtextxy(500,300,"PHAN CONG DANG");
-//	int index = 0;
-//	int trang1 = 1;
-//	int tongtrang1 = 0;
-//	char charTongTrang1[50] = "";
-//	char charTrang1[50] = "";
-//	int trang2 = 1;
-//	int tongtrang2 = 0;
-//	char charTongTrang2[50] = "";
-//	int tempTOTALCB = 0;
-//	char charTrang2[50] = "";
-//	int trang3 = 1; 
-//	int tongtrang3 = 0;
-//	char charTongTrang3[50] = "";
-//	char charTrang3[50] = "";
-//	int trang4 = 1; 
-//	int tongtrang4 = 0;
-//	char charTongTrang4[50] = "";
-//	char charTrang4[50] = "";
-//	int tempTOTALSEARCHCB = 0;
-//	int trang5 = 1; 
-//	int tongtrang5 = 0;
-//	char charTongTrang5[50] = "";
-//	char charTrang5[50] = "";
-//	int trang6 = 1; 
-//	int tongtrang6 = 0;
-//	char charTongTrang6[50] = "";
-//	char charTrang6[50] = "";
-//	int trang7 = 1; 
-//	int tongtrang7 = 0;
-//	char charTongTrang7[50] = "";
-//	char charTrang7[50] = "";
-//	char ID1[50] = ""; 
-//	char LOAI1[50] = "";
-//	char SOCHO1[50] = ""; 
-//	char ID2[50] = "";
-//	char NGAY2[50] = ""; 
-//	char THANG2[50] = ""; 
-//	char NAM2[50] = ""; 
-//	char GIO2[50] = ""; 
-//	char PHUT2[50] = ""; 
-//	char TOI2[50] = "";
-//	char IDMAYBAY2[50] = "";
-//	char TRANGTHAI2[10]= ""; 
-//	char CCCD3[50] = "";
-//	char HO3[50] = ""; 
-//	char TEN3[50] = ""; 
-//	char GIOITINH3[50] = "";
-//	char ID4[50] = ""; 
-//	char NGAY4[50] = "";
-//	char THANG4[50] = ""; 
-//	char NAM4[50] = "";
-//	char TOI4[50] = ""; 
-//	char ID5[50] = "";
-//	char NGAY5[50] = ""; 
-//	char THANG5[50] = ""; 
-//	char NAM5[50] = ""; 
-//	char GIO5[50] = ""; 
-//	char PHUT5[50] = ""; 
-//	char TOI5[50] = "";
-//	char VITRI5[50] = "";
-//	char CCCD5[50] = ""; 
-//	char HO5[50] = "";
-//	char TEN5[50] = "";
-//	char GIOITINH5[50] = ""; 
-//	char ID6[50] = "";
-//	char NGAY6[50] = ""; 
-//	char THANG6[50] = ""; 
-//	char NAM6[50] = ""; 
-//	char GIO6[50] = ""; 
-//	char PHUT6[50] = ""; 
-//	char TOI6[50] = "";
-//	bool okID1 = false;
-//	bool okLOAI1 = false;
-//	bool okSOCHO1 = false; 
-//	bool okID2 = false;
-//	bool okNGAY2= false; 
-//	bool okTHANG2 = false; 
-//	bool okNAM2 = false;
-//	bool NamNhuan2 = false; 
-//	bool okGIO2 = false; 
-//	bool okPHUT2 = false;
-//	bool okTOI2 = false;
-//	bool okIDMAYBAY2 = false; 
-//	bool okCCCD3 = false;
-//	bool okHO3 = false; 
-//	bool okTEN3 = false;
-//	bool okGIOITINH3= false;
-//// Man 4 KHONG CAN CHECK 
-//	bool okID5 = false;
-//	bool okVITRI5= false;
-//	bool okCCCD5 = false; 
-//	bool okViTriCCCD5 = false;
-//	bool okHO5 = false;
-//    bool okTEN5 = false;
-//	bool okGIOITINH5 = false; 
-//	bool okVE5 = false;
-//// MAN 6 K CHECK
-//// MAN 7 K CHECK
-//	int sotam1 = 0;
-//	int tempSoCho = 0;
-//	int TempNgay2 = 0;
-//	int TempThang2 = 0;
-//	int TempNam2 = 0;
-//	int TempGio2 = 0;
-//	int TempPhut2 = 0;
-//	int sotam3 = 0;
-//	int TempNgay4 = 0;
-//	int TempThang4 = 0;
-//	int TempNam4 = 0;
-//	int SoChoNgoi5 = 0;
-//	int ViTriVe5 = 0;
-//	int tempvitri = 0;
-//	int sotam5 = 0;
-//	int TempTT = 0; 
-	ClearData();
+	int index = 0;
+	int trang1 = 1;
+	int tongtrang1 = 0;
+	char charTongTrang1[50] = "";
+	char charTrang1[50] = "";
+	int trang2 = 1;
+	int tongtrang2 = 0;
+	char charTongTrang2[50] = "";
+	int tempTOTALCB = 0;
+	char charTrang2[50] = "";
+	int trang3 = 1; 
+	int tongtrang3 = 0;
+	char charTongTrang3[50] = "";
+	char charTrang3[50] = "";
+	int trang4 = 1; 
+	int tongtrang4 = 0;
+	char charTongTrang4[50] = "";
+	char charTrang4[50] = "";
+	int tempTOTALSEARCHCB = 0;
+	int trang5 = 1; 
+	int tongtrang5 = 0;
+	char charTongTrang5[50] = "";
+	char charTrang5[50] = "";
+	int trang6 = 1; 
+	int tongtrang6 = 0;
+	char charTongTrang6[50] = "";
+	char charTrang6[50] = "";
+	int trang7 = 1; 
+	int tongtrang7 = 0;
+	char charTongTrang7[50] = "";
+	char charTrang7[50] = "";
+	char ID1[50] = ""; 
+	char LOAI1[50] = "";
+	char SOCHO1[50] = ""; 
+	char ID2[50] = "";
+	char NGAY2[50] = ""; 
+	char THANG2[50] = ""; 
+	char NAM2[50] = ""; 
+	char GIO2[50] = ""; 
+	char PHUT2[50] = ""; 
+	char TOI2[50] = "";
+	char IDMAYBAY2[50] = "";
+	char TRANGTHAI2[10]= ""; 
+	char CCCD3[50] = "";
+	char HO3[50] = ""; 
+	char TEN3[50] = ""; 
+	char GIOITINH3[50] = "";
+	char ID4[50] = ""; 
+	char NGAY4[50] = "";
+	char THANG4[50] = ""; 
+	char NAM4[50] = "";
+	char TOI4[50] = ""; 
+	char ID5[50] = "";
+	char NGAY5[50] = ""; 
+	char THANG5[50] = ""; 
+	char NAM5[50] = ""; 
+	char GIO5[50] = ""; 
+	char PHUT5[50] = ""; 
+	char TOI5[50] = "";
+	char VITRI5[50] = "";
+	char CCCD5[50] = ""; 
+	char HO5[50] = "";
+	char TEN5[50] = "";
+	char GIOITINH5[50] = ""; 
+	char ID6[50] = "";
+	char NGAY6[50] = ""; 
+	char THANG6[50] = ""; 
+	char NAM6[50] = ""; 
+	char GIO6[50] = ""; 
+	char PHUT6[50] = ""; 
+	char TOI6[50] = "";
+	bool okID1 = false;
+	bool okLOAI1 = false;
+	bool okSOCHO1 = false; 
+	bool okID2 = false;
+	bool okNGAY2= false; 
+	bool okTHANG2 = false; 
+	bool okNAM2 = false;
+	bool NamNhuan2 = false; 
+	bool okGIO2 = false; 
+	bool okPHUT2 = false;
+	bool okTOI2 = false;
+	bool okIDMAYBAY2 = false; 
+	bool okCCCD3 = false;
+	bool okHO3 = false; 
+	bool okTEN3 = false;
+	bool okGIOITINH3= false;
+// Man 4 KHONG CAN CHECK 
+	bool okID5 = false;
+	bool okVITRI5= false;
+	bool okCCCD5 = false; 
+	bool okViTriCCCD5 = false;
+	bool okHO5 = false;
+    bool okTEN5 = false;
+	bool okGIOITINH5 = false; 
+	bool okVE5 = false;
+	bool HUYVECCCD = false;
+// MAN 6 K CHECK
+// MAN 7 K CHECK
+	int sotam1 = 0;
+	int tempSoCho = 0;
+	int TempNgay2 = 0;
+	int TempThang2 = 0;
+	int TempNam2 = 0;
+	int TempGio2 = 0;
+	int TempPhut2 = 0;
+	int sotam3 = 0;
+	int TempNgay4 = 0;
+	int TempThang4 = 0;
+	int TempNam4 = 0;
+	int SoChoNgoi5 = 0;
+	int ViTriVe5 = 0;
+	int tempvitri = 0;
+	int sotam5 = 0;
+	int TempTT = 0; 
 	NodeChuyenBay* ptr = new NodeChuyenBay;
 	ptr = pheadDSCB;
 	ktHK = FileGoodHK(CheckHK);
@@ -161,7 +160,20 @@ void run(){
     	if(x!=-1 && y!=-1)
 		switch(MID[x][y]){
 			case 1:{ // man hinh Quan Ly May Bay
-				ClearData();
+				//CLEAN DATA
+				trang1 = 1;
+				tongtrang1 = 0;
+				strcpy(charTongTrang1,"");
+				strcpy(charTrang1,"");
+				strcpy(ID1,""); 
+				strcpy(LOAI1,"");
+				strcpy(SOCHO1,""); 
+				okID1 = false;
+				okLOAI1 = false;
+				okSOCHO1 = false; 
+				sotam1 = 0;
+				tempSoCho = 0;
+				//==============
 				Menu();
 				QuanLyMayBay();
 				trang1 = 1;
@@ -251,7 +263,7 @@ void run(){
 			}
 			case 12:{ // Loai
 					taoID(450,650,925,680,0); //ID OFF
-					taoID(450,787,925,817,13);
+//					taoID(450,787,925,817,0);
 					ScanMa(450+5,717+5,LOAI1,10,15) ;
 				 	if(strlen(LOAI1)==0){
 				 		setbkcolor(3);
@@ -643,7 +655,37 @@ void run(){
 			}
 			
 			case 2:{ // MAN HINH CHUYEN BAY 
-			ClearData();
+				//ClEAN DATA
+				tempTOTALCB = 0;
+				trang2 = 1;
+				tongtrang2 = 0;
+				strcpy(charTongTrang2,"");
+				strcpy(charTrang2,"");
+				strcpy(ID2,"");
+				strcpy(NGAY2,"");
+				strcpy(THANG2,"");
+				strcpy(NAM2,"");
+				strcpy(GIO2,"");
+				strcpy(PHUT2,""); 
+				strcpy(TOI2,"");
+				strcpy(IDMAYBAY2,"");
+				strcpy(TRANGTHAI2,"");
+				okID2 = false;
+				okNGAY2= false; 
+				okTHANG2 = false; 
+				okNAM2 = false;
+			 	NamNhuan2 = false; 
+				okGIO2 = false; 
+				okPHUT2 = false;
+				okTOI2 = false;
+				okIDMAYBAY2 = false; 
+				TempNgay2 = 0;
+				TempThang2 = 0;
+				TempNam2 = 0;
+				TempGio2 = 0;
+				TempPhut2 = 0;
+				TempTT = 0;
+				//====================
 				Menu();
 				QuanLyChuyenBay();
 			   	NodeChuyenBay* ptr = pheadDSCB;
@@ -2062,7 +2104,21 @@ void run(){
 				break;
 			}		
 			case 3:{ // MAN HINH 3 - QUAN LY HANH KHACH
-				ClearData();
+				//CLEAN DATA
+				trang3 = 1; 
+				tongtrang3 = 0;
+				strcpy(charTongTrang3,"");
+				strcpy(charTrang3,"");
+				strcpy(CCCD3,"");
+				strcpy(HO3,"");
+				strcpy(TEN3,"");
+				strcpy(GIOITINH3,"");
+				okCCCD3 = false;
+				okHO3 = false; 
+				okTEN3 = false;
+				okGIOITINH3= false;
+				sotam3 = 0;
+				//==========
 				Menu();
 				QuanLyHanhKhach();
 				trang3 = 1;
@@ -2595,7 +2651,21 @@ void run(){
 			}
 			
 			case 4:{ // MAN HINH 4 - TIM KIEM CHUYEN BAY
-                ClearData();
+                //CLEAN DATA
+               	trang4 = 1; 
+				tongtrang4 = 0;
+				strcpy(charTongTrang4,"");
+				strcpy(charTrang4,"");	
+				tempTOTALSEARCHCB = 0;
+				strcpy(ID4,"");
+				strcpy(NGAY4,"");
+				strcpy(THANG4,"");
+				strcpy(NAM4,"");
+				strcpy(TOI4,"");
+				TempNgay4 = 0;
+				TempThang4 = 0;
+				TempNam4 = 0;
+                //==========
 				Menu();
 				TimChuyenBay();
 				x=-1,y=-1;
@@ -2919,7 +2989,37 @@ void run(){
 				break;
 			}
 			case 5:{ // MAN HINH 5 - DAT VE
-				ClearData();
+				//CLEAN DATA
+				trang5 = 1; 
+				tongtrang5 = 0;
+				strcpy(charTongTrang5,"");
+				strcpy(charTrang5,"");
+				strcpy(ID5,"");
+				strcpy(NGAY5,"");
+				strcpy(THANG5,""); 
+				strcpy(NAM5,"");
+				strcpy(GIO5,"");
+				strcpy(PHUT5,"");
+				strcpy(TOI5,"");
+				strcpy(VITRI5,"");
+				strcpy(CCCD5,"");
+				strcpy(HO5,"");
+				strcpy(TEN5,"");
+				strcpy(GIOITINH5,""); 
+				HUYVECCCD = false;
+				okID5 = false;
+				okVITRI5= false;
+				okCCCD5 = false; 
+				okViTriCCCD5 = false;
+				okHO5 = false;
+			    okTEN5 = false;
+				okGIOITINH5 = false; 
+				okVE5 = false;
+				SoChoNgoi5 = 0;
+				ViTriVe5 = 0;
+				tempvitri = 0;
+			 	sotam5 = 0;
+				//======================
 				Menu();
 				DatVe();
 				x=-1,y=-1;
@@ -3044,25 +3144,7 @@ void run(){
 				nodehk check;
 				check = SearchHk(root,CCCD5);
 				NodeChuyenBay* ptr = SearchNode(pheadDSCB,ID5);
-//			    NodeChuyenBay* ptr2 = pheadDSCB;
-//			    while(ptr2 != NULL)
-//			    {
-//			    	if(Late30Min(ptr2->data.DepartTime,ptr->data.DepartTime) == true && ptr2 != ptr)
-//			    	 {
-//			    	 	cout<<"may bay dat"<<ptr->data.DepartTime.day <<" "<< ptr->data.DepartTime.mon <<" "<<ptr->data.DepartTime.year <<" "<<ptr->data.DepartTime.hour << " "<< ptr->data.DepartTime.min<<endl<<endl;
-//			    	 	cout<<"may bay tim"<< ptr2->data.DepartTime.day <<" "<< ptr2->data.DepartTime.mon <<" "<<ptr2->data.DepartTime.year <<" "<<ptr2->data.DepartTime.hour << " "<< ptr2->data.DepartTime.min<<endl;
-//			    	 	for(int i=0; i< ptr2->data.dsv.n ; i++)
-//			    	 	{
-//			    	 		if(strcmp(CCCD5,ptr2->data.dsv.ve[i]->CCCD) ==0 )
-//			    	 		 {
-//			    	 		 	cout << "CHECK " << endl;
-//			    	 		 	// Hanh khach khong the dat 2 chuyen bay khoi hanh cach nhau duoi 30 phut!
-//							 }
-//						}
-//			    	 	
-//					 }
-//			       ptr2= ptr2->next;	
-//				}
+			    NodeChuyenBay* ptr2 = pheadDSCB;
 				for (int i =0; i< ptr->data.dsv.n ; i++)
 				{
 					if(strcmp(CCCD5,ptr->data.dsv.ve[i]->CCCD)==0)
@@ -3078,17 +3160,18 @@ void run(){
 				 	BaoLoi1(970 + 60,675);
 				 	okCCCD5=false; 
 					}
-				else if(strlen(CCCD5)==9 && okViTriCCCD5 == false && check == NULL){
+				else if(strlen(CCCD5)==9 && okViTriCCCD5 == false && check == NULL)
+				{
 				 	setbkcolor(3);
 				 	setcolor(0);
 				 	settextstyle(3,0,1);
 				 	outtextxy(970,680,"CCCD: ");
 				 	HopLe1(970 + 60,675);
 				 	okCCCD5=true;
-				  //HO TEN ON 
+				 		//HO TEN ON 
 				 	taoO(458,742,640,772,15,0,53);
 				    taoO(735,742,925,772,15,0,0);
-					}
+				}
 				else if(check != NULL){
 					
 					setbkcolor(3);
@@ -3118,7 +3201,7 @@ void run(){
 							
 					if(strcmp(GIOITINH5,"Nam")==0){
 						taoO(500,787,600,817,1,0,0);        //NAM ON
-						OUTTEXT(500+25,787+5,1,15,3,1,"NAM");
+		 				OUTTEXT(500+25,787+5,1,15,3,1,"NAM");
 						taoO(775,787,875,817,7,0,0);
 						OUTTEXT(775+35,787+5,7,8,3,1,"NU");
 					}
@@ -3135,11 +3218,32 @@ void run(){
 				    	taoButton(965,780,1065,830,0,7,8,3,"Ban Ve");
 						taoButton(1145,780,1245,830,0,7,8,3,"Huy Ve");
 					}
-//					else if(okViTriCCCD5 == false){
 					else{
 						taoButton(965,780,1065,830,5001,7,0,3,"Ban Ve");
 						taoButton(1145,780,1245,830,0,7,8,3,"Huy Ve");
 						}
+					while(ptr2 != NULL)
+					{
+				    	if(Late30Min(ptr2->data.DepartTime,ptr->data.DepartTime) == true && ptr2 != ptr)
+				    	 {
+				    	 	//cout<<"may bay dat"<<ptr->data.DepartTime.day <<" "<< ptr->data.DepartTime.mon <<" "<<ptr->data.DepartTime.year <<" "<<ptr->data.DepartTime.hour << " "<< ptr->data.DepartTime.min<<endl<<endl;
+				    	 	//cout<<"may bay tim"<< ptr2->data.DepartTime.day <<" "<< ptr2->data.DepartTime.mon <<" "<<ptr2->data.DepartTime.year <<" "<<ptr2->data.DepartTime.hour << " "<< ptr2->data.DepartTime.min<<endl;
+				    	 	for(int i=0; i< ptr2->data.dsv.n ; i++)
+				    	 	{
+				    	 		if(strcmp(CCCD5,ptr2->data.dsv.ve[i]->CCCD) ==0 )
+				    	 		 {
+				    	 		 		setbkcolor(3);
+										setcolor(0);
+										settextstyle(3,0,1);
+										outtextxy(970,680,"CCCD:");
+										Late30Min(970 + 60,675);
+										taoButton(965,780,1065,830,0,7,8,3,"Ban Ve");
+										taoButton(1145,780,1245,830,0,7,8,3,"Huy Ve");
+								 }
+							}	
+						 }
+				    	ptr2= ptr2->next;	
+					}
 					}
 				else{
 					setbkcolor(3);
@@ -3841,7 +3945,19 @@ void run(){
 				break;
 			}
 			case 6:{
-				ClearData();
+				//CLEAN DATA
+				trang6 = 1; 
+				tongtrang6 = 0;
+				strcpy(charTongTrang6,"");
+				strcpy(charTrang6,"");
+				strcpy(ID6,"");
+				strcpy(NGAY6,""); 
+				strcpy(THANG6,""); 
+				strcpy(NAM6,"");
+				strcpy(GIO6,"");
+			 	strcpy(PHUT6,""); 
+				strcpy(TOI6,"");
+				//=========================
 				Menu();
 				DanhSachHanhKhach();
 				x=-1,y=-1;
@@ -3883,8 +3999,7 @@ void run(){
 					//VE BANG
 					trang6 = 1;
 					tongtrang6 = ptr->data.dsv.n/9;
-					if (ptr->data.dsv.n%9 != 0)
-			  	 		tongtrang6 +=1;
+					if (ptr->data.dsv.n%9 != 0) tongtrang6 +=1;
 					IntToChar(tongtrang6,charTongTrang6);
 					IntToChar(trang6,charTrang6);
 					OUTTEXT(730,770,3,1,3,3,charTrang6);
@@ -4015,7 +4130,12 @@ void run(){
 				break;
 			}
 			case 7:{
-				ClearData();
+				//CLEAN DATA
+				trang7 = 1; 
+				tongtrang7 = 0;
+				strcpy(charTongTrang7,"");
+				strcpy(charTrang7,"");
+				//=====================
 				Menu();
 				ThongKeChuyenBay();
 				SortMayBay(dsmb);

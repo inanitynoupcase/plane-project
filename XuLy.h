@@ -5,8 +5,6 @@
 #include<sstream>
 #include<string>
 #include<fstream>
-#include<cstdio>
-#include <iomanip>  
 #pragma once
 NodeMayBay dsmb;
 ptrDSCB pheadDSCB=NULL;
@@ -161,6 +159,7 @@ NodeHanhKhach* deleteNodeHK(nodehk  &root, char CCCDtemp[])
         return root;
     }
 }
+
 int indexHK=0;
 void LNR(nodehk &root, HanhKhach *data)
 {
@@ -171,7 +170,6 @@ void LNR(nodehk &root, HanhKhach *data)
     strcpy(data[indexHK].HO,root->data.HO);
     strcpy(data[indexHK].TEN,root->data.TEN);
     strcpy(data[indexHK].GioiTinh,root->data.GioiTinh);
-    
   //  data[indexHK].numb = indexHK;
   //  cout<<"this is new "<<indexHK<<endl;
   //  data[indexHK].numb = indexHK;
@@ -179,7 +177,7 @@ void LNR(nodehk &root, HanhKhach *data)
 //    cout<<"this is new "<<indexHK<<endl;
     indexHK++;
     LNR(root->right,data);
-  }
+   }
 } 
 int indexHK2=0;
 void NLR(nodehk &root, HanhKhach *data)
@@ -833,8 +831,7 @@ int CountTotalChuyenBay(ptrDSCB &pheadDSCB){
 }
 //DUYET CHUYEN BAY THEO SEARCH
 int CountTotalChuyenBayTheoSearch(ptrDSCB &pheadDSCB,int TempNgay,int TempThang,int TempNam,char TempToi[]){
-	NodeChuyenBay* ptr= new NodeChuyenBay;
-//   	ptr = pheadDSCB;
+	NodeChuyenBay* ptr= pheadDSCB;
  	int TOTALchuyenbaySEARCH = 0;
  	while(ptr != NULL){
  		if(ptr->data.DepartTime.day == TempNgay && ptr->data.DepartTime.mon == TempThang && ptr->data.DepartTime.year == TempNam && strcmp(ptr->data.SanBayDen,TempToi) == 0 )

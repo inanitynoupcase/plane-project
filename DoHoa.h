@@ -32,6 +32,7 @@ void KhongTonTai1(int x,int y);
 void BiHuy1(int x,int y);
 void HoanTat1(int x,int y);
 void GioiTinh1(int x,int y,int ss);
+void Late30Min(int x,int y);
 void CleanMessageBox(int x,int y);
 
 void OUTTEXT(int x, int y, int maunen, int mauchu,int fontchu, int sizechu, char text[]);
@@ -374,13 +375,6 @@ void ScanMa(int x, int y, char s[], int lenMax,int mauNen ){
 
 //=====================================================================HAM-VE-VA-SET-ID=======================================================//
 //SET LAI ID
-void khoitaoID(){
-	for(int i = 0; i < maxX;i++){
-		for(int j = 0; j < maxY;j++){
-			MID[i][j]=0;
-		}
-	}
-}
 
 void taoID(int x1,int y1, int x2,int y2, int ID){
 	for(int i = x1; i < x2;i++){
@@ -409,7 +403,8 @@ void taoOkoID(int x1,int y1,int x2,int y2,int mau,int mauvien){
 void taoDong(int x1,int y1,int chieucao,int mangdodai[], int slcot,int mau,int mauvien){
 	int x2, y2;	
 	y2 = y1 + chieucao; 
-	for(int i=0;i < slcot;i++){
+	for(int i=0;i < slcot;i++)
+	{
 		x2 = x1 + mangdodai[i];
 		taoOkoID(x1,y1,x2,y2,mau,mauvien);
 		x1 = x2;	
@@ -527,7 +522,14 @@ void GioiTinh1(int x,int y,int ss){
 		outtextxy(x+5,y+5,"Nu");
 	}
 }
-
+void Late30Min(int x,int y){
+	settextstyle(3,0,1);
+	setbkcolor(3);	
+	setcolor(4);
+	outtextxy(x+5,y+5,"                                          ");
+	outtextxy(x+5,y+5,"Vui Long Doi 30p De Tiep");
+	outtextxy(x+5-60,y+30+5,"Tuc Dat Ve");
+}
 void CleanMessageBox(int x,int y){
 	settextstyle(3,0,1);
 	setbkcolor(3);	
@@ -867,237 +869,4 @@ void ThongKeChuyenBay(){
    	taoButton(1130,760,1180,810,70002,7,0,2," >");
 }
 //===================================================================================================================//
-	int index = 0;
-	int trang1 = 1;
-	int tongtrang1 = 0;
-	char charTongTrang1[50] = "";
-	char charTrang1[50] = "";
-	int trang2 = 1;
-	int tongtrang2 = 0;
-	char charTongTrang2[50] = "";
-	int tempTOTALCB = 0;
-	char charTrang2[50] = "";
-	int trang3 = 1; 
-	int tongtrang3 = 0;
-	char charTongTrang3[50] = "";
-	char charTrang3[50] = "";
-	int trang4 = 1; 
-	int tongtrang4 = 0;
-	char charTongTrang4[50] = "";
-	char charTrang4[50] = "";
-	int tempTOTALSEARCHCB = 0;
-	int trang5 = 1; 
-	int tongtrang5 = 0;
-	char charTongTrang5[50] = "";
-	char charTrang5[50] = "";
-	int trang6 = 1; 
-	int tongtrang6 = 0;
-	char charTongTrang6[50] = "";
-	char charTrang6[50] = "";
-	int trang7 = 1; 
-	int tongtrang7 = 0;
-	char charTongTrang7[50] = "";
-	char charTrang7[50] = "";
-	char ID1[50] = ""; 
-	char LOAI1[50] = "";
-	char SOCHO1[50] = ""; 
-	char ID2[50] = "";
-	char NGAY2[50] = ""; 
-	char THANG2[50] = ""; 
-	char NAM2[50] = ""; 
-	char GIO2[50] = ""; 
-	char PHUT2[50] = ""; 
-	char TOI2[50] = "";
-	char IDMAYBAY2[50] = "";
-	char TRANGTHAI2[10]= ""; 
-	char CCCD3[50] = "";
-	char HO3[50] = ""; 
-	char TEN3[50] = ""; 
-	char GIOITINH3[50] = "";
-	char ID4[50] = ""; 
-	char NGAY4[50] = "";
-	char THANG4[50] = ""; 
-	char NAM4[50] = "";
-	char TOI4[50] = ""; 
-	char ID5[50] = "";
-	char NGAY5[50] = ""; 
-	char THANG5[50] = ""; 
-	char NAM5[50] = ""; 
-	char GIO5[50] = ""; 
-	char PHUT5[50] = ""; 
-	char TOI5[50] = "";
-	char VITRI5[50] = "";
-	char CCCD5[50] = ""; 
-	char HO5[50] = "";
-	char TEN5[50] = "";
-	char GIOITINH5[50] = ""; 
-	char ID6[50] = "";
-	char NGAY6[50] = ""; 
-	char THANG6[50] = ""; 
-	char NAM6[50] = ""; 
-	char GIO6[50] = ""; 
-	char PHUT6[50] = ""; 
-	char TOI6[50] = "";
-	bool okID1 = false;
-	bool okLOAI1 = false;
-	bool okSOCHO1 = false; 
-	bool okID2 = false;
-	bool okNGAY2= false; 
-	bool okTHANG2 = false; 
-	bool okNAM2 = false;
-	bool NamNhuan2 = false; 
-	bool okGIO2 = false; 
-	bool okPHUT2 = false;
-	bool okTOI2 = false;
-	bool okIDMAYBAY2 = false; 
-	bool okCCCD3 = false;
-	bool okHO3 = false; 
-	bool okTEN3 = false;
-	bool okGIOITINH3= false;
-// Man 4 KHONG CAN CHECK 
-	bool HUYVECCCD = false;
-	bool okID5 = false;
-	bool okVITRI5= false;
-	bool okCCCD5 = false; 
-	bool okViTriCCCD5 = false;
-	bool okHO5 = false;
-    bool okTEN5 = false;
-	bool okGIOITINH5 = false; 
-	bool okVE5 = false;
-// MAN 6 K CHECK
-// MAN 7 K CHECK
-	int sotam1 = 0;
-	int tempSoCho = 0;
-	int TempNgay2 = 0;
-	int TempThang2 = 0;
-	int TempNam2 = 0;
-	int TempGio2 = 0;
-	int TempPhut2 = 0;
-	int sotam3 = 0;
-	int TempNgay4 = 0;
-	int TempThang4 = 0;
-	int TempNam4 = 0;
-	int SoChoNgoi5 = 0;
-	int ViTriVe5 = 0;
-	int tempvitri = 0;
-	int sotam5 = 0;
-	int TempTT = 0; 
-
-void ClearData(){
-	index = 0;
-	trang1 = 1;
-	tongtrang1 = 0;
-	strcpy(charTongTrang1,"");
-	strcpy(charTrang1,"");
-	trang2 = 1;
-	tongtrang2 = 0;
-	tempTOTALCB = 0;
-	strcpy(charTongTrang2,"");
-	strcpy(charTrang2,"");
-	trang3 = 1; 
-	tongtrang3 = 0;
-	strcpy(charTongTrang3,"");
-	strcpy(charTrang3,"");
-	trang4 = 1; 
-	tongtrang4 = 0;
-	strcpy(charTongTrang4,"");
-	strcpy(charTrang4,"");	
-	tempTOTALSEARCHCB = 0;
-	trang5 = 1; 
-	tongtrang5 = 0;
-	strcpy(charTongTrang5,"");
-	strcpy(charTrang5,"");
-	trang6 = 1; 
-	tongtrang6 = 0;
-	strcpy(charTongTrang6,"");
-	strcpy(charTrang6,"");
-	trang7 = 1; 
-	tongtrang7 = 0;
-	strcpy(charTongTrang7,"");
-	strcpy(charTrang7,"");
-	strcpy(ID1,""); 
-	strcpy(LOAI1,"");
-	strcpy(SOCHO1,""); 
-	strcpy(ID2,"");
-	strcpy(NGAY2,"");
-	strcpy(THANG2,"");
-	strcpy(NAM2,"");
-	strcpy(GIO2,"");
-	strcpy(PHUT2,""); 
-	strcpy(TOI2,"");
-	strcpy(IDMAYBAY2,"");
-	strcpy(TRANGTHAI2,"");
-	strcpy(CCCD3,"");
-	strcpy(HO3,"");
-	strcpy(TEN3,"");
-	strcpy(GIOITINH3,"");
-	strcpy(ID4,"");
-	strcpy(NGAY4,"");
-	strcpy(THANG4,"");
-	strcpy(NAM4,"");
-	strcpy(TOI4,"");
-	strcpy(ID5,"");
-	strcpy(NGAY5,"");
-	strcpy(THANG5,""); 
-	strcpy(NAM5,"");
-	strcpy(GIO5,"");
-	strcpy(PHUT5,"");
-	strcpy(TOI5,"");
-	strcpy(VITRI5,"");
-	strcpy(CCCD5,"");
-	strcpy(HO5,"");
-	strcpy(TEN5,"");
-	strcpy(GIOITINH5,""); 
-	strcpy(ID6,"");
-	strcpy(NGAY6,""); 
-	strcpy(THANG6,""); 
-	strcpy(NAM6,"");
-	strcpy(GIO6,"");
- 	strcpy(PHUT6,""); 
-	strcpy(TOI6,"");
-	okID1 = false;
-	okLOAI1 = false;
-	okSOCHO1 = false; 
-	okID2 = false;
-	okNGAY2= false; 
-	okTHANG2 = false; 
-	okNAM2 = false;
- 	NamNhuan2 = false; 
-	okGIO2 = false; 
-	okPHUT2 = false;
-	okTOI2 = false;
-	okIDMAYBAY2 = false; 
-	okCCCD3 = false;
-	okHO3 = false; 
-	okTEN3 = false;
-	okGIOITINH3= false;
-// Man 4 KHONG CAN CHECK 
-	HUYVECCCD = false;
-	okID5 = false;
-	okVITRI5= false;
-	okCCCD5 = false; 
-	okViTriCCCD5 = false;
-	okHO5 = false;
-    okTEN5 = false;
-	okGIOITINH5 = false; 
-	okVE5 = false;
-// MAN 6 K CHECK
-// MAN 7 K CHECK
-	sotam1 = 0;
-	tempSoCho = 0;
-	TempNgay2 = 0;
-	TempThang2 = 0;
-	TempNam2 = 0;
-	TempGio2 = 0;
-	TempPhut2 = 0;
-	sotam3 = 0;
-	TempNgay4 = 0;
-	TempThang4 = 0;
-	TempNam4 = 0;
-	SoChoNgoi5 = 0;
-	ViTriVe5 = 0;
-	tempvitri = 0;
- 	sotam5 = 0;
-	TempTT = 0; 
-}
 

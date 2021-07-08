@@ -70,8 +70,7 @@ struct HanhKhach
   char CCCD[12];
   char HO[10];
   char TEN[15];
-  char GioiTinh[3]; 
-  bool IsOnPlane =1;
+  char GioiTinh[4]; 
 };
 struct NodeHanhKhach
 {
