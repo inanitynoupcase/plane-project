@@ -1,7 +1,6 @@
 #include"CTDL.h"
 #include<cmath>
 #include<string.h>
-#include<vector>
 #include<iostream>
 #include<sstream>
 #include<string>
@@ -414,24 +413,17 @@ void AddMb(NodeMayBay &nodemb,char TempID[],char TempType[],int TempRoom){
    nodemb.total++;
 }
 void EditMb(NodeMayBay &nodemb,char TempID[],char TempType[],int TempRoom){
-   	int result = SearchIdMb(nodemb,TempID); // return i;
+   	int result = SearchIdMb(nodemb,TempID); // Tim Kiem may bay can sua ;
     dsmb.data[result]->Room = TempRoom;
     strcpy(dsmb.data[result]->Type,TempType);
 }
 void DelMb(NodeMayBay &nodemb,char TempID[])
 {
-//nhap vao id may bay truoc
-  	int result = SearchIdMb(nodemb,TempID);
+  	int result = SearchIdMb(nodemb,TempID); // Tim Kiem may bay con xoa
 
     if(dsmb.data[result]->Active == true)
     {
        dsmb.data[result]->Active = false;
-       return;
-    }
-    else if(dsmb.data[result]->Active == false)
-    {
-       // may bay da bi xoa tu truoc
-       while (kbhit()) getch();
        return;
     }
 }
@@ -613,9 +605,6 @@ bool check_decent_chuyen_bay(ptrDSCB &pheadDSCB,char temp_so_hieu[],Date temp)
 				if(time<120) return false;
 			}
     }
-    sad1     sad2
-    12/3     13/3
-     11pm     01am
     else if(ptr->data.DepartTime.year==temp.year && abs(ptr->data.DepartTime.mon-temp.mon)==1 )
     {
     	
@@ -832,8 +821,8 @@ void UpdateCB(ptrDSCB &pheadDSCB)
 }
 //DUYET CHUYEN BAY
 int CountTotalChuyenBay(ptrDSCB &pheadDSCB){
-	NodeChuyenBay* ptr= new NodeChuyenBay;
-   	ptr = pheadDSCB;
+	NodeChuyenBay* ptr= pheadDSCB;
+//   	ptr = pheadDSCB;
  	int TOTALchuyenbay = 0;
  	while(ptr != NULL){
  		TOTALchuyenbay++;
@@ -845,7 +834,7 @@ int CountTotalChuyenBay(ptrDSCB &pheadDSCB){
 //DUYET CHUYEN BAY THEO SEARCH
 int CountTotalChuyenBayTheoSearch(ptrDSCB &pheadDSCB,int TempNgay,int TempThang,int TempNam,char TempToi[]){
 	NodeChuyenBay* ptr= new NodeChuyenBay;
-   	ptr = pheadDSCB;
+//   	ptr = pheadDSCB;
  	int TOTALchuyenbaySEARCH = 0;
  	while(ptr != NULL){
  		if(ptr->data.DepartTime.day == TempNgay && ptr->data.DepartTime.mon == TempThang && ptr->data.DepartTime.year == TempNam && strcmp(ptr->data.SanBayDen,TempToi) == 0 )
@@ -1133,7 +1122,7 @@ void FileINHK(ifstream &in)
 
 void NLR_FileOutHK(ofstream &out,nodehk root)
 {
-  out.open("DSHK.txt", ios::app |ios::binary );
+  out.open("DSHK.dat", ios::app |ios::binary );
   if(root != NULL)
   {
   	   int count=0;
@@ -1296,29 +1285,6 @@ bool FileGoodVe(ifstream &in)
 }
 
 //=============================================================================================================================================//
-
-
-void CMDREMOVE() // De phong ham remove bi loi 
-{
-  system("echo %cd% > location.txt");
-    ifstream in("location.txt");
-    string temp;
-    vector<char> RLocation;
-    getline(in,temp);
-    for(int i=0; i< temp.size(); i++)
-    {
-        RLocation.push_back(temp[i]);
-        if (temp[i] == '\\')
-        {
-            RLocation.push_back('\\');
-        }
-    }
-    string location(RLocation.begin(),RLocation.end());
-  //  cout<<location;
-    string cmd;
-    cmd= "cd /d "+ location + " & del DSMB.txt";
-    system(cmd.c_str());
-}
 
 int CharToInt(char ch[]){ 
 	int l=strlen(ch);
