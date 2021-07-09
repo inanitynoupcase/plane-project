@@ -1233,6 +1233,7 @@ void FileInVe(ifstream &read)
         } 
 		delete [] a; 
      }
+	read.close();
 }
 void FileOutVe(ofstream &out, ptrDSCB phead)
 {
