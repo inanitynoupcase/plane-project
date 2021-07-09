@@ -78,7 +78,7 @@ void ScanHo(int x, int y, char s[], int lenMax,int mauNen){
     s[l+1]='\0';
     s[l]='|';
     int x1,y1;
-     while(1){
+    while(1){
 		outtextxy(x,y,s);
      	if(kbhit()){
 	     	char c= getch();
@@ -87,7 +87,7 @@ void ScanHo(int x, int y, char s[], int lenMax,int mauNen){
 	     		continue;
 			 }
 	     	if (l<lenMax){
-	     		if(('a'<=c&&c<='z')||('A'<=c&&c<='Z')|| c=='_' ){	
+	     		if(('a'<=c&&c<='z')||('A'<=c&&c<='Z')){	
 	     			if (l==0  && ('a'<=c&&c<='z'))		c=c+'A'-'a'; // thuong thanh hoa
 	     			else if (l!=0 && s[l-1] == ' ' && ('a'<=c&&c<='z')) c=c+'A'-'a';
 	     			else if (l!=0 && s[l-1] != ' ' && ('A'<=c&&c<='Z')) 	c=c-'A' + 'a'; // hoa thanh thuong
@@ -121,7 +121,7 @@ void ScanHo(int x, int y, char s[], int lenMax,int mauNen){
 				s[l]='\0';
 				break;
 			}
-	}
+		}
 		else{
 			s[l]='|';
 			delay(100);
@@ -152,7 +152,7 @@ void ScanTen(int x, int y, char s[], int lenMax,int mauNen){
 	     	if (l<lenMax){
 	     		if('a'<=c&&c<='z'||'A'<=c&&c<='Z'|| c==' ')	{
 	     			if (l==0  && ('a'<=c&&c<='z'))		c=c+'A'-'a'; // thuong thanh hoa
-	     			else if (l!=0 && s[l-1] == ' ' && ('a'<=c&&c<='z')) c=c+'A'-'a';
+	     			else if (l!=0 && s[l-1] == ' ' && ('a'<=c&&c<='z')) c=c+'A'-'a'; // thuong thanh hoa
 	     			else if (l!=0 && s[l-1] != ' ' && ('A'<=c&&c<='Z')) 	c=c-'A' + 'a'; // hoa thanh thuong
 	     			else if (c==' ' && (l==0 || s[l-1] == ' ')) continue;				
 			     	s[l]=c;
@@ -176,18 +176,18 @@ void ScanTen(int x, int y, char s[], int lenMax,int mauNen){
 					}	
 				else continue;
 				} 	
-		else if(c==8){
-					s[l-1]=' ';
-					s[l]=' ';
-					s[l+1]= ' ';
-					s[l+2] = ' ';
-					outtextxy(x,y,s);
-					l--;
-		}
-		else if (c==13){
-				s[l]='\0';
-				break;
-		}else continue;	
+			else if(c==8){
+						s[l-1]=' ';
+						s[l]=' ';
+						s[l+1]= ' ';
+						s[l+2] = ' ';
+						outtextxy(x,y,s);
+						l--;
+			}
+			else if (c==13){
+					s[l]='\0';
+					break;
+			}else continue;	
 	}
 	else{
 		s[l]='|';

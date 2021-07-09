@@ -1589,7 +1589,9 @@ void run(){
 			   		temp.day = TempNgay2;
 			   		temp.hour = TempGio2;
 			   		temp.min = TempPhut2;
+			   		cout << CheckDepartTime(temp) << endl; 
 			    	if(CheckDepartTime(temp)==true){
+			    		cout << check_decent_chuyen_bay(pheadDSCB,IDMAYBAY2,temp) << endl;
 						if(check_decent_chuyen_bay(pheadDSCB,IDMAYBAY2,temp)==true){   			
 						//	remove("ChuyenBay.txt");
 							AddNewChuyenBay(pheadDSCB,ID2,TempNgay2,TempThang2,TempNam2,TempGio2,TempPhut2,TOI2,IDMAYBAY2,TempTT);
@@ -1694,14 +1696,32 @@ void run(){
 							else taoID(405,575,455,625,20001);
 							if(tongtrang2>1) taoID(1130,575,1180,625,20002); // TAO ID NUT NEXT
 							if(trang2==tongtrang2) taoID(1130,575,1180,625,0); // KO TAO ID NUT NEXT 	
+							taoButton(965,780,1040,830,2002,15,1,3,"NEW");
+							delay(50);
+						   	taoButton(965,780,1040,830,0,7,8,3,"NEW");
+							MessageBox("Da Them Thanh Cong",14);
+							delay(400);
+							MessageBox("",0);
 						}
-						taoButton(965,780,1040,830,2002,15,1,3,"NEW");
-						delay(50);
-				    	taoButton(965,780,1040,830,0,7,8,3,"NEW");
-						MessageBox("Da Them Thanh Cong",14);
-						delay(400);
-						MessageBox("",0);
-				
+						else{
+							MessageBox("Khong The Them",4);
+							outtextxy(975,650,"2 CHUYEN BAY CUNG MAY BAY");
+							outtextxy(990,710,"PHAI CACH NHAU 2 TIENG");
+							taoID(458,650,925,680,0);
+	
+							taoID(395,697,475,727,0);
+							taoID(550,697,600,727,0);
+							taoID(660,697,710,727,0);
+							taoID(750,697,800,727,0);
+							taoID(860,697,925,727,0);
+								
+							taoID(458,742,925,772,0);
+							taoID(458,787,820,817,0);
+							taoID(860,787,925,817,0);
+							taoButton(965,780,1040,830,2002,15,1,3,"NEW");
+							delay(50);
+					    	taoButton(965,780,1040,830,0,7,8,3,"NEW");	
+						}
 					}		
 					else{
 
@@ -1840,7 +1860,6 @@ void run(){
 						else taoID(405,575,455,625,20001);
 						if(tongtrang2>1) taoID(1130,575,1180,625,20002); // TAO ID NUT NEXT
 						if(trang2==tongtrang2) taoID(1130,575,1180,625,0); // KO TAO ID NUT NEXT 	
-						}
 						taoButton(1050,780,1135,830,2003,15,1,3,"SAVE");
 						delay(50);
 						taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
@@ -1848,6 +1867,27 @@ void run(){
 						MessageBox("Da Sua Thanh Cong",14);
 						delay(400);
 						MessageBox("",0);
+						}
+						else{
+							MessageBox("Khong The Them",4);
+							outtextxy(975,650,"2 CHUYEN BAY CUNG MAY BAY");
+							outtextxy(990,710,"PHAI CACH NHAU 2 TIENG");
+							taoID(458,650,925,680,0);
+	
+							taoID(395,697,475,727,0);
+							taoID(550,697,600,727,0);
+							taoID(660,697,710,727,0);
+							taoID(750,697,800,727,0);
+							taoID(860,697,925,727,0);
+								
+							taoID(458,742,925,772,0);
+							taoID(458,787,820,817,0);
+							taoID(860,787,925,817,0);
+							taoButton(1050,780,1135,830,2003,15,1,3,"SAVE");
+							delay(50);
+							taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
+							taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
+						}
 					}
 					else{
 						MessageBox("KHONG THE SUA",4);
@@ -4233,6 +4273,9 @@ void run(){
 		
 		}
 	}
+	DeleteTree(root);
+	DeleteDSMB(dsmb);
+	DeleteDSCB(pheadDSCB);
 }
 
 
@@ -4245,9 +4288,6 @@ int main(int argc, char *argv[])
 	initwindow(maxX, maxY);					
    	cleardevice();	
 	run();
-	DeleteTree(root);
-	DeleteDSMB(dsmb);
-	DeleteDSCB(pheadDSCB);
 	while(!kbhit()) delay(1);
 	system("pause");
     closegraph();

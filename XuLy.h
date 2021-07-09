@@ -28,7 +28,6 @@ void SortMayBay(NodeMayBay &dsmb);
 
 // ham xu ly chuyen bay
 ptrDSCB SearchNode(ptrDSCB &pheadCB,char TempMCB[]);
-ptrDSCB SearchChuyenBay_Ve(ptrDSCB &pheadCB,char TempCCCD[]);
 void InsertNodeCB(ptrDSCB &pheadCB, NodeChuyenBay *p);
 void AddNewChuyenBay(ptrDSCB &pheadDSCB,char TempMCB[],int TempDay,int TempMonth,int TempYear,int TempHour, int TempMin,char TempNoiToi[],char tempIDMB[],int TempTT);
 bool checkYear(int year);
@@ -43,7 +42,7 @@ int CountTotalChuyenBayTheoSearch(ptrDSCB &pheadDSCB,int TempNgay,int TempThang,
 
 //HAM XU LY HANH KHACH
 void InsertNodehk(nodehk &root, HanhKhach &datahk);
-//NodeHanhKhach* deleteNodeHK(NodeHanhKhach* root, char CCCDtemp[]);
+NodeHanhKhach* deleteNodeHK(nodehk  &root, char CCCDtemp[]);
 void LNR(nodehk &root, HanhKhach *data);
 void NLR(nodehk &root, HanhKhach *data);
 nodehk SearchHk(nodehk &root,char tempcmnd[]);
@@ -234,62 +233,62 @@ bool IsOnPlane(ptrDSCB phead, char CCCDtemp[])
 bool Late30Min(Date dt1,Date dt2)
 {
 	if(dt1.day==dt2.day)
-  {
+  	{//PHUT < 30, CUNG GIO, CUNG NGAY, THANG, NAM
 		if(dt1.year==dt2.year && dt1.mon==dt2.mon &&dt1.hour==dt2.hour && abs(dt1.min-dt2.min)<=30)
-    {
+    	{
 			return true;
 		}
 	}
 	else if(dt1.year==dt2.year && dt1.mon==dt2.mon && abs(dt1.day-dt2.day)==1)
-  {
+  	{//~1 NGAY, DAU NGAY A, CUOI NGAY B, CUNG THANG, NAM
 		if(dt1.day>dt2.day)
-    {
+  		{
 			if((dt1.hour*60+dt1.min)+(1440-(dt2.hour*60+dt2.min))<=30)
-      {
+     		{
 				return true;
 			}
 		}
 		else if(dt1.day<dt2.day)
-    {
-				if((dt2.hour*60+dt2.min)+(1440-(dt1.hour*60+dt1.min))<=30)
-        {
+   		{
+			if((dt2.hour*60+dt2.min)+(1440-(dt1.hour*60+dt1.min))<=30)
+      		{
 				return true;
 		  	}
 		}
 	}
 	else if(dt1.year==dt2.year && abs(dt1.mon-dt2.mon)==1 )
-  {
+ 	{//CUOI THANG A, DAU THANG B 
 		if(dt1.day== day[dt1.mon] && dt2.day==1 || dt2.day==day[dt2.mon] && dt1.day==1)
-    {
+   		{
 			if(dt1.mon>dt2.mon)
-      {
+            {
 				if((dt1.hour*60+dt1.min)+(1440-(dt2.hour*60+dt2.min))<=30)
-        {
+       			{
 				return true;
 				}
 			}
 			else
-      {
+     		{
 				if((dt2.hour*60+dt2.min)+(1440-(dt1.hour*60+dt1.min))<=30)
-        {
-				return true;
-		   	}
-		  }
-  	}
+       			{
+					return true;
+		   		}
+		 	}
+  		}
 	}
 	else if(abs(dt1.year-dt2.year)==1 )
-  {
+  	{//CUOI NAM A, DAU NAM B
 		if(dt1.day==31 && dt1.mon==12 && dt2.day==1 && dt2.mon==1)
-    {
+ 	   	{
 			if((dt2.hour*60+dt2.min)+(1440-(dt1.hour*60+dt1.min))<=30)
-      {
+     		{
 				return true;
-	 	  }
-  	}
+	 	  	}
+  		}
 		else if(dt1.day==1 && dt1.mon==1 && dt2.day==31 && dt2.mon==12)
-    {
+   		{
 			if((dt1.hour*60+dt1.min)+(1440-(dt2.hour*60+dt2.min))<=30)
-      {
+     	 	{
 				return false;
 			}
 		}
@@ -474,22 +473,6 @@ ptrDSCB SearchNode(ptrDSCB &pheadCB,char TempMCB[])
 	return NULL;
 }
 
-// de trung 
-ptrDSCB SearchChuyenBay_Ve(ptrDSCB &pheadCB,char TempCCCD[])
-{	
-	NodeChuyenBay*ptr = pheadCB;
-	while(ptr!=NULL)
-  {
-		for(int i=0; i< ptr->data.dsv.n ; i++)
-		{
-			if(strcmp(TempCCCD, ptr->data.dsv.ve[i]->CCCD) == 0)
-			 return ptr;
-		}
-		ptr=ptr->next;
-	}
-	return NULL;
-}
-
 //INSERT NODE CHUYEN BAY
 void InsertNodeCB(ptrDSCB &pheadCB, NodeChuyenBay *p)
 {
@@ -565,89 +548,82 @@ bool check_decent_chuyen_bay(ptrDSCB &pheadDSCB,char temp_so_hieu[],Date temp)
 	NodeChuyenBay *ptr = new NodeChuyenBay;
 	ptr=pheadDSCB;
 	while(ptr!=NULL)
-{
-//	cout<<ptr->data.DepartTime.day<<" "<<ptr->data.DepartTime.mon<<" "<<ptr->data.DepartTime.year<<" "<<ptr->data.DepartTime.hour << " "<<ptr->data.DepartTime.min<<endl;
-//	cout<<ptr->data.ID;
-	if(strcmp(ptr->data.ID,temp_so_hieu)==0 && ptr->data.Status!=0)
 	{
-		if(ptr->data.DepartTime.day==temp.day && ptr->data.DepartTime.mon==temp.mon && ptr->data.DepartTime.year==temp.year )
-    {
-			
-			if(ptr->data.DepartTime.hour!=temp.hour)
-      {
-				int time=abs((ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)-(temp.hour*60+temp.min));
-				if(time<120)
-        {
-					return false;
-				}
+	//	cout<<ptr->data.DepartTime.day<<" "<<ptr->data.DepartTime.mon<<" "<<ptr->data.DepartTime.year<<" "<<ptr->data.DepartTime.hour << " "<<ptr->data.DepartTime.min<<endl;
+	//	cout<<ptr->data.ID;
+		if(strcmp(ptr->data.ID,temp_so_hieu)==0 && ptr->data.Status!=0)
+		{
+			if(ptr->data.DepartTime.day==temp.day && ptr->data.DepartTime.mon==temp.mon && ptr->data.DepartTime.year==temp.year )
+	    	{//XET CUNG NGAY, CUNG THANG, CUNG NAM
+				
+				if(ptr->data.DepartTime.hour!=temp.hour)
+	     		{
+					int time=abs((ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)-(temp.hour*60+temp.min));
+					if(time<120) //PHUT 
+	        		{			
+						return false;
+					}
+				}	
+				else if(ptr->data.DepartTime.hour==temp.hour) return false;				
 			}	
-			else if(ptr->data.DepartTime.hour==temp.hour) return false;				
-		}
-			
-		else if(abs(ptr->data.DepartTime.day-temp.day)==1 && ptr->data.DepartTime.mon==temp.mon && ptr->data.DepartTime.year==temp.year)
-    {
-			
-			//cach nhau 1 ngay, cb truoc ptr->data
-			if(ptr->data.DepartTime.day>temp.day)
-      {
-				int time=(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)
-				+(1440-(temp.hour*60+temp.min));
-			   if(time<120) return false;
-			}
-			
-			//cach nhau 1 ngay, cb sau ptr->data
-			else if(temp.day>ptr->data.DepartTime.day)
-      {
-				int time=(1440-(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min))
-				+(temp.hour*60+temp.min);
-				if(time<120) return false;
-			}
-    }
-    else if(ptr->data.DepartTime.year==temp.year && abs(ptr->data.DepartTime.mon-temp.mon)==1 )
-    {
-    	
-		if((ptr->data.DepartTime.day==day[ptr->data.DepartTime.mon] && temp.day==1) || (temp.day==day[temp.mon] && ptr->data.DepartTime.day==1))
-    {
-			if(ptr->data.DepartTime.mon>temp.mon)
-      {
-				if((ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)+(1440-(temp.hour*60+temp.min))<120)
-        {
-				return false;
+			else if(abs(ptr->data.DepartTime.day-temp.day)==1 && ptr->data.DepartTime.mon==temp.mon && ptr->data.DepartTime.year==temp.year)
+	   		{//XET ~1 NGAY, CUNG THANG, CUNG NAM
+				
+				//THOI GIAN CAN XET TRUOC CHUYEN BAY CUNG MAY BAY
+				if(ptr->data.DepartTime.day>temp.day)
+	     		{
+					int time=(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)+(1440-(temp.hour*60+temp.min));
+				   	if(time<120) return false;
+				}
+				//THOI GIAN CAN XET SAU CHUYEN BAY CUNG MAY BAY
+				else if(temp.day>ptr->data.DepartTime.day)
+	    		{
+					int time=(1440-(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min))+(temp.hour*60+temp.min);
+					if(time<120) return false;
+				}
+	    	}
+		    else if(ptr->data.DepartTime.year==temp.year && abs(ptr->data.DepartTime.mon-temp.mon)==1 )
+		    {//XET ~1 THANG, CUOI THANG A & DAU THANG B, CUNG NAM
+		    	
+				if((ptr->data.DepartTime.day==day[ptr->data.DepartTime.mon] && temp.day==1) || (temp.day==day[temp.mon] && ptr->data.DepartTime.day==1))
+		 	    {
+					if(ptr->data.DepartTime.mon>temp.mon)
+		     		{
+						if((ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)+(1440-(temp.hour*60+temp.min))<120)
+		       			{
+						return false;
+						}
+					}
+					else
+		       		{
+						if((temp.hour*60+temp.min)+(1440-(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min))<120)
+		       			{
+						return false;
+						}
+					}
 				}
 			}
-			else
-        {
-				if((temp.hour*60+temp.min)+(1440-(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min))<120)
-        {
-				return false;
+			else if(abs(ptr->data.DepartTime.year-temp.year)==1 )
+		 	{//XET ~1 NAM, CUOI NAM A & DAU NAM B
+				if(ptr->data.DepartTime.day==31 && ptr->data.DepartTime.mon==12 && temp.day==1 && temp.mon==1)
+		    	{
+					if((temp.hour*60+temp.min)+(1440-(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min))<120)
+		     		{
+						return false;
+					}
+				}
+				else if(ptr->data.DepartTime.day==1 && ptr->data.DepartTime.mon==1 && temp.day==31 && temp.mon==12)
+		   		{
+					if((ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)+(1440-(temp.hour*60+temp.min))<120)
+		      		{
+						return false;
+					}
+				}
 			}
 		}
-	}
-	}
-	else if(abs(ptr->data.DepartTime.year-temp.year)==1 )
-  {
-		if(ptr->data.DepartTime.day==31 && ptr->data.DepartTime.mon==12 && temp.day==1 && temp.mon==1)
-    {
-			if((temp.hour*60+temp.min)+(1440-(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min))<120)
-      {
-				return false;
-		}
-	}
-		else if(ptr->data.DepartTime.day==1 && ptr->data.DepartTime.mon==1 && temp.day==31 && temp.mon==12)
-    {
-			if((ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)+(1440-(temp.hour*60+temp.min))<120)
-      {
-				return false;
-				}
-		}
-
-	 }
-
-  }
-		ptr=ptr->next;
-
- }
-		return true;
+	ptr=ptr->next;
+ 	}
+	return true;
 }
 // Sort Chuyen Bay THEO THOI GIAN
 void SortCB_Time(ptrDSCB &pheadDSCB)
@@ -713,14 +689,13 @@ void EditChuyenBay(ptrDSCB &pheadDSCB,ptrDSCB &editnode,char TempMCB[],int TempD
 bool check_decent_chuyen_bay_version_2(ptrDSCB &pheadDSCB,ptrDSCB &EditNode,char TempIDMB[],Date Temp)
 {
 	
-		NodeChuyenBay*ptr=pheadDSCB;
+	NodeChuyenBay*ptr=pheadDSCB;
 	while(ptr!=NULL)
 	{
 	if(strcmp(ptr->data.ID,TempIDMB)==0 && ptr->data.Status!=0 && ptr!=EditNode)
 	{
-		if(ptr->data.DepartTime.day==Temp.day && ptr->data.DepartTime.mon==Temp.mon
-		&& ptr->data.DepartTime.year==Temp.year )
-		{
+		if(ptr->data.DepartTime.day==Temp.day && ptr->data.DepartTime.mon==Temp.mon && ptr->data.DepartTime.year==Temp.year )
+		{//XET CUNG NGAY, CUNG THANG, CUNG NAM
 			
 			if(ptr->data.DepartTime.hour!=Temp.hour)
 			{
@@ -734,24 +709,22 @@ bool check_decent_chuyen_bay_version_2(ptrDSCB &pheadDSCB,ptrDSCB &EditNode,char
 			else if(ptr->data.DepartTime.hour==Temp.hour) return false;				
 		}
 			
-		else if(abs(ptr->data.DepartTime.day-Temp.day)==1 && ptr->data.DepartTime.mon==Temp.mon
-		&& ptr->data.DepartTime.year==Temp.year){
-			
-			//cach nhau 1 ngay, cb truoc ptr->data
+		else if(abs(ptr->data.DepartTime.day-Temp.day)==1 && ptr->data.DepartTime.mon==Temp.mon && ptr->data.DepartTime.year==Temp.year){
+		//XET ~1 NGAY, CUNG THANG, CUNG NAM
+			//CHUYEN BAY CAN XET TRUOC CHUYEN BAY CUNG MAY BAY
 			if(ptr->data.DepartTime.day>Temp.day){
-				int time=(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)
-				+(1440-(Temp.hour*60+Temp.min));
+				int time=(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min)+(1440-(Temp.hour*60+Temp.min));
 			   if(time<120) return false;
 			}
 			
-			//cach nhau 1 ngay, cb sau ptr->data
+			//CHUYEN BAY CAN XET SAU CHUYEN BAY CUNG MAY BAY
 			else if(Temp.day>ptr->data.DepartTime.day){
 				int time=(1440-(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min))+(Temp.hour*60+Temp.min);
 				if(time<120) return false;
 			}
         }
     else if(ptr->data.DepartTime.year==Temp.year && abs(ptr->data.DepartTime.mon-Temp.mon)==1 )
-	{
+	{//XET ~1 THANG, CUNG NAM, DAU THANG A & CUOI THANG B
     	
 		if((ptr->data.DepartTime.day==day[ptr->data.DepartTime.mon] && Temp.day==1) || (Temp.day==day[Temp.mon] && ptr->data.DepartTime.day==1))
 		{
@@ -768,6 +741,7 @@ bool check_decent_chuyen_bay_version_2(ptrDSCB &pheadDSCB,ptrDSCB &EditNode,char
 		}
 	}
 	}
+	//XET ~1 NAM, DAU NAM A & CUOI NAM B
 	else if(abs(ptr->data.DepartTime.year-Temp.year)==1 ){
 		if(ptr->data.DepartTime.day==31 && ptr->data.DepartTime.mon==12 && Temp.day==1 && Temp.mon==1){
 			if((Temp.hour*60+Temp.min)+(1440-(ptr->data.DepartTime.hour*60+ptr->data.DepartTime.min))<120){
@@ -1233,7 +1207,6 @@ void FileInVe(ifstream &read)
         } 
 		delete [] a; 
      }
-	read.close();
 }
 void FileOutVe(ofstream &out, ptrDSCB phead)
 {
