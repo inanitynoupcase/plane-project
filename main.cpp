@@ -147,7 +147,8 @@ void run(){
     	FileINHK(HKTIN);
 	}
      
-	while (1){         
+	while (1){
+        clearmouseclick(WM_LBUTTONDOWN);
 		if(kbhit()){
 			char c = getch();
 		}
@@ -3767,7 +3768,17 @@ void run(){
 				delay(50);
 				taoButton(1145,780,1245,830,5002,7,0,3,"Huy Ve");
 				NodeChuyenBay* ptr = SearchNode(pheadDSCB,ID5);
-				RemoveVe(ptr->data.dsv,CCCD5,index);
+				cout << ptr->data.dsv.n << " " << index << " " << endl; 
+				for (int i =0; i< ptr->data.dsv.n ; i++)
+				{
+					if(strcmp(CCCD5,ptr->data.dsv.ve[i]->CCCD)==0)
+					{
+						index = i;
+					}
+				}
+				cout << ptr->data.dsv.n << " " << index << " " << endl; 
+				RemoveVe(ptr->data.dsv,index);
+				cout << ptr->data.dsv.n << " " << index << " " << endl;
 				FileOutVe(VEO,pheadDSCB);
 				int x1 = 355, y1 = 120;
 				int k1 = 0;

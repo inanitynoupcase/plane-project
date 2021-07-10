@@ -54,7 +54,7 @@ void FREEVE(DsVe &dsv);
 void FREEMayBay(ptrDSCB &phead, char MaMB[]);
 void SortVe(DsVe &dsv);
 bool IsEmpty(DsVe &dsv,int pos);
-void RemoveVe(DsVe &dsv,char CCCD[],int i);
+void RemoveVe(DsVe &dsv,int i);
 void OrderVe(DsVe &dsv ,int pos,nodehk Check,HanhKhach data);
 
 //HAM INPUT & OUTPUT
@@ -304,6 +304,7 @@ void FREEVE(DsVe &dsv)
 		delete dsv.ve[i];
 		dsv.ve[i]=NULL;
 	}
+	dsv.n =0;
 }
 void FREEMayBay(ptrDSCB &phead, char MaMB[])
  {
@@ -362,7 +363,7 @@ bool IsEmpty(DsVe &dsv,int pos)
 
 
 // xoa ve
-void RemoveVe(DsVe &dsv,char CCCD[],int i)
+void RemoveVe(DsVe &dsv,int i)
 {
    	for(int j=i;j<dsv.n-1;j++)
 	{
@@ -1208,6 +1209,7 @@ void FileInVe(ifstream &read)
         } 
 		delete [] a; 
      }
+     read.close();
 }
 void FileOutVe(ofstream &out, ptrDSCB phead)
 {
