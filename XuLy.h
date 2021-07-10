@@ -427,14 +427,15 @@ void DelMb(NodeMayBay &nodemb,char TempID[])
 // CHECK MAYBAY CO CHUYEN BAY CHUA
 bool IsHaveFlight(ptrDSCB &pheadCB, char MaMB[])
 {
-  ptrDSCB ptr = pheadDSCB;
- while(ptr != NULL) 
-{    
- if(strcmp(ptr->data.ID,MaMB) ==0 )
-    return true;
-else return false;
- ptr=ptr->next;
-     }
+  	NodeChuyenBay *ptr = pheadDSCB;
+
+	while(ptr != NULL) 
+	{
+		cout << ptr->data.ID << " " << MaMB << " " << strcmp(ptr->data.ID,MaMB) << endl;
+	 	if(strcmp(ptr->data.ID,MaMB)==0)  return true;
+	 	ptr=ptr->next;
+    }
+    return false;
 }
 
 //SORT THEO SO LUOT BAY

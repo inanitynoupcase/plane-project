@@ -6,8 +6,8 @@ using namespace std;
 
 struct MayBay
 {
-  char ID[16];
-  char Type[41];
+  char ID[15];
+  char Type[40];
   int Room; // so cho cua may bay
   bool Active = true;
   int SoLuotBay = 0;
@@ -23,7 +23,7 @@ struct NodeMayBay
 
 struct Ve
 {
-    char CCCD[9];
+    char CCCD[12];
     int stt; // so thu tu 
 }; 
 struct DsVe
@@ -47,10 +47,10 @@ void CreateVe(DsVe &dsv, int quantity)
 
 struct ChuyenBay
 {
-	char MaCB[16]; // ma chuyen bay
+	char MaCB[15]; // ma chuyen bay
     Date DepartTime; // thoi gian
-    char SanBayDen[21]; // noitoi
-    char ID[16];	// id may bay
+    char SanBayDen[20]; // noitoi
+    char ID[15];	// id may bay
     int Status = 1 ; // trang thai 0: huy chuyen, 1: con ve,  2: het ve, 3: hoan tat
     DsVe dsv; 
 };

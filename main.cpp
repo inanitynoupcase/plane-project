@@ -515,6 +515,7 @@ void run(){
 					delay(50);
 					taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
 					taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
+					cout << IsHaveFlight(pheadDSCB,ID1) << endl; 
 					if(IsHaveFlight(pheadDSCB,ID1)==false){
 					//	CMDREMOVE();
 						DelMb(dsmb,ID1);
@@ -4006,7 +4007,14 @@ void run(){
 			case 61:{ //ID CHUYEN BAY 
 				taoO(915,50,1135,80,15,0,61);
 				ScanMa(915+5,50+5,ID6,10,15);
-				if(SearchNode(pheadDSCB,ID6)!=NULL ){ // SEARCH ID CHUYENBAY FUNCTION
+				if(SearchNode(pheadDSCB,ID6)==NULL){
+					taoO(515,110,800,140,7,0,0);
+					taoO(915,110,1135,140,7,0,0);
+					char text[][50]={"STT","So Ve","CCCD","Ho","Ten","Gioi Tinh"};
+					int m[6] = {90,90,200,170,220,150}; //sum = 900;
+   					taoBang(335,190,55,m,6,10,text,15,0);
+				}
+				else if(SearchNode(pheadDSCB,ID6)!=NULL ){ // SEARCH ID CHUYENBAY FUNCTION
 					UpdateCB(pheadDSCB);
 					FileOutVe(VEO,pheadDSCB);
 					NodeChuyenBay* ptr = SearchNode(pheadDSCB,ID6);

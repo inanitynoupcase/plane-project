@@ -11,28 +11,6 @@ struct Date
 	int year;
 };
 
-// kiem tra nam nhuan 
-bool DaysOfMon(Date dt)
-{
-	if(dt.mon==2)
-    {
-		if(dt.year%400==0 ||(dt.year%4==0 && dt.year%100!=0)){
-			if(dt.day>29) return false; // nam nhuan 29 ngay
-			return true;
-		}
-		else
-        {
-			if(dt.day>28) return false;
-			return true;
-		}
-	}
-	else
-    {
-	if(dt.day>day[dt.mon]) return false;
-	return true;
-	}
-	
-}
 bool CheckDepartTime(Date dt)
 {
 	
@@ -40,8 +18,8 @@ bool CheckDepartTime(Date dt)
 	tm *ltm=localtime(&now);
 	Date DtNow; 
 	DtNow.day=ltm->tm_mday;
-	DtNow.mon=1+ltm->tm_mon;
-	DtNow.year=1900+ltm->tm_year;
+	DtNow.mon=1+ltm->tm_mon; //0 -> 11
+	DtNow.year=1900+ltm->tm_year; //TINH TU 1900
 	DtNow.hour=ltm->tm_hour;
 	DtNow.min=ltm->tm_min;
 	
