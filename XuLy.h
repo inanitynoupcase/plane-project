@@ -306,23 +306,6 @@ void FREEVE(DsVe &dsv)
 	}
 	dsv.n =0;
 }
-void FREEMayBay(ptrDSCB &phead, char MaMB[])
- {
-   ptrDSCB ptr = phead;
-   while (ptr != NULL)
-   {
-      if(ptr->data.Status == 1 || ptr->data.Status ==2)
-       {
-         if (strcmp(ptr->data.ID,MaMB)==0 )
-         {
-           ptr->data.Status =0;
-           FREEVE(ptr->data.dsv);
-           
-         }
-       }
-      ptr = ptr->next; 
-   }
- }
  
 // sort danh sach ve
 void SortVe(DsVe &dsv)
@@ -339,8 +322,6 @@ void SortVe(DsVe &dsv)
 				TempIndex=j;
 			}
 		}
-		
-		Temp=dsv.ve[i];
 		dsv.ve[i]=dsv.ve[TempIndex];
 		dsv.ve[TempIndex]=Temp;		
 	}
@@ -645,7 +626,7 @@ void SortCB_Time(ptrDSCB &pheadDSCB)
              ptr2->data = TempChuyenBay;
           	}
     	}
-        else if(ptr1->data.Status == 3 || CheckDepartTime(ptr1->data.DepartTime) == false && CheckDepartTime(ptr2->data.DepartTime) == true )
+        else if((ptr1->data.Status == 3 || CheckDepartTime(ptr1->data.DepartTime))== false && CheckDepartTime(ptr2->data.DepartTime) == true )
         {
             ChuyenBay TempChuyenBay = ptr1->data;
             ptr1->data = ptr2->data;
@@ -769,7 +750,6 @@ bool check_decent_chuyen_bay_version_2(ptrDSCB &pheadDSCB,ptrDSCB &EditNode,char
 void DelChuyenBay(ptrDSCB &ptr, NodeMayBay &DSMB)
 {
     ptr->data.Status=0;
-    ptr->data.dsv.n =0;
 	int result = SearchIdMb(DSMB,ptr->data.ID);
   	dsmb.data[result]->SoLuotBay--;
     FREEVE(ptr->data.dsv);
@@ -1284,20 +1264,10 @@ void IntToChar(int num,char ch[]){
 void DeleteTree(nodehk &root)
  {
     if (root == NULL) 
-	{
         return;
-    }
-    if (root->left == NULL) 
-	{
         DeleteTree(root->left);
-    }
-     if (root->right == NULL) 
-	 {
         DeleteTree(root->right);
-    }
-    
 	delete root;
-  root=NULL;
 }
 void DeleteDSMB(NodeMayBay &dsmb)
 {
