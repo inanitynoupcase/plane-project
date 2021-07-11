@@ -318,7 +318,7 @@ void SortVe(DsVe &dsv)
 		{
 			if(Temp->stt > dsv.ve[j]->stt)
 			{
-				Temp=dsv.ve[j];
+				//kt temp Temp=dsv.ve[j];
 				TempIndex=j;
 			}
 		}
