@@ -51,7 +51,7 @@ nodehk SearchHk(nodehk &root,char tempcmnd[]);
 bool IsOnPlane(ptrDSCB phead, char CCCDtemp[]);
 bool Late30Min(Date dt1,Date dt2);
 void FREEVE(DsVe &dsv);
-void FREEMayBay(ptrDSCB &phead, char MaMB[]);
+// ham them khi can void FREEMayBay(ptrDSCB &phead, char MaMB[]);
 void SortVe(DsVe &dsv);
 bool IsEmpty(DsVe &dsv,int pos);
 void RemoveVe(DsVe &dsv,int i);
