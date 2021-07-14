@@ -299,7 +299,7 @@ bool Late30Min(Date dt1,Date dt2)
 //Xoa het ds ve
 void FREEVE(DsVe &dsv)
 {
-	for(int i=dsv.n; i< dsv.max;i++)
+	for(int i=0; i< dsv.n;i++)
 	{
 		delete dsv.ve[i];
 		dsv.ve[i]=NULL;
@@ -346,8 +346,10 @@ bool IsEmpty(DsVe &dsv,int pos)
 // xoa ve
 void RemoveVe(DsVe &dsv,int i)
 {
+	delete dsv.ve[i];
    	for(int j=i;j<dsv.n-1;j++)
 	{
+		
 	  *dsv.ve[j]=*dsv.ve[j+1];
 	}
    dsv.n--;
@@ -377,7 +379,7 @@ int SearchIdMb(NodeMayBay NodeMb,char TempId[])
 {
     for(int i=0; i< NodeMb.total ; i++)
      {
-        if(strcmp(NodeMb.data[i]->ID , TempId)==0 && NodeMb.data[i]->Active == true){
+        if(strcmp(NodeMb.data[i]->ID , TempId)==0){
         	return i;
 		}
 	 }   
@@ -399,12 +401,12 @@ void EditMb(NodeMayBay &nodemb,char TempID[],char TempType[],int TempRoom){
 void DelMb(NodeMayBay &nodemb,char TempID[])
 {
   	int result = SearchIdMb(nodemb,TempID); // Tim Kiem may bay con xoa
-
-    if(dsmb.data[result]->Active == true)
-    {
-       dsmb.data[result]->Active = false;
-       return;
-    }
+	delete nodemb.data[result];
+    for(int j=result ;j <nodemb.total-1 ;j++)
+	{
+	  	nodemb.data[j]=nodemb.data[j+1];
+	}
+	nodemb.total--;
 }
 // CHECK MAYBAY CO CHUYEN BAY CHUA
 bool IsHaveFlight(ptrDSCB &pheadCB, char MaMB[])
@@ -423,7 +425,7 @@ bool IsHaveFlight(ptrDSCB &pheadCB, char MaMB[])
 //SORT THEO SO LUOT BAY
 void SortMayBay(NodeMayBay &dsmb)
 {
- for(int i=0; i< dsmb.total ; i++)
+ for(int i=0; i< dsmb.total-1 ; i++)
   {
     int Index =i;
     for(int j=i+1; j< dsmb.total ; j++)
@@ -826,7 +828,7 @@ void FileInMB(ifstream &MBIn,NodeMayBay &nodemb){
 //    cout<<endl;
   	int x[3]; 
   	int countN =0;
-    for(int i=2 ; i< 5; i++)
+    for(int i=2 ; i< 4; i++)
 	{
         
         stringstream go(array[i]);
@@ -845,7 +847,6 @@ void FileInMB(ifstream &MBIn,NodeMayBay &nodemb){
       	MayBay* mb= new MayBay;
     	mb->Room = x[0];  
     	mb->SoLuotBay = x[1];
-    	mb->Active = x[2];
     // cout<<mb->Room<<" "<<mb->SoLuotBay<<" "<<mb->ACTIVE<<endl;
     
 //     	strcpy(tempID, array[0].c_str());
@@ -866,7 +867,7 @@ void FileInMB(ifstream &MBIn,NodeMayBay &nodemb){
 void FileOutMB(ofstream &MBOut,NodeMayBay nodemb,int n)
 {
 	MBOut.open("DSMB.txt",ios::app);
-	MBOut<<nodemb.data[n]->ID<<" "<<nodemb.data[n]->Type<<" "<<nodemb.data[n]->Room<<" "<<nodemb.data[n]->SoLuotBay<<" "<<nodemb.data[n]->Active<<endl;
+	MBOut<<nodemb.data[n]->ID<<" "<<nodemb.data[n]->Type<<" "<<nodemb.data[n]->Room<<" "<<nodemb.data[n]->SoLuotBay<<endl;
  	MBOut.close();
 }
 
@@ -877,10 +878,7 @@ void FileOutMBV2(ofstream &MBOut,NodeMayBay dsmb)
   {	
 	for(int i=0; i<dsmb.total; i++)
 	{		
-	    if(dsmb.data[i]->Active != 0)
-	    {
-    	MBOut<<dsmb.data[i]->ID<<" "<<dsmb.data[i]->Type<<" "<<dsmb.data[i]->Room<<" "<<dsmb.data[i]->SoLuotBay<<" "<<dsmb.data[i]->Active<<endl;
-        }
+    	MBOut<<dsmb.data[i]->ID<<" "<<dsmb.data[i]->Type<<" "<<dsmb.data[i]->Room<<" "<<dsmb.data[i]->SoLuotBay<<endl;
     }
  	MBOut.close();
   }
