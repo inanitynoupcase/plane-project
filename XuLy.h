@@ -415,7 +415,6 @@ bool IsHaveFlight(ptrDSCB &pheadCB, char MaMB[])
 
 	while(ptr != NULL) 
 	{
-		cout << ptr->data.ID << " " << MaMB << " " << strcmp(ptr->data.ID,MaMB) << endl;
 	 	if(strcmp(ptr->data.ID,MaMB)==0)  return true;
 	 	ptr=ptr->next;
     }

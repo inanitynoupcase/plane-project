@@ -189,19 +189,14 @@ void run(){
 				OUTTEXT(790,585,3,0,3,3,charTongTrang1);
 				int m[3] = {300,310,300};
 				int xx = 335; int yy = 65;
-				int j = 9; 
-				for(int i=0;i<j && i < dsmb.total;i++){
-					if(dsmb.data[i]->Active == false){
-						j++;
-					}
-					else{
-						OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
-						OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
-						char CharRoom[50];
-						IntToChar(dsmb.data[i]->Room,CharRoom);
-						OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
-						yy+=55;
-					}
+				for(int i=0;i<9 && i < dsmb.total;i++)
+				{
+					OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
+					OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
+					char CharRoom[50];
+					IntToChar(dsmb.data[i]->Room,CharRoom);
+					OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
+					yy+=55;
 				}
 				if(trang1==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
 			  	else taoID(405,575,455,625,10001);
@@ -435,19 +430,13 @@ void run(){
 					OUTTEXT1(760,585,3,0,3,3);
 					OUTTEXT(790,585,3,0,3,3,charTongTrang1);
 					int xx = 335; int yy = 65;
-					int j = 9; 
-					for(int i=0;i<j && i < dsmb.total;i++){
-						if(dsmb.data[i]->Active == false){
-							j++;
-						}
-						else{
-							OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
-							OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
-							char CharRoom[50];
-							IntToChar(dsmb.data[i]->Room,CharRoom);
-							OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
-							yy+=55;
-						}
+					for(int i=0;i<9 && i < dsmb.total;i++){
+						OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
+						OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
+						char CharRoom[50];
+						IntToChar(dsmb.data[i]->Room,CharRoom);
+						OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
+						yy+=55;
 					}
 					if(trang1==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
 				  	else taoID(405,575,455,625,10001);
@@ -487,19 +476,13 @@ void run(){
 					OUTTEXT1(760,585,3,0,3,3);
 					OUTTEXT(790,585,3,0,3,3,charTongTrang1);
 					int xx = 335; int yy = 65;
-					int j = 9; 
-					for(int i=0;i<j && i < dsmb.total;i++){
-						if(dsmb.data[i]->Active == false){
-							j++;
-						}
-						else{
-							OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
-							OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
-							char CharRoom[50];
-							IntToChar(dsmb.data[i]->Room,CharRoom);
-							OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
-							yy+=55;
-						}
+					for(int i=0;i<9 && i < dsmb.total;i++){
+						OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
+						OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
+						char CharRoom[50];
+						IntToChar(dsmb.data[i]->Room,CharRoom);
+						OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
+						yy+=55;
 					}
 				  	if(trang1==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
 				  	else taoID(405,575,455,625,10001);
@@ -516,19 +499,13 @@ void run(){
 					delay(50);
 					taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
 					taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
-					cout << IsHaveFlight(pheadDSCB,ID1) << endl; 
 					if(IsHaveFlight(pheadDSCB,ID1)==false){
-					//	CMDREMOVE();
 						DelMb(dsmb,ID1);
-						FREEMayBay(pheadDSCB,ID1);
+						FileOutMBV2(MBO,dsmb);
+						//CLEAR DATA
 						strcpy(ID1,"");
 						strcpy(LOAI1,"");
 						strcpy(SOCHO1,"");
-//						for(int i=0;i<dsmb.total;i++){
-//							if(dsmb.data[i]->Active == true)
-//							FileOutMB(MBO,dsmb,i);	
-//						}
-                        FileOutMBV2(MBO,dsmb);
 						taoO(450,650,925,680,7,0,11);
 						taoO(450,717,925,747,7,0,0);
 						taoO(450,787,925,817,7,0,0);
@@ -546,19 +523,14 @@ void run(){
 						OUTTEXT1(760,585,3,0,3,3);
 						OUTTEXT(790,585,3,0,3,3,charTongTrang1);
 						int xx = 335; int yy = 65;
-						int j = 9; 
-						for(int i=0;i<j && i < dsmb.total;i++){
-							if(dsmb.data[i]->Active == false){
-								j++;
-							}
-							else{
-								OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
-								OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
-								char CharRoom[50];
-								IntToChar(dsmb.data[i]->Room,CharRoom);
-								OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
-								yy+=55;
-							}
+ 
+						for(int i=0;i<9 && i < dsmb.total;i++){
+							OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
+							OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
+							char CharRoom[50];
+							IntToChar(dsmb.data[i]->Room,CharRoom);
+							OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
+							yy+=55;
 						}
 						if(trang1==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
 					  	else taoID(405,575,455,625,10001);
@@ -596,19 +568,13 @@ void run(){
 				OUTTEXT1(760,585,3,0,3,3);
 				OUTTEXT(790,585,3,0,3,3,charTongTrang1);
 			  	int xx = 335; int yy = 65;
-				int j = 9; 
-				for(int i=0;i<j && 9*(trang1-1)+i < dsmb.total;i++){
-					if(dsmb.data[9*(trang1-1)+i]->Active == false){
-						j++;
-					}
-					else{
-						OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[9*(trang1-1)+i ]->ID);
-						OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[ 9*(trang1-1)+i ]->Type);
-						char CharRoom[50];
-						IntToChar(dsmb.data[9*(trang1-1)+i ]->Room,CharRoom);
-						OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
-						yy+=55;
-					}
+				for(int i=0;i<9 && 9*(trang1-1)+i < dsmb.total;i++){
+					OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[9*(trang1-1)+i ]->ID);
+					OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[ 9*(trang1-1)+i ]->Type);
+					char CharRoom[50];
+					IntToChar(dsmb.data[9*(trang1-1)+i ]->Room,CharRoom);
+					OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
+					yy+=55;
 				}
 				if(trang1==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
 			  	else taoID(405,575,455,625,10001);
@@ -634,19 +600,13 @@ void run(){
 				OUTTEXT1(760,585,3,0,3,3);
 				OUTTEXT(790,585,3,0,3,3,charTongTrang1);
 			   	int xx = 335; int yy = 65;
-				int j = 9; 
-				for(int i=0;i<j && 9*(trang1-1)+i < dsmb.total;i++){
-					if(dsmb.data[9*(trang1-1)+i]->Active == false){
-						j++;
-					}
-					else{
-						OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[9*(trang1-1)+i ]->ID);
-						OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[ 9*(trang1-1)+i ]->Type);
-						char CharRoom[50];
-						IntToChar(dsmb.data[9*(trang1-1)+i ]->Room,CharRoom);
-						OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
-						yy+=55;
-					}
+				for(int i=0;i<9 && 9*(trang1-1)+i < dsmb.total;i++){
+					OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[9*(trang1-1)+i ]->ID);
+					OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[ 9*(trang1-1)+i ]->Type);
+					char CharRoom[50];
+					IntToChar(dsmb.data[9*(trang1-1)+i ]->Room,CharRoom);
+					OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
+					yy+=55;
 				}
 				if(trang1==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
 			  	else taoID(405,575,455,625,10001);
@@ -2519,6 +2479,7 @@ void run(){
 //            			{
 //            				DeleteTree(root);
 //						}
+
 	            			HanhKhach *array2 = new HanhKhach[CountTotalHK];
 					   	    NLR(root,array2);
 					   		indexHK2 =0;
