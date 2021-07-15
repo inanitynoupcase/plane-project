@@ -130,21 +130,21 @@ void run(){
 	int TempTT = 0; 
 	NodeChuyenBay* ptr = new NodeChuyenBay;
 	ptr = pheadDSCB;
-	ktHK = FileGoodHK(CheckHK);
-	if(FileGoodMB(CheckMB) == 1)                                                                                     
+	bool ktHK= FileGoodHK();
+	if(FileGoodMB() == 1)                                                                                     
 	{                                                                           
-	FileInMB(MBI,dsmb);
-	 if(FileGoodCB(CheckCB) == 1)
+	FileInMB(dsmb);
+	 if(FileGoodCB() == 1 )
 	  {
-	   FileInCB(CBI,pheadDSCB);
-         if(FileGoodVe(CheckVe) == 1 && ktHK == 1)
-          FileInVe(VEI);
+	   FileInCB(pheadDSCB);
+         if(FileGoodVe() == 1 && ktHK == 1)
+          FileInVe();
 	  }
     }
-    cout<<" this is kthk "<<ktHK<<" ";
+    
     if(ktHK ==1)
     {
-    	FileINHK(HKTIN);
+    	FileINHK();
 	}
      
 	while (1){
@@ -155,7 +155,7 @@ void run(){
 		delay(1);
 		if (ismouseclick(WM_LBUTTONDOWN)){
 			getmouseclick(WM_LBUTTONDOWN, x, y);
-			cout << x <<"," << y <<"," <<MID[x][y] << endl;
+			cout << x <<"," << y <<"," << MID[x][y] << endl;
 		}
         menu:
     	if(x!=-1 && y!=-1)
@@ -189,8 +189,8 @@ void run(){
 				OUTTEXT(790,585,3,0,3,3,charTongTrang1);
 				int m[3] = {300,310,300};
 				int xx = 335; int yy = 65;
-				for(int i=0;i<9 && i < dsmb.total;i++)
-				{
+				int j = 9; 
+				for(int i=0;i<9 && i < dsmb.total;i++){
 					OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
 					OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
 					char CharRoom[50];
@@ -403,7 +403,7 @@ void run(){
 					delay(50);
 					taoButton(965,780,1040,830,0,7,8,3,"NEW");
 					AddMb(dsmb,ID1,LOAI1,tempSoCho);
-					FileOutMB(MBO,dsmb,dsmb.total-1);	
+					FileOutMB(dsmb,dsmb.total-1);	
 
 					strcpy(ID1,"");
 					strcpy(LOAI1,"");
@@ -429,7 +429,7 @@ void run(){
 					OUTTEXT(730,585,3,1,3,3,charTrang1);
 					OUTTEXT1(760,585,3,0,3,3);
 					OUTTEXT(790,585,3,0,3,3,charTongTrang1);
-					int xx = 335; int yy = 65;
+					int xx = 335; int yy = 65; 
 					for(int i=0;i<9 && i < dsmb.total;i++){
 						OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
 						OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
@@ -457,7 +457,7 @@ void run(){
 					strcpy(ID1,"");
 					strcpy(LOAI1,"");
 					strcpy(SOCHO1,"");
-					FileOutMBV2(MBO,dsmb);
+					FileOutMBV2(dsmb);
 					taoO(450,650,925,680,7,0,11);
 					taoO(450,717,925,747,7,0,0);
 					taoO(450,787,925,817,7,0,0);
@@ -499,13 +499,19 @@ void run(){
 					delay(50);
 					taoButton(1145,780,1265,830,0,7,8,3,"REMOVE");
 					taoButton(1050,780,1135,830,0,7,8,3,"SAVE");
+					cout << IsHaveFlight(pheadDSCB,ID1) << endl; 
 					if(IsHaveFlight(pheadDSCB,ID1)==false){
+					//	CMDREMOVE();
 						DelMb(dsmb,ID1);
-						FileOutMBV2(MBO,dsmb);
-						//CLEAR DATA
+					
 						strcpy(ID1,"");
 						strcpy(LOAI1,"");
 						strcpy(SOCHO1,"");
+//						for(int i=0;i<dsmb.total;i++){
+//							if(dsmb.data[i]->Active == true)
+//							FileOutMB(MBO,dsmb,i);	
+//						}
+                        FileOutMBV2(dsmb);
 						taoO(450,650,925,680,7,0,11);
 						taoO(450,717,925,747,7,0,0);
 						taoO(450,787,925,817,7,0,0);
@@ -523,7 +529,6 @@ void run(){
 						OUTTEXT1(760,585,3,0,3,3);
 						OUTTEXT(790,585,3,0,3,3,charTongTrang1);
 						int xx = 335; int yy = 65;
- 
 						for(int i=0;i<9 && i < dsmb.total;i++){
 							OUTTEXT(xx+12,yy+15,15,0,3,3,dsmb.data[i]->ID);
 							OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,dsmb.data[i]->Type);
@@ -532,6 +537,7 @@ void run(){
 							OUTTEXT(xx+12+m[0]+m[1],yy+15,15,0,3,3,CharRoom);
 							yy+=55;
 						}
+
 						if(trang1==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
 					  	else taoID(405,575,455,625,10001);
 						if(tongtrang1>1) taoID(1130,575,1180,625,10002); // TAO ID NUT NEXT
@@ -654,7 +660,7 @@ void run(){
 //				ptr = pheadDSCB;
 				SortCB_Time(pheadDSCB);
 				UpdateCB(pheadDSCB);
-				FileOutVe(VEO,pheadDSCB);
+				FileOutVe(pheadDSCB);
 				tempTOTALCB = CountTotalChuyenBay(pheadDSCB);
 				trang2 = 1;
 				tongtrang2 = tempTOTALCB/9;
@@ -1559,8 +1565,8 @@ void run(){
 							AddNewChuyenBay(pheadDSCB,ID2,TempNgay2,TempThang2,TempNam2,TempGio2,TempPhut2,TOI2,IDMAYBAY2,TempTT);
 							SortCB_Time(pheadDSCB);
 							UpdateCB(pheadDSCB);
-							FileOutCB(CBO,pheadDSCB);
-							FileOutMBV2(MBO,dsmb);
+							FileOutCB(pheadDSCB);
+							FileOutMBV2(dsmb);
 							//CLEAR DU LIEU CU
 							strcpy(ID2,"");
 							strcpy(NGAY2,"");
@@ -1605,7 +1611,7 @@ void run(){
 							NodeChuyenBay* ptr = pheadDSCB;
 					//		ptr = pheadDSCB;
 
-							FileOutVe(VEO,pheadDSCB);
+							FileOutVe(pheadDSCB);
 							tempTOTALCB = CountTotalChuyenBay(pheadDSCB);
 							trang2 = 1;
 							tongtrang2 = tempTOTALCB/9;
@@ -1724,7 +1730,7 @@ void run(){
 			    	if(CheckDepartTime(temp)==true){
 						if(check_decent_chuyen_bay_version_2(pheadDSCB,Edit,IDMAYBAY2,temp)==true){ 
 							EditChuyenBay(pheadDSCB,Edit,ID2,TempNgay2,TempThang2,TempNam2,TempGio2,TempPhut2);
-							FileOutCB(CBO,pheadDSCB);
+							FileOutCB(pheadDSCB);
 							//CLEAR DU LIEU CU
 							strcpy(ID2,"");
 							strcpy(NGAY2,"");
@@ -1769,7 +1775,7 @@ void run(){
 					// new		ptr = pheadDSCB;
 							SortCB_Time(pheadDSCB);
 							UpdateCB(pheadDSCB);
-							FileOutVe(VEO,pheadDSCB);
+							FileOutVe(pheadDSCB);
 							tempTOTALCB = CountTotalChuyenBay(pheadDSCB);
 							trang2 = 1;
 							tongtrang2 = tempTOTALCB/9;
@@ -1894,8 +1900,8 @@ void run(){
 				
 						SortCB_Time(pheadDSCB);
 						UpdateCB(pheadDSCB);
-						FileOutCB(CBO,pheadDSCB);
-						FileOutVe(VEO,pheadDSCB);
+						FileOutCB(pheadDSCB);
+						FileOutVe(pheadDSCB);
 						
 						tempTOTALCB = CountTotalChuyenBay(pheadDSCB);
 						trang2 = 1;
@@ -1977,7 +1983,7 @@ void run(){
 				// new	ptr = pheadDSCB;
 					SortCB_Time(pheadDSCB);
 					UpdateCB(pheadDSCB);
-					FileOutVe(VEO,pheadDSCB);
+					FileOutVe(pheadDSCB);
 					tempTOTALCB = CountTotalChuyenBay(pheadDSCB);
 				  	trang2 -=1;
 					tongtrang2 = tempTOTALCB/9;
@@ -2043,7 +2049,7 @@ void run(){
 					//ptr = pheadDSCB;
 					SortCB_Time(pheadDSCB);
 					UpdateCB(pheadDSCB);
-					FileOutVe(VEO,pheadDSCB);
+					FileOutVe(pheadDSCB);
 					tempTOTALCB = CountTotalChuyenBay(pheadDSCB);
 					if (trang2 + 1 > tongtrang2) break;
 				  	trang2 +=1;
@@ -2120,12 +2126,13 @@ void run(){
 				okTEN3 = false;
 				okGIOITINH3= false;
 				sotam3 = 0;
+				int totalhk = count(root);
 				//==========
 				Menu();
 				QuanLyHanhKhach();
 				trang3 = 1;
-				tongtrang3 = CountTotalHK/9;
-				if (CountTotalHK%9 != 0){
+				tongtrang3 = totalhk/9;
+				if (totalhk%9 != 0){
 			   		tongtrang3 +=1;
 				}
 				IntToChar(tongtrang3,charTongTrang3);
@@ -2135,11 +2142,12 @@ void run(){
 				OUTTEXT(790,585,3,0,3,3,charTongTrang3);
 				int m[4] = {200,260,250,200};
 				int xx = 335;int yy = 65;
-			   	//cout<<"   "<<CountTotalHK<<"    ";
-			   	HanhKhach *array = new HanhKhach[CountTotalHK];
-			   	LNR(root,array);
 			   	
-			   	for(int i=0; i< 9 && i< CountTotalHK; i++)
+			   	HanhKhach *array = new HanhKhach[totalhk];
+			   	int Index=0;
+			   	LNR(root,array,Index);
+			   	
+			   	for(int i=0; i< 9 && i< totalhk; i++)
 			   	{
 			  	   	OUTTEXT(xx+12,yy+15,15,0,3,3,array[i].CCCD);
 					OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,array[i].HO);
@@ -2147,7 +2155,7 @@ void run(){
 					OUTTEXT(xx+12+m[0]+m[1]+m[2],yy+15,15,0,3,3,array[i].GioiTinh);
 			  		yy += 55;
 				}
-				indexHK =0;
+			
 			    delete [] array;
 			    if(trang3==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
 			  	else taoID(405,575,455,625,30001);
@@ -2382,8 +2390,9 @@ void run(){
 					    strcpy(data.TEN,TEN3);
 					    strcpy(data.GioiTinh,GIOITINH3);
 					 //   remove("HanhKhach.txt");
-                        InsertNodehk(root,data);
-                   //	 	NLR_FileOutHK(HKT,root);
+                        InsertNodehk(root,data,root);
+                        int totalhk = count(root);
+                        cout<<"This is total hk"<<totalhk<<endl;
 						strcpy(CCCD3,"");
 						strcpy(HO3,"");
 						strcpy(TEN3,"");
@@ -2409,8 +2418,8 @@ void run(){
 						OUTTEXT(775+35,787+5,7,8,3,1,"NU");
 						
 						trang3 = 1;
-						tongtrang3 = CountTotalHK/9;
-						if (CountTotalHK%9 != 0){
+						tongtrang3 = totalhk/9;
+						if (totalhk%9 != 0){
 					   		tongtrang3 +=1;
 						}
 						IntToChar(tongtrang3,charTongTrang3);
@@ -2423,21 +2432,22 @@ void run(){
 					   	taoBang(335,10,55,m,4,10,text,15,0);
 						int xx = 335;int yy = 65;
 					   	//cout<<"   "<<CountTotalHK<<"    ";
-					   	HanhKhach *array = new HanhKhach[CountTotalHK];
-					   	LNR(root,array);
-					   	indexHK =0;
+					   	HanhKhach *array = new HanhKhach[totalhk];
+					   	int Index=0;
+					   	LNR(root,array,Index);
 					   	
-			      	   	HanhKhach *array2 = new HanhKhach[CountTotalHK];
-					   	NLR(root,array2);
-					   	indexHK2 =0;
+					   	int Index2=0;
+			      	   	HanhKhach *array2 = new HanhKhach[totalhk];
+					   	NLR(root,array2,Index2);
 					   	
-					    NLR_FileOutHK(HKT,array2,CountTotalHK);
-					  for(int i=0 ; i< CountTotalHK ; i++)
+					   	
+					    NLR_FileOutHK(array2,totalhk);
+					  for(int i=0 ; i< totalhk ; i++)
 					  {
 					    cout<<"ten "<<array2[i].CCCD<<endl;
 					   
 			       	}
-					   	for(int i=0; i< 9 && i< CountTotalHK; i++)
+					   	for(int i=0; i< 9 && i< totalhk; i++)
 					   	{
 					  	   	OUTTEXT(xx+12,yy+15,15,0,3,3,array[i].CCCD);
 							OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,array[i].HO);
@@ -2473,18 +2483,18 @@ void run(){
 					if(okCCCD3 == false && okHO3 == true && okTEN3 == true && okGIOITINH3 == true){
 //						    remove("HanhKhach.txt");
 	            			root = deleteNodeHK(root,CCCD3);
-	            			cout<<"old count "<<CountTotalHK<<endl;
-	            			CountTotalHK--;
+	            		    int totalhk= count(root);
+	            		    cout<<"this si new totalhk "<<totalhk<<" "<<endl;
+	            			//CountTotalHK--;
 //            			if(CountTotalHK == 0)
 //            			{
 //            				DeleteTree(root);
 //						}
-
-	            			HanhKhach *array2 = new HanhKhach[CountTotalHK];
-					   	    NLR(root,array2);
-					   		indexHK2 =0;
-	                   	 	NLR_FileOutHK(HKT,array2,CountTotalHK);
-                            cout<<"this is si"<<root->data.CCCD;
+                            int Index2=0;
+	            			HanhKhach *array2 = new HanhKhach[totalhk];
+					   	    NLR(root,array2,Index2);
+	                   	 	NLR_FileOutHK(array2,totalhk);
+                          
 							strcpy(CCCD3,"");
 							strcpy(HO3,"");
 							strcpy(TEN3,"");
@@ -2513,8 +2523,8 @@ void run(){
 							OUTTEXT(775+35,787+5,7,8,3,1,"NU");
 							
 							trang3 = 1;
-							tongtrang3 = CountTotalHK/9;
-							if (CountTotalHK%9 != 0){
+							tongtrang3 = totalhk/9;
+							if (totalhk%9 != 0){
 						   		tongtrang3 +=1;
 							}
 							IntToChar(tongtrang3,charTongTrang3);
@@ -2526,15 +2536,16 @@ void run(){
 							char text[][50]={"CCCD","HO","TEN","PHAI"};
 						   	taoBang(335,10,55,m,4,10,text,15,0);
 							int xx = 335;int yy = 65;
-						   	//cout<<"   "<<CountTotalHK<<"    ";
-						   	HanhKhach *array = new HanhKhach[CountTotalHK];
-						   	LNR(root,array);
-						   	cout<<"new count "<<CountTotalHK<<endl;
-						   	for(int i=0;i< CountTotalHK ;i++)
-						   	{
-						   	   cout<<"this is ccd"<< array[i].CCCD<<endl;	
-							}
-						   	for(int i=0; i< 9 && i< CountTotalHK; i++)
+						
+						   	HanhKhach *array = new HanhKhach[totalhk];
+						   	int Index=0;
+						   	LNR(root,array,Index);
+				
+//						   	for(int i=0;i< CountTotalHK ;i++)
+//						   	{
+//						   	   cout<<"this is ccd"<< array[i].CCCD<<endl;	
+//							}
+						   	for(int i=0; i< 9 && i< totalhk; i++)
 						   	{
 						  	   	OUTTEXT(xx+12,yy+15,15,0,3,3,array[i].CCCD);
 								OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,array[i].HO);
@@ -2542,7 +2553,7 @@ void run(){
 								OUTTEXT(xx+12+m[0]+m[1]+m[2],yy+15,15,0,3,3,array[i].GioiTinh);
 						  		yy += 55;
 							}
-							indexHK =0;
+							
 						    delete [] array;
 						    delete [] array2;
 						    if(trang3==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
@@ -2581,8 +2592,9 @@ void run(){
 				taoButton(405,575,455,625,30001,7,0,2,"<");
 				if (trang3 - 1 > tongtrang3) break;
 				trang3 -= 1;
-				tongtrang3 = CountTotalHK/9;
-				if (CountTotalHK%9 != 0)	tongtrang3 +=1;
+				int totalhk = count(root);
+				tongtrang3 = totalhk/9;
+				if (totalhk%9 != 0)	tongtrang3 +=1;
 				IntToChar(tongtrang3,charTongTrang3);
 				IntToChar(trang3,charTrang3);
 				OUTTEXT(730,585,3,1,3,3,charTrang3);
@@ -2592,10 +2604,11 @@ void run(){
 				char text[][50]={"CCCD","HO","TEN","PHAI"};
 			   	taoBang(335,10,55,m,4,10,text,15,0);
 				int xx = 335;int yy = 65;
-			   	//cout<<"   "<<CountTotalHK<<"    ";
-			   	HanhKhach *array = new HanhKhach[CountTotalHK];
-			   	LNR(root,array);
-			   	for(int i=0; i< 9 && 9*(trang3-1)+i < CountTotalHK; i++)
+			   	
+			   	HanhKhach *array = new HanhKhach[totalhk];
+			   	int Index=0;
+			   	LNR(root,array,Index);
+			   	for(int i=0; i< 9 && 9*(trang3-1)+i < totalhk; i++)
 			   	{
 			  	   	OUTTEXT(xx+12,yy+15,15,0,3,3,array[ 9*(trang3-1)+i].CCCD);
 					OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,array[9*(trang3-1)+i].HO);
@@ -2603,7 +2616,7 @@ void run(){
 					OUTTEXT(xx+12+m[0]+m[1]+m[2],yy+15,15,0,3,3,array[9*(trang3-1)+i].GioiTinh);
 			  		yy += 55;
 				}
-				indexHK =0;
+			
 			    delete [] array;
 			    if(trang3==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
 			  	else taoID(405,575,455,625,30001);
@@ -2620,8 +2633,9 @@ void run(){
 			  	taoButton(1130,575,1180,625,30002,7,0,2," >");
 			  	if (trang3 + 1 > tongtrang3) break;
 			  	trang3 += 1;
-				tongtrang3 = CountTotalHK/9;
-				if (CountTotalHK%9 != 0)	tongtrang3 +=1;
+			  	int totalhk = count(root);
+				tongtrang3 = totalhk/9;
+				if (totalhk%9 != 0)	tongtrang3 +=1;
 				IntToChar(tongtrang3,charTongTrang3);
 				IntToChar(trang3,charTrang3);
 				OUTTEXT(730,585,3,1,3,3,charTrang3);
@@ -2631,10 +2645,11 @@ void run(){
 				char text[][50]={"CCCD","HO","TEN","PHAI"};
 			   	taoBang(335,10,55,m,4,10,text,15,0);
 				int xx = 335;int yy = 65;
-			   	//cout<<"   "<<CountTotalHK<<"    ";
-			   	HanhKhach *array = new HanhKhach[CountTotalHK];
-			   	LNR(root,array);
-			   	for(int i=0; i< 9 && 9*(trang3-1)+i < CountTotalHK; i++)
+		
+			   	HanhKhach *array = new HanhKhach[totalhk];
+			   	int Index=0;
+			   	LNR(root,array,Index);
+			   	for(int i=0; i< 9 && 9*(trang3-1)+i < totalhk; i++)
 			   	{
 			  	   	OUTTEXT(xx+12,yy+15,15,0,3,3,array[ 9*(trang3-1)+i].CCCD);
 					OUTTEXT(xx+12+m[0],yy+15,15,0,3,3,array[9*(trang3-1)+i].HO);
@@ -2642,7 +2657,7 @@ void run(){
 					OUTTEXT(xx+12+m[0]+m[1]+m[2],yy+15,15,0,3,3,array[9*(trang3-1)+i].GioiTinh);
 			  		yy += 55;
 				}
-				indexHK =0;
+			
 			    delete [] array;
 
 			    if(trang3==1) taoID(405,575,455,625,0); // KO TAO ID NUT BACK
@@ -3361,7 +3376,7 @@ void run(){
 				}
 				else if(SearchNode(pheadDSCB,ID5)!=NULL ){ // SEARCH ID CHUYENBAY FUNCTION
 					UpdateCB(pheadDSCB);
-					FileOutVe(VEO,pheadDSCB);
+					FileOutVe(pheadDSCB);
 					NodeChuyenBay* ptr = SearchNode(pheadDSCB,ID5);
 					if(ptr->data.Status == 0 )
 					{
@@ -3629,13 +3644,14 @@ void run(){
 				strcpy(data.GioiTinh,GIOITINH5);
 				OrderVe(ptr->data.dsv,tempvitri,check,data);
 //				remove("HanhKhach.txt");
-//                NLR_FileOutHK(HKT,root);
+
 //                remove("Ve.txt");
-                FileOutVe(VEO,pheadDSCB);
-				HanhKhach *array2 = new HanhKhach[CountTotalHK];
-				NLR(root,array2);
-				indexHK2 =0;   	
-				NLR_FileOutHK(HKT,array2,CountTotalHK);
+                FileOutVe(pheadDSCB);
+                int totalhk= count(root);
+				HanhKhach *array2 = new HanhKhach[totalhk];
+				int Index2=0;
+				NLR(root,array2,Index2);
+				NLR_FileOutHK(array2,totalhk);
 				delete [] array2;
 				int arrayVITRI[ptr->data.dsv.n];
 				int count=0;
@@ -3652,7 +3668,7 @@ void run(){
 						if(i + k1 <= SoChoNgoi5){
 							for(int l = 0;l<count;l++){
 								if((i + k1) == arrayVITRI[l]){
-									cout << "1: " << arrayVITRI[l] << endl;
+//									cout << "1: " << arrayVITRI[l] << endl;
 									taoO(x1,y1,x1+30,y1+30,4,0,0);
 									char tempi[50] = "";
 									IntToChar(i + k1,tempi);
@@ -3674,7 +3690,7 @@ void run(){
 						if(i + k2 <= SoChoNgoi5){
 							for(int l = 0;l<count;l++){
 								if((i + k2) == arrayVITRI[l]){
-									cout << "2: " << arrayVITRI[l] << endl;
+//									cout << "2: " << arrayVITRI[l] << endl;
 									taoO(x2,y2,x2+30,y2+30,4,0,0);
 									char tempi[50] = "";
 									IntToChar(i + k2,tempi);
@@ -3737,13 +3753,13 @@ void run(){
 						index = i;
 					}
 				}
-				cout << ptr->data.dsv.n << " " << index << " " << endl; 
+//				cout << ptr->data.dsv.n << " " << index << " " << endl; 
 				RemoveVe(ptr->data.dsv,index);
-				cout << ptr->data.dsv.n << " " << index << " " << endl;
-				FileOutVe(VEO,pheadDSCB);
+//				cout << ptr->data.dsv.n << " " << index << " " << endl;
+				FileOutVe(pheadDSCB);
 				int x1 = 355, y1 = 120;
 				int k1 = 0;
-				cout << tempvitri << endl;
+//				cout << tempvitri << endl;
 				for(int j = 0; j < 10; j++){
 					for(int i = 1; i <= 5 ; i++){
 						if(i + k1 <= SoChoNgoi5){
@@ -3954,6 +3970,9 @@ void run(){
 					
 				taoO(775,787,875,817,7,0,0);
 				OUTTEXT(775+35,787+5,7,8,3,1,"NU");
+				//RESET FORM HUYVE - BANVE
+				taoButton(965,780,1065,830,0,7,8,3,"Ban Ve");
+				taoButton(1145,780,1245,830,0,7,8,3,"Huy Ve");
 				x=-1;y=-1;
 				break;
 			}
@@ -3988,7 +4007,7 @@ void run(){
 				}
 				else if(SearchNode(pheadDSCB,ID6)!=NULL ){ // SEARCH ID CHUYENBAY FUNCTION
 					UpdateCB(pheadDSCB);
-					FileOutVe(VEO,pheadDSCB);
+					FileOutVe(pheadDSCB);
 					NodeChuyenBay* ptr = SearchNode(pheadDSCB,ID6);
 					// LAY DU LIEU
 					char day[50]= "";
@@ -4062,7 +4081,7 @@ void run(){
  			  	taoButton(395,760,445,810,0,7,0,2,"<");	
 				if(SearchNode(pheadDSCB,ID6)!=NULL ){ // SEARCH ID CHUYENBAY FUNCTION
 					UpdateCB(pheadDSCB);
-					FileOutVe(VEO,pheadDSCB);
+					FileOutVe(pheadDSCB);
 					NodeChuyenBay* ptr = SearchNode(pheadDSCB,ID6);
 				 	trang6 -= 1;
 					tongtrang6 = ptr->data.dsv.n/9;
@@ -4109,7 +4128,7 @@ void run(){
 				taoButton(1130,760,1180,810,0,7,0,2," >");
 				if(SearchNode(pheadDSCB,ID6)!=NULL ){ // SEARCH ID CHUYENBAY FUNCTION
 					UpdateCB(pheadDSCB);
-					FileOutVe(VEO,pheadDSCB);
+					FileOutVe(pheadDSCB);
 					NodeChuyenBay* ptr = SearchNode(pheadDSCB,ID6);
 					trang6 += 1;
 					tongtrang6 = ptr->data.dsv.n/9;

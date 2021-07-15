@@ -9,7 +9,6 @@ struct MayBay
   char ID[15];
   char Type[40];
   int Room; // so cho cua may bay
-  bool Active = true;
   int SoLuotBay = 0;
   // cho so phu
 
@@ -33,17 +32,6 @@ struct DsVe
   int max; // so ghe max
 };
 
-//khoi tao mang 2 chieu con tro nhung no la 1 chieu
-
-void CreateVe(DsVe &dsv, int quantity)
-{
-	dsv.ve=new Ve*[quantity];
-	for(int i=0;i<quantity;i++)
-	{
-		dsv.ve[i] = new Ve[1];
-	}
-	dsv.max = quantity;
-}
 
 struct ChuyenBay
 {
