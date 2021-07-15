@@ -10,7 +10,6 @@ NodeMayBay dsmb;
 ptrDSCB pheadDSCB=NULL;
 nodehk root=NULL;
 
-#define IDCANCEL 2
 // ham xu ly may bay        
 int SearchIdMb(NodeMayBay NodeMb,char TempId[]);
 void AddMb(NodeMayBay &nodemb,char TempID[],char TempType[],int TempRoom);
