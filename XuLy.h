@@ -1060,6 +1060,7 @@ void FileINHK()
        {
        	Name = Name+" "+read[i];
 	   }
+	   Name.erase(Name.begin());
         HanhKhach data;
         strcpy(data.CCCD, read[0].c_str());
 	    strcpy(data.HO, read[1].c_str());
