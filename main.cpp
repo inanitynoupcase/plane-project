@@ -2178,7 +2178,7 @@ void run(){
 				
 				taoButton(335+200,600,335+200+40,640,3001,4,0,3,"X");
 				nodehk check;
-				ScanSoCCCD(450+5,650+5,CCCD3,9,15);
+				ScanSoCCCD(450+5,650+5,CCCD3,12,15);
 				check = SearchHk(root,CCCD3);
 				if(strlen(CCCD3)==0){
 				 	setbkcolor(3);
@@ -2234,7 +2234,7 @@ void run(){
 						taoID(450,650,925,680,0);
 				 		taoID(450,717,925,747,0);  
 					}
-				else if(strcmp(CCCD3,"000000000")==0){
+				else if(strcmp(CCCD3,"000000000000")==0){
 					setbkcolor(3);
 					setcolor(0);
 					settextstyle(3,0,1);
@@ -2242,7 +2242,7 @@ void run(){
 					KhongHopLe1(970 + 60,645);
 				 	okCCCD3=false; 
 				}
-				else if(strlen(CCCD3)==9){
+				else if(strlen(CCCD3)==12){
 				 	setbkcolor(3);
 				 	setcolor(0);
 				 	settextstyle(3,0,1);
@@ -2390,7 +2390,7 @@ void run(){
 					    strcpy(data.TEN,TEN3);
 					    strcpy(data.GioiTinh,GIOITINH3);
 					 //   remove("HanhKhach.txt");
-                        InsertNodehk(root,data,root);
+                        InsertNodehk(root,data);
                         int totalhk = count(root);
                         cout<<"This is total hk"<<totalhk<<endl;
 						strcpy(CCCD3,"");
@@ -2484,7 +2484,7 @@ void run(){
 //						    remove("HanhKhach.txt");
 	            			root = deleteNodeHK(root,CCCD3);
 	            		    int totalhk= count(root);
-	            		    cout<<"this si new totalhk "<<totalhk<<" "<<endl;
+//	            		    cout<<"this si new totalhk "<<totalhk<<" "<<endl;
 	            			//CountTotalHK--;
 //            			if(CountTotalHK == 0)
 //            			{
@@ -3158,7 +3158,7 @@ void run(){
 			} 
 			case 52:{ // CCCD 
 				taoID(458,650,925,680,0); // VI TRI OFF
-				ScanSoCCCD(458+5,697+5,CCCD5,9,15);
+				ScanSoCCCD(458+5,697+5,CCCD5,12,15);
 				nodehk check;
 				check = SearchHk(root,CCCD5);
 				NodeChuyenBay* ptr = SearchNode(pheadDSCB,ID5);
@@ -3178,7 +3178,15 @@ void run(){
 				 	BaoLoi1(970 + 60,675);
 				 	okCCCD5=false; 
 					}
-				else if(strlen(CCCD5)==9 && okViTriCCCD5 == false && check == NULL)
+				else if(strcmp(CCCD5,"000000000000")==0){
+					setbkcolor(3);
+					setcolor(0);
+					settextstyle(3,0,1);
+					outtextxy(970,680,"CCCD:");
+					KhongHopLe1(970 + 60,675);
+				 	okCCCD5=false; 
+				}
+				else if(strlen(CCCD5)==12 && okViTriCCCD5 == false && check == NULL)
 				{
 				 	setbkcolor(3);
 				 	setcolor(0);
@@ -3852,7 +3860,7 @@ void run(){
 					taoO(458,697,925,727,15,0,50002);
 				}
 				taoID(458,650,925,680,0); // VI TRI OFF
-				ScanSoCCCD(458+5,697+5,CCCD5,9,15);
+				ScanSoCCCD(458+5,697+5,CCCD5,12,15);
 				nodehk check;
 				check = SearchHk(root,CCCD5);
 				NodeChuyenBay* ptr = SearchNode(pheadDSCB,ID5);
@@ -3874,6 +3882,14 @@ void run(){
 				 	BaoLoi1(970 + 60,675);
 				 	okCCCD5=false; 
 					}
+				else if(strcmp(CCCD5,"000000000000")==0){
+					setbkcolor(3);
+					setcolor(0);
+					settextstyle(3,0,1);
+					outtextxy(970,680,"CCCD:");
+					KhongHopLe1(970 + 60,675);
+				 	okCCCD5=false; 
+				}
 				else if(check != NULL){
 					
 					setbkcolor(3);

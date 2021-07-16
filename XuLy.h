@@ -33,7 +33,7 @@ int CountTotalChuyenBay(ptrDSCB &pheadDSCB);
 int CountTotalChuyenBayTheoSearch(ptrDSCB &pheadDSCB,int TempNgay,int TempThang,int TempNam,char TempToi[]);
 
 //HAM XU LY HANH KHACH
-void InsertNodehk(nodehk &root,HanhKhach datahk,nodehk &find);
+void InsertNodehk(nodehk &root,HanhKhach datahk);
 NodeHanhKhach* deleteNodeHK(nodehk  &root, char CCCDtemp[]);
 void LNR(nodehk &root, HanhKhach *data,int &number);
 void NLR(nodehk &root, HanhKhach *data,int &number);
@@ -94,7 +94,7 @@ int count(nodehk &root)
     }
 }
 
-void InsertNodehk(nodehk &root, HanhKhach datahk,nodehk &find)
+void InsertNodehk(nodehk &root, HanhKhach datahk)
 {
    if(root == NULL )
    {
@@ -115,12 +115,12 @@ void InsertNodehk(nodehk &root, HanhKhach datahk,nodehk &find)
    {
      if(strcmp(datahk.CCCD,root->data.CCCD) >0 )
 	 {
-       InsertNodehk(root->right,datahk,find);
+       InsertNodehk(root->right,datahk);
        
      }
      else if(strcmp(datahk.CCCD, root->data.CCCD) <0 )
 	 {
-       InsertNodehk(root->left,datahk,find);
+       InsertNodehk(root->left,datahk);
      }
    }
 }
@@ -372,7 +372,7 @@ void OrderVe(DsVe &dsv ,int pos,nodehk Check,HanhKhach data)
 {
   	  if (Check == NULL)
 			{
-				InsertNodehk(root,data,root);
+				InsertNodehk(root,data);
 				dsv.ve[dsv.n]->stt = pos;
 				strcpy(dsv.ve[dsv.n]->CCCD,data.CCCD);
 			}
@@ -1066,7 +1066,7 @@ void FileINHK()
 	    strcpy(data.HO, read[1].c_str());
 	    strcpy(data.TEN, Name.c_str());
 	    strcpy(data.GioiTinh, read[count-1].c_str());
-	    InsertNodehk(root,data,root);
+	    InsertNodehk(root,data);
 	    delete [] read;
    } 
 	in.close();

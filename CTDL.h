@@ -22,7 +22,7 @@ struct NodeMayBay
 
 struct Ve
 {
-    char CCCD[12];
+    char CCCD[13];
     int stt; // so thu tu 
 }; 
 struct DsVe
@@ -55,7 +55,7 @@ typedef NodeChuyenBay*ptrDSCB;
 // CAY NHI PHAN TIM KIEM
 struct HanhKhach
 {
-  char CCCD[12];
+  char CCCD[13];
   char HO[10];
   char TEN[15];
   char GioiTinh[4]; 
