@@ -1039,7 +1039,7 @@ bool FileGoodCB()
 void FileINHK()
 {
   ifstream in;
-  in.open("DSHK.dat",ios::binary);
+  in.open("DSHK.dat");
   string temp;
    while(getline(in,temp))
    {
@@ -1099,7 +1099,7 @@ void FileINHK()
 void NLR_FileOutHK(HanhKhach *data, int countHK)
 {
 	ofstream out;
-	out.open("DSHK.dat", ios::trunc |ios::binary );
+	out.open("DSHK.dat", ios::trunc);
 	if(countHK > 0)
   {
 	 	for(int i=0; i< countHK ;i++)
