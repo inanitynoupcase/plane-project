@@ -46,7 +46,7 @@ cập nhật vào danh sách hành khách, nếu có rồi thì in ra màn hình
 **8. Thống kê số lượt thực hiện chuyến bay của từng máy bay theo thứ tự số lượt thực hiện giảm dần. Kết xuất:**
 
 ```
-            | Số hiệu máy bay | Số lượt thực hiện chuyến bay |
+                        | Số hiệu máy bay | Số lượt thực hiện chuyến bay |
 ```
 *Lưu ý: Chương trình cung cấp khả năng lưu các danh sách vào file và kiểm tra các điều kiện nhập liệu để đảm bảo tính chính xác của dữ liệu.*
 ______________________________________________________________________________
